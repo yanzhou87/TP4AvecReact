@@ -1,9 +1,15 @@
+import {FaGithub, FaGithubAlt, FaTimes} from 'react-icons/fa'
+
 const Admin = ({admin}) => {
     return (
-        <div className="admin">
-            <p>{admin.firstName}</p>
-            <p>{admin.lastName}</p>
-        </div>
+
+        <tr className="admin">
+
+            <td><span><FaGithubAlt/></span>{admin.firstName}</td>
+            <td>{admin.lastName}</td>
+        </tr>
+
+
     )
 }
 

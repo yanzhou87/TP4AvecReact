@@ -4,14 +4,16 @@ import {useEffect, useState} from "react";
 import Admins from "./components/Admins";
 import Header from "./components/Header";
 import Clients from "./components/Clients";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
     const [changeTypeUser, setChangeTypeUser] = useState(
         {
-            showAdmins :false,
-            showClient :false
+            showAdmins: false,
+            showClient: false
         }
     )
+
     const [admins, setAdmins] = useState([])
 
     const [clients, setClients] = useState([])
@@ -34,7 +36,7 @@ function App() {
         return data
     }
 
-    const fetchAdmin = async(id) => {
+    const fetchAdmin = async (id) => {
         const res = await fetch(`http://localhost:5000/admins/${id}`)
         const data = await res.json()
         return data
@@ -46,26 +48,43 @@ function App() {
         return data
     }
 
-    const fetchClient= async(id) => {
+    const fetchClient = async (id) => {
         const res = await fetch(`http://localhost:5000/clients/${id}`)
         const data = await res.json()
         return data
     }
-    const changeTypeUserForAdmin =()=>{
-        setChangeTypeUser({showAdmins:true, showClient: false});
+    const changeTypeUserForAdmin = () => {
+        setChangeTypeUser({showAdmins: true, showClient: false});
     }
-    const changeTypeUserForClient =()=>{
-        setChangeTypeUser({showAdmins:false, showClient: true});
+    const changeTypeUserForClient = () => {
+        setChangeTypeUser({showAdmins: false, showClient: true});
     }
-    const exit =()=>{
-        setChangeTypeUser({showAdmins:false, showClient: false});
+    const exit = () => {
+        setChangeTypeUser({showAdmins: false, showClient: false});
     }
     return (
-        <div className="container">
-            <Header title={'Library'} changeTypeUserForAdmin={changeTypeUserForAdmin} exit={exit} changeTypeUserForClient={changeTypeUserForClient}/>
-            {changeTypeUser.showAdmins && <Admins admins={admins}/>}
-            {changeTypeUser.showClient && <Clients clients={clients}/>}
-        </div>
+
+
+        <Router>
+
+            <div className="container">
+                <Routes>
+
+                    <Route path='/' element={<Header title={'Library'} changeTypeUserForAdmin={changeTypeUserForAdmin}
+                                                     exit={exit}
+                                                     changeTypeUserForClient={changeTypeUserForClient}/>}/>
+                    <Route path='/admins' element={<Admins admins={admins}/>}/>
+
+                    <Route path='/clients' element={ <Clients clients={clients}/>}/>
+
+
+                </Routes>
+
+
+            </div>
+        </Router>
+
+
     );
 }
 

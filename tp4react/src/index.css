@@ -12,25 +12,28 @@ code {
     monospace;
 }
 
+table{
+  border-collapse: collapse;
+  width: 80%;
+  text-align: left;
+  margin: 20px;
+}
+table,tr,th,td{
+  border:1px solid black ;
+  padding: 15px;
+}
+
+tr:hover {background-color: #f5f5f5;}
+tr:nth-child(even) {background-color: #f2f2f2;}
+th {
+  background-color: #4CAF50;
+  color: white;
+}
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-
-.admin{
-  display: flex;
-  justify-content: center;
-}
-
-.client{
-  display: flex;
-  justify-content: center;
-}
-
-p{
-  margin-left: 20px;
 }
 
 .btn {
@@ -58,4 +61,7 @@ p{
 .btn-block {
   display: block;
   width: 100%;
+}
+span{
+  margin-right: 20px;
 }
