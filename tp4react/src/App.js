@@ -51,8 +51,6 @@ function App() {
         setChangeTypeUser({showAdmins:true, showClient: false});
     }
     const changeTypeUserForClient =()=>{
-        console.log(changeTypeUser.showClient)
-
         setChangeTypeUser({showAdmins:false, showClient: true});
     }
     const exit =()=>{
