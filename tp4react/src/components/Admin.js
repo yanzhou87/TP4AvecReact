@@ -1,15 +1,11 @@
-import {FaGithub, FaGithubAlt, FaTimes} from 'react-icons/fa'
+import {FaGithubAlt} from 'react-icons/fa'
 
 const Admin = ({admin}) => {
     return (
-
-        <tr className="admin">
-
+        <tr className="admin" onClick={() => window.location.href = '/adminPage'}>
             <td><span><FaGithubAlt/></span>{admin.firstName}</td>
             <td>{admin.lastName}</td>
         </tr>
-
-
     )
 }
 

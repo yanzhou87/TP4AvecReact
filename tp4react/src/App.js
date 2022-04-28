@@ -5,6 +5,10 @@ import Admins from "./components/Admins";
 import Header from "./components/Header";
 import Clients from "./components/Clients";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import AddAdmin from "./components/AddAdmin";
+import AdminPage from "./components/AdminPage";
+import AddClient from "./components/AddClient";
+
 
 function App() {
     const [changeTypeUser, setChangeTypeUser] = useState(
@@ -65,6 +69,30 @@ function App() {
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
     }
+    const addAdmin = async (admin) => {
+        const res = await fetch('http://localhost:5000/admins',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(admin)
+            })
+        const data = await res.json()
+        setAdmins([...admins, data])
+    }
+    const addClient= async (admin) => {
+        const res = await fetch('http://localhost:5000/clients',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(client)
+            })
+        const data = await res.json()
+        setClients([...clients, data])
+    }
     return (
 
 
@@ -77,6 +105,9 @@ function App() {
                                                      changeTypeUserForClient={changeTypeUserForClient}/>}/>
                     <Route path='/admins' element={<Admins admins={admins}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}/>}/>
+                    <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
+                    <Route path='/adminPage' element={ <AdminPage />}/>
+                    <Route path='/addClient' element={ <AddClient onAdd={addClient}/>}/>
                 </Routes>
             </div>
         </Router>

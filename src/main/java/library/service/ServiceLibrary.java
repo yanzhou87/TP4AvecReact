@@ -4,13 +4,14 @@ package library.service;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 @Component
 public class ServiceLibrary {
 

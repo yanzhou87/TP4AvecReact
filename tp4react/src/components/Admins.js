@@ -12,8 +12,7 @@ const Admins = ({admins, onClickAdmin}) => {
                 </tr>
                 {admins.map((admin) => (
                     <Admin key={admin.id}
-                           admin={admin}
-                    />
+                           admin={admin}/>
                 ))}
                 </thead>
             </table>

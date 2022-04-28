@@ -4,12 +4,13 @@ import library.model.*;
 import library.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 @Component
 public class ServiceClient {
 
@@ -74,6 +75,9 @@ public class ServiceClient {
     public List<LibraryUser> findAllClients() {
         return libraryUserRepository.findAll();
     }
+    public List<LibraryUser> findAllAdmins() {
+        return libraryUserRepository.findAll();
+    }
 
     public List<Article> findAllArticles() {
         return articleRepository.findAll();
@@ -89,5 +93,13 @@ public class ServiceClient {
 
     public List<Exemplaire> findALLExemplairesByArticleId(long articleId) {
         return exemplaireRepository.findByArticleId(articleId);
+    }
+
+    public List<Admin> getAllAdmins() {
+       return   libraryUserRepository.findAllAdmins();
+    }
+
+    public Admin findAdminById(long id) {
+        return libraryUserRepository.findAdminById(id);
     }
 }
