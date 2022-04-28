@@ -14,29 +14,18 @@ function App() {
     )
     const [admins, setAdmins] = useState([])
 
-    const [clients, setClients] = useState([
-
-        {
-            id: 1,
-            firstName: "client 1",
-            lastName: "ccccc",
-            age: 40,
-            address: ''
-        },
-        {
-            id: 2,
-            firstName: "client 2",
-            lastName: "ccccc",
-            age: 60,
-            address: ''
-        }
-    ])
+    const [clients, setClients] = useState([])
     useEffect(() => {
         const getAdmins = async () => {
             const dminsFromServer = await fetchAdmins()
             setAdmins(dminsFromServer)
         }
+        const getClients = async () => {
+            const clientsFromServer = await fetchClients()
+            setClients(clientsFromServer)
+        }
         getAdmins()
+        getClients()
     }, [])
 
     const fetchAdmins = async () => {
@@ -47,6 +36,18 @@ function App() {
 
     const fetchAdmin = async(id) => {
         const res = await fetch(`http://localhost:5000/admins/${id}`)
+        const data = await res.json()
+        return data
+    }
+
+    const fetchClients = async () => {
+        const res = await fetch('http://localhost:5000/clients')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchClient= async(id) => {
+        const res = await fetch(`http://localhost:5000/clients/${id}`)
         const data = await res.json()
         return data
     }
