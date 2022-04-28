@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Admins from "./components/Admins";
 import Header from "./components/Header";
 import Clients from "./components/Clients";
@@ -12,23 +12,7 @@ function App() {
             showClient :false
         }
     )
-    const [admins, setAdmins] = useState([
-
-        {
-            id: 1,
-            firstName: "admin 1",
-            lastName: "ad",
-            age: 20,
-            address: ''
-        },
-        {
-            id: 2,
-            firstName: "admin 2",
-            lastName: "ad",
-            age: 30,
-            address: ''
-        }
-    ])
+    const [admins, setAdmins] = useState([])
 
     const [clients, setClients] = useState([
 
@@ -47,6 +31,25 @@ function App() {
             address: ''
         }
     ])
+    useEffect(() => {
+        const getAdmins = async () => {
+            const dminsFromServer = await fetchAdmins()
+            setAdmins(dminsFromServer)
+        }
+        getAdmins()
+    }, [])
+
+    const fetchAdmins = async () => {
+        const res = await fetch('http://localhost:5000/admins')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchAdmin = async(id) => {
+        const res = await fetch(`http://localhost:5000/admins/${id}`)
+        const data = await res.json()
+        return data
+    }
     const changeTypeUserForAdmin =()=>{
         setChangeTypeUser({showAdmins:true, showClient: false});
     }

@@ -1,0 +1,18 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "firstName": "admin 1",
+      "lastName": "ad",
+      "age": 20,
+      "address": ""
+    },
+    {
+      "id": 2,
+      "firstName": "admin 2",
+      "lastName": "ad",
+      "age": 30,
+      "address": ""
+    }
+  ]
+}
