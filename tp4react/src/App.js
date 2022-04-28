@@ -3,8 +3,15 @@ import './App.css';
 import {useState} from "react";
 import Admin from "./components/Admin";
 import Admins from "./components/Admins";
+import Header from "./components/Header";
 
 function App() {
+    const [changeTypeUser, setChangeTypeUser] = useState(
+        {
+            showAdmins :false,
+            showClient :false
+        }
+    )
     const [admins, setAdmins] = useState([
 
         {
@@ -22,9 +29,16 @@ function App() {
             address: ''
         }
     ])
+    const changeTypeUserForAdmin =()=>{
+        setChangeTypeUser({showAdmins:true, showClient: false});
+    }
+    const exit =()=>{
+        setChangeTypeUser({showAdmins:false, showClient: false});
+    }
     return (
         <div className="container">
-            <Admins admins={admins}/>
+            <Header title={'Library'} changeTypeUser={changeTypeUser} changeTypeUserForAdmin={changeTypeUserForAdmin} exit={exit}/>
+            {changeTypeUser.showAdmins && <Admins admins={admins}/>}
         </div>
     );
 }
