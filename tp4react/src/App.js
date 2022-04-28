@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
-import Admin from "./components/Admin";
 import Admins from "./components/Admins";
 import Header from "./components/Header";
+import Clients from "./components/Clients";
 
 function App() {
     const [changeTypeUser, setChangeTypeUser] = useState(
@@ -29,16 +29,40 @@ function App() {
             address: ''
         }
     ])
+
+    const [clients, setClients] = useState([
+
+        {
+            id: 1,
+            firstName: "client 1",
+            lastName: "ccccc",
+            age: 40,
+            address: ''
+        },
+        {
+            id: 2,
+            firstName: "client 2",
+            lastName: "ccccc",
+            age: 60,
+            address: ''
+        }
+    ])
     const changeTypeUserForAdmin =()=>{
         setChangeTypeUser({showAdmins:true, showClient: false});
+    }
+    const changeTypeUserForClient =()=>{
+        console.log(changeTypeUser.showClient)
+
+        setChangeTypeUser({showAdmins:false, showClient: true});
     }
     const exit =()=>{
         setChangeTypeUser({showAdmins:false, showClient: false});
     }
     return (
         <div className="container">
-            <Header title={'Library'} changeTypeUser={changeTypeUser} changeTypeUserForAdmin={changeTypeUserForAdmin} exit={exit}/>
+            <Header title={'Library'} changeTypeUserForAdmin={changeTypeUserForAdmin} exit={exit} changeTypeUserForClient={changeTypeUserForClient}/>
             {changeTypeUser.showAdmins && <Admins admins={admins}/>}
+            {changeTypeUser.showClient && <Clients clients={clients}/>}
         </div>
     );
 }

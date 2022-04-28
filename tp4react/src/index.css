@@ -17,6 +17,11 @@ code {
   justify-content: center;
 }
 
+.client{
+  display: flex;
+  justify-content: center;
+}
+
 p{
   margin-left: 20px;
 }
