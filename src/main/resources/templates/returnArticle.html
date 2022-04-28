@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Article</title>
+</head>
+<body>
+<form action="#" th:action="@{/returncreate}" th:object="${returnArticleForm}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <table border="1">
+        <tr>
+
+            <td><label>Client Id</label></td>
+            <td><input type="number" th:field="*{clientId}"/></td>
+        </tr>
+        <tr>
+            <td><label>Article Id</label></td>
+            <td><input type="number" th:field="*{articleId}"/></td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="Save"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

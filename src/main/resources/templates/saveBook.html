@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Save Book</title>
+</head>
+<body>
+<form action="#" th:action="@{/bookcreate}" th:object="${saveBookForm}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <table border="1">
+        <tr>
+
+            <td><label>Title</label></td>
+            <td><input type="text" th:field="*{title}" /></td>
+            <td th:if="${#fields.hasErrors('title')}">title invalide</td>
+        </tr>
+        <tr>
+            <td><label>Author</label></td>
+            <td><input type="text" th:field="*{author}" /></td>
+            <td th:if="${#fields.hasErrors('author')}">author invalide</td>
+        </tr>
+        <tr>
+            <td><label>Book Type</label></td>
+            <td><input type="text" th:field="*{articleType}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+
+    <a th:href="@{'/'}">Page index</a>
+</form>
+</body>
+</html>
