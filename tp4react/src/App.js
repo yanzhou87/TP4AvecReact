@@ -62,6 +62,9 @@ function App() {
     const exit = () => {
         setChangeTypeUser({showAdmins: false, showClient: false});
     }
+    const selectAdmin = async (id)=>{
+        const admin = await fetchAdmin(id)
+    }
     return (
 
 
@@ -69,18 +72,12 @@ function App() {
 
             <div className="container">
                 <Routes>
-
                     <Route path='/' element={<Header title={'Library'} changeTypeUserForAdmin={changeTypeUserForAdmin}
                                                      exit={exit}
                                                      changeTypeUserForClient={changeTypeUserForClient}/>}/>
                     <Route path='/admins' element={<Admins admins={admins}/>}/>
-
                     <Route path='/clients' element={ <Clients clients={clients}/>}/>
-
-
                 </Routes>
-
-
             </div>
         </Router>
 

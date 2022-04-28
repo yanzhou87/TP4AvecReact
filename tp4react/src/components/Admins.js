@@ -1,7 +1,9 @@
 import Admin from "./Admin";
+import Button from "./Button";
 
 const Admins = ({admins, onClickAdmin}) => {
     return (
+        <>
             <table>
                 <thead>
                 <tr>
@@ -15,6 +17,9 @@ const Admins = ({admins, onClickAdmin}) => {
                 ))}
                 </thead>
             </table>
+            <Button color={'red'}
+                    text={'Exit'} onClick={() => window.location.href = '/'}/>
+        </>
     )
 }
 

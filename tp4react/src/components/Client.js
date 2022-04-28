@@ -1,9 +1,9 @@
 const Client = ({client}) => {
     return (
-        <div className="client">
-            <p>{client.firstName}</p>
-            <p>{client.lastName}</p>
-        </div>
+        <tr className="client">
+            <td>{client.firstName}</td>
+            <td>{client.lastName}</td>
+        </tr>
     )
 }
 

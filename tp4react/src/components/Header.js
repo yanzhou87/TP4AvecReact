@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import Button from './Button'
-// import { useLocation } from 'react-router-dom'
 const Header = ({title, changeTypeUserForAdmin, exit, changeTypeUserForClient}) => {
-    // const location = useLocation()
     return (
         <header className='header'>
             <h1>{title}</h1>
@@ -12,10 +10,7 @@ const Header = ({title, changeTypeUserForAdmin, exit, changeTypeUserForClient}) 
                     text={'Admins'} onClick={()=> window.location.href ='/admins' }/>
             <Button color={'pink'}
                     text={'Client'} onClick={()=> window.location.href ='/clients'}/>
-            <Button color={'red'}
-                    text={'Exit'} onClick={()=> window.location.href ='/'} />
             </div>
-            {/*)}*/}
         </header>
     )
 }
