@@ -10,6 +10,7 @@ import PageForAdmin from "./components/PageForAdmin";
 import AddClient from "./components/AddClient";
 import PageForClient from "./components/PageForClient";
 import ClientsInfosForAdmins from "./components/ClientsInfosForAdmins";
+import Books from "./components/Books";
 
 
 function App() {
@@ -93,6 +94,10 @@ function App() {
         const client = await fetchClient(id)
         setClient({id:client.id, firstName : client.firstName,lastName:client.lastName, age:client.age, address :client.address })
     }
+    const selectBook = async (id) => {
+      const book = await fetchBook(id)
+        setBook(book)
+    }
     const addAdmin = async (admin) => {
         const res = await fetch('http://localhost:5000/admins',
             {
@@ -129,6 +134,7 @@ function App() {
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
                     <Route path='/pageForClient' element={<PageForClient client={client}/>}/>
                     <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients}/>}/>
+                    <Route path='books' element={<Books books={books} selectBook={selectBook}/>}/>
                 </Routes>
             </div>
         </Router>

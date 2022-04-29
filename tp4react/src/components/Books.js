@@ -1,22 +1,22 @@
-import Admin from "./Admin";
+
 import Button from "./Button";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import Book from "./Book";
 
-const Books = ({livres, selectLivre}) => {
+const Books = ({books, selectBook}) => {
     return (
         <>
             <table>
                 <thead>
                 <tr>
-                    <th>Click</th>
                     <th>Title</th>
                     <th>Author</th>
                 </tr>
-                {livres.map((livre) => (
-                    <Livre key={livre.id}
-                           livre={livre}
-                           selectLivre={selectLivre}/>
+                {books.map((book) => (
+                    <Book key={book.id}
+                           book={book}
+                           selectBook={selectBook}/>
                 ))}
                 </thead>
             </table>
@@ -26,8 +26,8 @@ const Books = ({livres, selectLivre}) => {
     )
 }
 
-Admins.propTypes = {
-    selectAdmin: PropTypes.func,
+Books.propTypes = {
+    selectBook: PropTypes.func,
 }
-export default Admins
+export default Books
 

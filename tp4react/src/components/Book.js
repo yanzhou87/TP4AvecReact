@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom";
 import {FaLaugh} from "react-icons/fa";
 
-const Book = ({livre, selectLivre}) => {
+const Book = ({book, selectBook}) => {
     return (
-        <tr className="livre" onClick={()=>selectLivre(livre.id)}>
-            <td><Link to='/pageForLivre'><span><FaLaugh/></span></Link></td>
-            <td>{livre.title}</td>
-            <td>{livre.author}</td>
+        <tr className="book" onClick={()=>selectBook(book.id)}>
+
+            <td>{book.title}</td>
+            <td>{book.author}</td>
         </tr>
     )
 }
 
-export default Client
+export default Book
