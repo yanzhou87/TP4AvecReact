@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+import Admins from "./Admins";
 
 const Cd = ({cd}) => {
     return (
@@ -7,4 +9,7 @@ const Cd = ({cd}) => {
     )
 }
 
+Cd.propTypes = {
+   // cd:PropTypes.object,
+}
 export default Cd

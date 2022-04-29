@@ -2,7 +2,7 @@
 import Button from "./Button";
 import {Link} from "react-router-dom";
 
-const Cds = ({cds}) => {
+const Dvds = ({dvds}) => {
     return (
         <>
             <table>
@@ -11,10 +11,10 @@ const Cds = ({cds}) => {
                     <th>Title</th>
                     <th>Author</th>
                 </tr>
-                {cds.map((cd) => (
-                    <tr  key={cd.id}>
-                        <td>{cd.title}</td>
-                        <td>{cd.author}</td>
+                {dvds.map((dvd) => (
+                    <tr  key={dvd.id}>
+                        <td>{dvd.title}</td>
+                        <td>{dvd.author}</td>
                     </tr>
                 ))}
                 </thead>
@@ -24,7 +24,7 @@ const Cds = ({cds}) => {
         </>
     )
 }
-Cds.propTypes = {
-   // cds: PropTypes.object
+Dvds.propTypes = {
+    // cds: PropTypes.object
 }
-export default Cds
+export default Dvds

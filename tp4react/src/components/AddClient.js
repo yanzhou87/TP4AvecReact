@@ -36,9 +36,9 @@ const AddClient = ({onAdd}) => {
                        onChange={(e) => setLastName(e.target.value)}/>
             </div>
 
-            <input type='submit' value='Save Client' className='btn btn-block'
-                   onClick={() => window.location.href = '/'}/>
-            <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
+          <input type='submit' value='Save Client' className='btn btn-block'
+                  />
+    <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
         </form>
 
 

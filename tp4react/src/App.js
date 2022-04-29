@@ -12,6 +12,7 @@ import Books from "./components/Books";
 import Admin from "./components/Admin";
 import Client from "./components/Client";
 import Cds from "./components/Cds";
+import Dvds from "./components/Dvds";
 
 
 function App() {
@@ -46,10 +47,15 @@ function App() {
             const cdsFromServer = await fetchCds()
             setCds(cdsFromServer)
         }
+        const getDvds = async () =>{
+            const dvdsFromServer = await fetchDvds()
+            setDvds(dvdsFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
         getCds()
+        getDvds()
     }, [])
 
     const fetchAdmins = async () => {
@@ -99,6 +105,18 @@ function App() {
         return data
     }
 
+    const fetchDvds = async () =>{
+        const res = await fetch('http://localhost:5000/dvds')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchDvd = async (id) =>{
+        const res = await fetch(`http://localhost:5000/dvd/${id}`)
+        const data = await res.json()
+        return data
+    }
+
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
        setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
@@ -112,6 +130,7 @@ function App() {
         setBook(book)
     }
     const addAdmin = async (admin) => {
+
         const res = await fetch('http://localhost:5000/admins',
             {
                 method: 'POST',
@@ -149,6 +168,7 @@ function App() {
                     <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients}/>}/>
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
+                    <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                 </Routes>
             </div>
         </Router>

@@ -2,6 +2,7 @@
 import Button from "./Button";
 import {Link} from "react-router-dom";
 import {FaLaugh} from "react-icons/fa";
+import PropTypes from "prop-types";
 
 const Clients = ({clients, selectClient}) => {
     return (
@@ -28,4 +29,9 @@ const Clients = ({clients, selectClient}) => {
     )
 }
 
+
+Clients.propTypes = {
+    // clients:PropTypes.object,
+    selectClient: PropTypes.func,
+}
 export default Clients

@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {FaHandPointRight, FaLaugh} from "react-icons/fa";
 import Button from "./Button";
+import PropTypes from "prop-types";
 
 const Client = ({client}) => {
     return (
@@ -13,4 +14,7 @@ const Client = ({client}) => {
     )
 }
 
+Client.propTypes = {
+   // client:PropTypes.object,
+}
 export default Client

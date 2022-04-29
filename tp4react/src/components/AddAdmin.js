@@ -1,11 +1,10 @@
 import {useState} from 'react'
-import Button from "./Button";
 import {Link} from "react-router-dom";
+import Button from "./Button";
 
 const AddAdmin = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -36,8 +35,8 @@ const AddAdmin = ({onAdd}) => {
                        onChange={(e) => setLastName(e.target.value)}/>
             </div>
 
-            <Link to='/'>  <input type='submit' value='Save Admin' className='btn btn-block'/></Link>
-
+              <input type='submit' value='Save Admin' className='btn btn-block'/>
+              <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
         </form>
 
 

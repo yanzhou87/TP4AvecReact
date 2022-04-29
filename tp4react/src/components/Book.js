@@ -1,5 +1,5 @@
-import {Link} from "react-router-dom";
-import {FaLaugh} from "react-icons/fa";
+
+import PropTypes from "prop-types";
 
 const Book = ({book, selectBook}) => {
     return (
@@ -11,4 +11,7 @@ const Book = ({book, selectBook}) => {
     )
 }
 
+Book.propTypes = {
+   // book:PropTypes.object,
+}
 export default Book

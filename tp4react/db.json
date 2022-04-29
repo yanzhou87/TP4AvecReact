@@ -18,6 +18,11 @@
       "firstName": "yan",
       "lastName": "zhou",
       "id": 3
+    },
+    {
+      "firstName": "aass",
+      "lastName": "aass",
+      "id": 4
     }
   ],
   "clients": [
@@ -44,6 +49,21 @@
       "firstName": "yy",
       "lastName": "zz",
       "id": 4
+    },
+    {
+      "firstName": "yu",
+      "lastName": "yu",
+      "id": 5
+    },
+    {
+      "firstName": "ee",
+      "lastName": "ee",
+      "id": 6
+    },
+    {
+      "firstName": "yaya",
+      "lastName": "yaya",
+      "id": 7
     }
   ],
   "books": [
@@ -53,9 +73,9 @@
       "author": "Vivi",
       "yearPublication": "1988-09-23",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
+      "nombreExemplaires": 3,
       "editor": "Michel",
-      "numbrePage" : 301
+      "numbrePage": 301
     },
     {
       "id": 2,
@@ -63,11 +83,10 @@
       "author": "Cici",
       "yearPublication": "1960-03-02",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
+      "nombreExemplaires": 3,
       "editor": "Francois",
-      "numbrePage" : 301
+      "numbrePage": 301
     }
-
   ],
   "cds": [
     {
@@ -76,8 +95,8 @@
       "author": "Vivi",
       "yearPublication": "1988-09-23",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
-      "durationMovie" : 1.0
+      "nombreExemplaires": 3,
+      "durationMovie": 1
     },
     {
       "id": 4,
@@ -85,10 +104,9 @@
       "author": "Cici",
       "yearPublication": "1960-03-02",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
-      "durationMovie" : 1.0
+      "nombreExemplaires": 3,
+      "durationMovie": 1
     }
-
   ],
   "dvds": [
     {
@@ -97,8 +115,8 @@
       "author": "Vivi",
       "yearPublication": "1988-09-23",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
-      "durationMovie" : 2.0
+      "nombreExemplaires": 3,
+      "durationMovie": 2
     },
     {
       "id": 2,
@@ -106,9 +124,8 @@
       "author": "Cici",
       "yearPublication": "1960-03-02",
       "articleType": "Roman",
-      "nombreExemplaires" : 3,
-      "durationMovie" : 2.30
+      "nombreExemplaires": 3,
+      "durationMovie": 2.3
     }
   ]
 }
-

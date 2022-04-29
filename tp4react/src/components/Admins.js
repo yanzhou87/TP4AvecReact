@@ -32,6 +32,7 @@ const Admins = ({admins, selectAdmin}) => {
 }
 
 Admins.propTypes = {
+  //  admins:PropTypes.object,
     selectAdmin: PropTypes.func,
 }
 export default Admins

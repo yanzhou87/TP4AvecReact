@@ -27,6 +27,7 @@ const Books = ({books, selectBook}) => {
 }
 
 Books.propTypes = {
+   // books : PropTypes.object,
     selectBook: PropTypes.func,
 }
 export default Books
