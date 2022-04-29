@@ -18,10 +18,11 @@ function App() {
             showClient: false
         }
     )
-
     const [admins, setAdmins] = useState([])
-
     const [clients, setClients] = useState([])
+    const [admin, setAdmin] = useState({})
+    const [client, setClient] = useState()
+
     useEffect(() => {
         const getAdmins = async () => {
             const dminsFromServer = await fetchAdmins()
@@ -69,6 +70,8 @@ function App() {
     }
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
+       console.log("fonction select admin id : " + admin.id)
+       setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
     }
     const addAdmin = async (admin) => {
         const res = await fetch('http://localhost:5000/admins',
@@ -95,23 +98,19 @@ function App() {
         setClients([...clients, data])
     }
     return (
-
         <Router>
             <div className="container">
                 <Routes>
-                    <Route path='/' element={<Header title={'Library'} changeTypeUserForAdmin={changeTypeUserForAdmin}
-                                                     exit={exit}
-                                                     changeTypeUserForClient={changeTypeUserForClient}/>}/>
-                    <Route path='/admins' element={<Admins admins={admins}/>}/>
+                    <Route path='/' element={<Header title={'Library'}/>}/>
+                    <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}/>}/>
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
-                    <Route path='/pageForAdmin' element={ <PageForAdmin />}/>
+                    <Route path='/pageForAdmin' element={<PageForAdmin admin={admin}/>}/>
                     <Route path='/addClient' element={ <AddClient onAdd={addClient}/>}/>
                     <Route path='/pageForClient' element={<PageForClient /> }/>
                 </Routes>
             </div>
         </Router>
-
     );
 }
 

@@ -1,5 +1,6 @@
 import Client from "./Client";
 import Button from "./Button";
+import {Link} from "react-router-dom";
 
 const Clients = ({clients, onClickClient}) => {
     return (
@@ -7,19 +8,20 @@ const Clients = ({clients, onClickClient}) => {
             <table>
                 <thead>
                 <tr>
+                    <th>Click</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                 </tr>
                 {clients.map((client) => (
                     <Client key={client.id}
                             client={client}
+                            onClick={onClickClient}
                     />
                 ))}
                 </thead>
             </table>
 
-            <Button color={'red'}
-                    text={'Exit'} onClick={() => window.location.href = '/'}/>
+            <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
         </>
     )
 }

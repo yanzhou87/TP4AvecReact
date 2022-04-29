@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import Button from "./Button";
+import {Link} from "react-router-dom";
 
 const AddClient = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')
@@ -37,8 +38,7 @@ const AddClient = ({onAdd}) => {
 
             <input type='submit' value='Save Client' className='btn btn-block'
                    onClick={() => window.location.href = '/'}/>
-            <Button color={'red'}
-                    text={'Exit'} onClick={() => window.location.href = '/'}/>
+            <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
         </form>
 
 

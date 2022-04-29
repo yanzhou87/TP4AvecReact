@@ -1,10 +1,13 @@
 import Button from "./Button";
+import {FaHandPointRight} from "react-icons/fa";
+import {Link} from "react-router-dom";
 
-const PageForAdmin =()=>{
+const PageForAdmin =({admin})=>{
+    console.log(admin)
     return(
         <div>
-            <Button color={'pink'}
-                    text={'Create Client'} onClick={() => window.location.href = '/addClient'}/>
+            <h2>  <span> <FaHandPointRight/></span> admin.firstName</h2>
+            <Link to='/addClient'><Button color={'pink'} text={'Create Client'}/></Link>
         </div>
     )
 }

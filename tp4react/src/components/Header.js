@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types'
 import Button from './Button'
+import {Link} from "react-router-dom";
 
-const Header = ({title, changeTypeUserForAdmin, exit, changeTypeUserForClient}) => {
+const Header = ({title}) => {
     return (
         <header className='header'>
             <h1>{title}</h1>
-            {/*{location.pathname === '/' && (*/}
             <div>
-                <Button color={'green'}
-                        text={'Admins'} onClick={() => window.location.href = '/admins'}/>
-                <Button color={'pink'}
-                        text={'Client'} onClick={() => window.location.href = '/clients'}/>
-                <Button color={'SkyBlue'}
-                        text={'Add admin'} onClick={() => window.location.href = '/addAdmin'}/>
+                <Link to='/admins'><Button color={'green'}
+                                           text={'Admins'}/></Link>
+                <Link to='/clients'><Button color={'pink'}
+                                            text={'Client'} onClick={() => window.location.href = '/clients'}/></Link>
+                <Link to='/addAdmin'><Button color={'SkyBlue'}
+                                             text={'Add admin'}
+                                             onClick={() => window.location.href = '/addAdmin'}/></Link>
             </div>
         </header>
     )

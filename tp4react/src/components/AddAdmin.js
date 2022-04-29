@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import Button from "./Button";
+import {Link} from "react-router-dom";
+import {FaGithubAlt} from "react-icons/fa";
 
 const AddAdmin = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')
@@ -37,8 +39,7 @@ const AddAdmin = ({onAdd}) => {
 
             <input type='submit' value='Save Admin' className='btn btn-block'
                    onClick={() => window.location.href = '/'}/>
-            <Button color={'red'}
-                    text={'Exit'} onClick={() => window.location.href = '/'}/>
+           <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
         </form>
 
 
