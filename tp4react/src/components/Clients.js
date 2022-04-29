@@ -2,7 +2,7 @@ import Client from "./Client";
 import Button from "./Button";
 import {Link} from "react-router-dom";
 
-const Clients = ({clients, onClickClient}) => {
+const Clients = ({clients, selectClient}) => {
     return (
         <>
             <table>
@@ -15,7 +15,7 @@ const Clients = ({clients, onClickClient}) => {
                 {clients.map((client) => (
                     <Client key={client.id}
                             client={client}
-                            onClick={onClickClient}
+                            selectClient={selectClient}
                     />
                 ))}
                 </thead>

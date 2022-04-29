@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import Button from "./Button";
 import {Link} from "react-router-dom";
-import {FaGithubAlt} from "react-icons/fa";
 
 const AddAdmin = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')

@@ -71,6 +71,7 @@ public class ClientController {
     }
 
     @GetMapping("/clients")
+
     public String getClients(Model model) {
         model.addAttribute("pageTitle", "Mon Demo");
         var clients = serviceClient.findAllClients();

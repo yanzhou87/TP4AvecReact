@@ -1,4 +1,4 @@
-import {FaGithubAlt} from 'react-icons/fa'
+import {FaGhost} from 'react-icons/fa'
 import {Link} from "react-router-dom";
 
 const Admin = ({admin, selectAdmin}) => {
@@ -8,7 +8,7 @@ const Admin = ({admin, selectAdmin}) => {
             <tr className="admin" onClick={() => {
                 selectAdmin(admin.id)
             }} >
-                <td><Link to='/pageForAdmin'><span><FaGithubAlt/></span></Link></td>
+                <td><Link to='/pageForAdmin'><span><FaGhost/></span></Link></td>
                 <td>{admin.firstName}</td>
                 <td>{admin.lastName}</td>
             </tr>

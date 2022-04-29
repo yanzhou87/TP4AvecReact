@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
-import {FaGithubAlt} from "react-icons/fa";
+import {FaLaugh} from "react-icons/fa";
 
-const Client = ({client, onClick}) => {
+const Client = ({client, selectClient}) => {
     return (
-        <tr className="client" onClick={()=>onClick()}>
-            <td><Link to='/pageForClient'><span><FaGithubAlt/></span></Link></td>
+        <tr className="client" onClick={()=>selectClient(client.id)}>
+            <td><Link to='/pageForClient'><span><FaLaugh/></span></Link></td>
             <td>{client.firstName}</td>
             <td>{client.lastName}</td>
         </tr>

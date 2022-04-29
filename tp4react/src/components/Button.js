@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types'
-import {Link} from "react-router-dom";
 
-const Button = ({color, text, onClick}) => {
+const Button = ({color, text}) => {
     return (
         <button
-            onClick={()=>onClick()}
             style={{backgroundColor: color }}
             className='btn'>{text}</button>
     )
@@ -16,8 +14,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
     text: PropTypes.string,
-    color: PropTypes.string,
-    onClick: PropTypes.func
+    color: PropTypes.string
 }
 
 export default Button
