@@ -13,6 +13,7 @@ import Admin from "./components/Admin";
 import Client from "./components/Client";
 import Cds from "./components/Cds";
 import Dvds from "./components/Dvds";
+import AddArticle from "./components/AddArticle";
 
 
 function App() {
@@ -154,6 +155,43 @@ function App() {
         const data = await res.json()
         setClients([...clients, data])
     }
+    const onAddBook= async (book) => {
+        const res = await fetch('http://localhost:5000/books',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(book)
+            })
+        const data = await res.json()
+        setBooks([...books, data])
+    }
+    const onAddCd= async (cd) => {
+        const res = await fetch('http://localhost:5000/cds',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(cd)
+            })
+        const data = await res.json()
+        setCds([...cds, data])
+    }
+    const onAddDvd= async (dvd) => {
+            const res = await fetch('http://localhost:5000/dvds',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(dvd)
+                })
+            const data = await res.json()
+            setDvds([...dvds, data])
+        }
+
     return (
         <Router>
             <div className="container">
@@ -169,6 +207,7 @@ function App() {
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
+                    <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
                 </Routes>
             </div>
         </Router>

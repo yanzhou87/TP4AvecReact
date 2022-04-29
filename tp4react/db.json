@@ -86,6 +86,11 @@
       "nombreExemplaires": 3,
       "editor": "Francois",
       "numbrePage": 301
+    },
+    {
+      "title": "book3",
+      "author": "b3",
+      "id": 3
     }
   ],
   "cds": [
@@ -106,6 +111,11 @@
       "articleType": "Roman",
       "nombreExemplaires": 3,
       "durationMovie": 1
+    },
+    {
+      "title": "cd 3",
+      "author": "c3",
+      "id": 5
     }
   ],
   "dvds": [
@@ -126,6 +136,11 @@
       "articleType": "Roman",
       "nombreExemplaires": 3,
       "durationMovie": 2.3
+    },
+    {
+      "title": "dvd3",
+      "author": "dd3",
+      "id": 3
     }
   ]
 }
