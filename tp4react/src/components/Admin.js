@@ -1,20 +1,17 @@
-import {FaGhost} from 'react-icons/fa'
+import { FaHandPointRight} from 'react-icons/fa'
 import {Link} from "react-router-dom";
+import Button from "./Button";
 
-const Admin = ({admin, selectAdmin}) => {
+const Admin = ({admin}) => {
 
     return (
-        <>
-            <tr className="admin" onClick={() => {
-                selectAdmin(admin.id)
-            }} >
-                <td><Link to='/pageForAdmin'><span><FaGhost/></span></Link></td>
-                <td>{admin.firstName}</td>
-                <td>{admin.lastName}</td>
-            </tr>
-
-        </>
-
+        <div>
+            <h2><span> <FaHandPointRight/></span> {admin.firstName}  {admin.lastName}</h2>
+            <Link to='/addClient'><Button color={'LightBlue'} text={'Create Client'}/></Link>
+            <Link to='/'><Button color={'FloralWhite'} text={'Create Article Sans Active'}/></Link>
+            <Link to='/clientsInfosForAdmins'><Button color={'pink'} text={'List Clients'}/></Link>
+            <Link to='/admins'><Button color={'red'} text={'Exit'}/></Link>
+        </div>
     )
 }
 

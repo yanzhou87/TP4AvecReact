@@ -3,21 +3,19 @@ import Button from "./Button";
 import {Link} from "react-router-dom";
 import {FaLaugh} from "react-icons/fa";
 
-const Clients = ({clients, selectClient}) => {
+const Cds = ({cds}) => {
     return (
         <>
             <table>
                 <thead>
                 <tr>
-                    <th>Click</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                 </tr>
-                {clients.map((client) => (
-                    <tr  key={client.id} onClick={()=>selectClient(client.id)}>
-                        <td><Link to='/client'><span><FaLaugh/></span></Link></td>
-                        <td>{client.firstName}</td>
-                        <td>{client.lastName}</td>
+                {cds.map((cd) => (
+                    <tr  key={cd.id}>
+                        <td>{cd.title}</td>
+                        <td>{cd.author}</td>
                     </tr>
                 ))}
                 </thead>
@@ -28,4 +26,4 @@ const Clients = ({clients, selectClient}) => {
     )
 }
 
-export default Clients
+export default Cds

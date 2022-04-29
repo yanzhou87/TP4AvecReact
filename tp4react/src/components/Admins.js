@@ -2,6 +2,7 @@ import Admin from "./Admin";
 import Button from "./Button";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {FaGhost} from "react-icons/fa";
 
 const Admins = ({admins, selectAdmin}) => {
     return (
@@ -14,9 +15,13 @@ const Admins = ({admins, selectAdmin}) => {
                     <th>Last Name</th>
                 </tr>
                 {admins.map((admin) => (
-                    <Admin key={admin.id}
-                           admin={admin}
-                           selectAdmin={selectAdmin}/>
+                    <tr key={admin.id} onClick={() => {
+                        selectAdmin(admin.id)
+                    }}>
+                        <td><Link to='/admin'><span><FaGhost/></span></Link></td>
+                        <td>{admin.firstName}</td>
+                        <td>{admin.lastName}</td>
+                    </tr>
                 ))}
                 </thead>
             </table>

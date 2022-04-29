@@ -19,7 +19,7 @@ const ClientsInfosForAdmins =({clients})=>{
                 ))}
                 </thead>
             </table>
-            <Link to='/pageForAdmin'><Button color={'pink'} text={'Mon page'}/></Link>
+            <Link to='/admin'><Button color={'pink'} text={'Mon page'}/></Link>
         </>
 
     )

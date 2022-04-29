@@ -1,13 +1,15 @@
 import {Link} from "react-router-dom";
-import {FaLaugh} from "react-icons/fa";
+import {FaHandPointRight, FaLaugh} from "react-icons/fa";
+import Button from "./Button";
 
-const Client = ({client, selectClient}) => {
+const Client = ({client}) => {
     return (
-        <tr className="client" onClick={()=>selectClient(client.id)}>
-            <td><Link to='/pageForClient'><span><FaLaugh/></span></Link></td>
-            <td>{client.firstName}</td>
-            <td>{client.lastName}</td>
-        </tr>
+        <div className="client">
+            <h2><span><FaHandPointRight/></span>{client.firstName} {client.lastName}</h2>
+            <Link to='/addEmprunt'><Button color={'pink'} text={'Create Emprunt'}/></Link>
+            <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
+            <div>afichier emprunts</div>
+        </div>
     )
 }
 

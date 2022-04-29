@@ -6,11 +6,12 @@ import Header from "./components/Header";
 import Clients from "./components/Clients";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import AddAdmin from "./components/AddAdmin";
-import PageForAdmin from "./components/PageForAdmin";
 import AddClient from "./components/AddClient";
-import PageForClient from "./components/PageForClient";
 import ClientsInfosForAdmins from "./components/ClientsInfosForAdmins";
 import Books from "./components/Books";
+import Admin from "./components/Admin";
+import Client from "./components/Client";
+import Cds from "./components/Cds";
 
 
 function App() {
@@ -41,14 +42,14 @@ function App() {
           const booksFromServer = await fetchBooks()
             setBooks(booksFromServer)
         }
-        // const getCds = async () =>{
-        //     const cdsFromServer = await fetchCds()
-        //     setCds(cdsFromServer)
-        // }
+        const getCds = async () =>{
+            const cdsFromServer = await fetchCds()
+            setCds(cdsFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
-        // getCDS()
+        getCds()
     }, [])
 
     const fetchAdmins = async () => {
@@ -86,6 +87,18 @@ function App() {
         const data = await res.json()
         return data
     }
+    const fetchCds = async () =>{
+        const res = await fetch('http://localhost:5000/cds')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchCd = async (id) =>{
+        const res = await fetch(`http://localhost:5000/cd/${id}`)
+        const data = await res.json()
+        return data
+    }
+
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
        setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
@@ -130,11 +143,12 @@ function App() {
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}  selectClient={selectClient}/>}/>
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
-                    <Route path='/pageForAdmin' element={ <PageForAdmin admin={admin}  selectAdmin={admin}/>}/>
+                    <Route path='/admin' element={ <Admin admin={admin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
-                    <Route path='/pageForClient' element={<PageForClient client={client}/>}/>
+                    <Route path='/client' element={<Client client={client}/>}/>
                     <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients}/>}/>
-                    <Route path='books' element={<Books books={books} selectBook={selectBook}/>}/>
+                    <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
+                    <Route path='/cds' element={<Cds cds={cds}/>}/>
                 </Routes>
             </div>
         </Router>
