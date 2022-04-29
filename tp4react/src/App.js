@@ -9,20 +9,21 @@ import AddAdmin from "./components/AddAdmin";
 import PageForAdmin from "./components/PageForAdmin";
 import AddClient from "./components/AddClient";
 import PageForClient from "./components/PageForClient";
+import ClientsInfosForAdmins from "./components/ClientsInfosForAdmins";
 
 
 function App() {
-    const [changeTypeUser, setChangeTypeUser] = useState(
-        {
-            showAdmins: false,
-            showClient: false
-        }
-    )
    
     const [admins, setAdmins] = useState([])
     const [clients, setClients] = useState([])
     const [admin, setAdmin] = useState({})
     const [client, setClient] = useState({})
+    const [books, setBooks] = useState([])
+    const [book, setBook] = useState({})
+    const [cds,setCDs] = useState([])
+    const [cd, setCD] = useState({})
+    const [dvds, setDVDs] = useState([])
+    const [dvd, setDVD] = useState({})
     const [emprunts, setEmprunts] = useState([])
     const [emprunt, setEmprunt] = useState({})
 
@@ -35,8 +36,18 @@ function App() {
             const clientsFromServer = await fetchClients()
             setClients(clientsFromServer)
         }
+        const getBooks = async () => {
+          const booksFromServer = await fetchBooks()
+            setBooks(booksFromServer)
+        }
+        const getCDS = async () =>{
+            const cdsFromServer = await fetchCDs()
+            setCDs(cdsFromServer)
+        }
         getAdmins()
         getClients()
+        getBooks()
+        getCDS()
     }, [])
 
     const fetchAdmins = async () => {
@@ -62,21 +73,24 @@ function App() {
         const data = await res.json()
         return data
     }
-    const changeTypeUserForAdmin = () => {
-        setChangeTypeUser({showAdmins: true, showClient: false});
+
+    const fetchBooks = async () =>{
+        const res = await fetch('http://localhost:5000/books')
+        const data = await res.json()
+        return data
     }
-    const changeTypeUserForClient = () => {
-        setChangeTypeUser({showAdmins: false, showClient: true});
-    }
-    const exit = () => {
-        setChangeTypeUser({showAdmins: false, showClient: false});
+
+    const fetchBook = async (id) =>{
+        const res = await fetch(`http://localhost:5000/clients/${id}`)
+        const data = await res.json()
+        return data
     }
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
        setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
     }
     const selectClient = async (id)=>{
-        const client = await fetchAdmin(id)
+        const client = await fetchClient(id)
         setClient({id:client.id, firstName : client.firstName,lastName:client.lastName, age:client.age, address :client.address })
     }
     const addAdmin = async (admin) => {
@@ -111,9 +125,10 @@ function App() {
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}  selectClient={selectClient}/>}/>
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
-                    <Route path='/pageForAdmin' element={ <PageForAdmin admin={admin}/>}/>
-                    <Route path='/addClient' element={ <AddClient onAdd={addClient}/>}/>
-                    <Route path='/pageForClient' element={<PageForClient client={client}/> }/>
+                    <Route path='/pageForAdmin' element={ <PageForAdmin admin={admin}  selectAdmin={admin}/>}/>
+                    <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
+                    <Route path='/pageForClient' element={<PageForClient client={client}/>}/>
+                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients}/>}/>
                 </Routes>
             </div>
         </Router>

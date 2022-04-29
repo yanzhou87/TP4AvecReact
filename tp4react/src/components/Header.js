@@ -20,10 +20,7 @@ Header.defaultProps = {
 }
 
 Header.propTypes = {
-    title: PropTypes.string.isRequired,
-    changeTypeUserForAdmin: PropTypes.func,
-    changeTypeUserForClient: PropTypes.func,
-    exit: PropTypes.func
+    title: PropTypes.string.isRequired
 }
 
 export default Header

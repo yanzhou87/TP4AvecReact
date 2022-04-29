@@ -3,20 +3,20 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-const Admins = ({admins, selectAdmin}) => {
+const Books = ({livres, selectLivre}) => {
     return (
         <>
             <table>
                 <thead>
                 <tr>
                     <th>Click</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Title</th>
+                    <th>Author</th>
                 </tr>
-                {admins.map((admin) => (
-                    <Admin key={admin.id}
-                           admin={admin}
-                           selectAdmin={selectAdmin}/>
+                {livres.map((livre) => (
+                    <Livre key={livre.id}
+                           livre={livre}
+                           selectLivre={selectLivre}/>
                 ))}
                 </thead>
             </table>

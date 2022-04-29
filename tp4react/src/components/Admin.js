@@ -1,5 +1,6 @@
 import {FaGhost} from 'react-icons/fa'
 import {Link} from "react-router-dom";
+import Button from "./Button";
 
 const Admin = ({admin, selectAdmin}) => {
 

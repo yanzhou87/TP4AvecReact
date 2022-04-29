@@ -34,6 +34,81 @@
       "lastName": "cccccc 2",
       "age": 30,
       "address": ""
+    },
+    {
+      "firstName": "zhou",
+      "lastName": "zhou",
+      "id": 3
+    },
+    {
+      "firstName": "yy",
+      "lastName": "zz",
+      "id": 4
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "book1",
+      "author": "Vivi",
+      "yearPublication": "1988-09-23",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "editor": "Michel",
+      "numbrePage" : 301
+    },
+    {
+      "id": 2,
+      "title": "book2",
+      "author": "Cici",
+      "yearPublication": "1960-03-02",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "editor": "Francois",
+      "numbrePage" : 301
+    }
+
+  ],
+  "cd": [
+    {
+      "id": 3,
+      "title": "cd1",
+      "author": "Vivi",
+      "yearPublication": "1988-09-23",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "durationMovie" : 1.0
+    },
+    {
+      "id": 4,
+      "title": "cd2",
+      "author": "Cici",
+      "yearPublication": "1960-03-02",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "durationMovie" : 1.0
+    }
+
+  ],
+  "dvd": [
+    {
+      "id": 1,
+      "title": "dvd1",
+      "author": "Vivi",
+      "yearPublication": "1988-09-23",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "durationMovie" : 2.0
+    },
+    {
+      "id": 2,
+      "title": "dvd2",
+      "author": "Cici",
+      "yearPublication": "1960-03-02",
+      "articleType": "Roman",
+      "nombreExemplaires" : 3,
+      "durationMovie" : 2.30
     }
   ]
 }
+
