@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-const AdminPage =()=>{
+const PageForAdmin =()=>{
     return(
         <div>
             <Button color={'pink'}
@@ -8,4 +8,4 @@ const AdminPage =()=>{
         </div>
     )
 }
-export default AdminPage
+export default PageForAdmin
