@@ -20,10 +20,10 @@ function App() {
     const [client, setClient] = useState({})
     const [books, setBooks] = useState([])
     const [book, setBook] = useState({})
-    const [cds,setCDs] = useState([])
-    const [cd, setCD] = useState({})
-    const [dvds, setDVDs] = useState([])
-    const [dvd, setDVD] = useState({})
+    const [cds,setCds] = useState([])
+    const [cd, setCd] = useState({})
+    const [dvds, setDvds] = useState([])
+    const [dvd, setDvd] = useState({})
     const [emprunts, setEmprunts] = useState([])
     const [emprunt, setEmprunt] = useState({})
 
@@ -40,14 +40,14 @@ function App() {
           const booksFromServer = await fetchBooks()
             setBooks(booksFromServer)
         }
-        const getCDS = async () =>{
-            const cdsFromServer = await fetchCDs()
-            setCDs(cdsFromServer)
-        }
+        // const getCds = async () =>{
+        //     const cdsFromServer = await fetchCds()
+        //     setCds(cdsFromServer)
+        // }
         getAdmins()
         getClients()
         getBooks()
-        getCDS()
+        // getCDS()
     }, [])
 
     const fetchAdmins = async () => {
@@ -81,7 +81,7 @@ function App() {
     }
 
     const fetchBook = async (id) =>{
-        const res = await fetch(`http://localhost:5000/clients/${id}`)
+        const res = await fetch(`http://localhost:5000/book/${id}`)
         const data = await res.json()
         return data
     }

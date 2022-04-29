@@ -5,12 +5,11 @@ import {Link} from "react-router-dom";
 const PageForClient = ({client, emprunts}) => {
     return (
         <div className="pageForClient">
-            <h2> <span><FaHandPointRight/></span>{client.firstName} {client.lastName}</h2>
+            <h2><span><FaHandPointRight/></span>{client.firstName} {client.lastName}</h2>
             <Link to='/addEmprunt'><Button color={'pink'} text={'Create Emprunt'}/></Link>
-            {emprunts.map((emprunt) => (
-                <Emprunt key={emprunt.id}  emprunt={emprunt} />
-            ))}
+            <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
+            <div>afichier emprunts</div>
         </div>
-)
+    )
 }
 export default PageForClient

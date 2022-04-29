@@ -36,9 +36,8 @@ const AddAdmin = ({onAdd}) => {
                        onChange={(e) => setLastName(e.target.value)}/>
             </div>
 
-            <input type='submit' value='Save Admin' className='btn btn-block'
-                   onClick={() => window.location.href = '/'}/>
-           <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
+            <Link to='/'>  <input type='submit' value='Save Admin' className='btn btn-block'/></Link>
+
         </form>
 
 
