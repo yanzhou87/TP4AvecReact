@@ -32,7 +32,7 @@ public class MainLibrary implements CommandLineRunner {
         Admin admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
         System.out.println(serviceLibrary.getAllClients());
         System.out.println(serviceLibrary.getAllAdmins());
-        final Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
+         Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
         System.out.println(serviceLibrary.getAllBooks());
 
 

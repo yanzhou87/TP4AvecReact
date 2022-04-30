@@ -106,10 +106,15 @@ public class ServiceAdmin {
         return libraryUserRepository.save(admin);
     }
 
+    public CD saveCD(CD cd) {
+        return articleRepository.save(cd);
+    }
+    public DVD saveDVD(DVD dvd) {
+        return articleRepository.save(dvd);
+    }
     public Book saveBook(Book book) {
         return articleRepository.save(book);
     }
-
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
         List<Article> articles =  articleRepository.findAll();
@@ -121,7 +126,7 @@ public class ServiceAdmin {
         return books;
     }
 
-    public List<CD> getAllCDs() {
+    public List<CD> getAllCds() {
         List<CD> cds = new ArrayList<>();
         List<Article> articles =  articleRepository.findAll();
         for(Article cd : articles){
