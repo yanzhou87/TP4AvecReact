@@ -178,6 +178,38 @@
       "id": 3
     }
   ],
+  "exemplaires": [
+    {
+      "id": 1,
+      "article":{
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
+      "isBorrowed" : "false",
+      "empruntId" : -1
+    },
+    {
+      "id": 2,
+      "article":{
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
+      "isBorrowed" : "false",
+      "empruntId" : -1
+    }
+  ],
   "emprunts": [
     {
       "id": 1,

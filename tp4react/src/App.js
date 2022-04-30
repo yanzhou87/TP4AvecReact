@@ -35,6 +35,7 @@ function App() {
     const [empruntsForClient, setEmpruntsForClient] = useState([])
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
+    const [exemplaires, setExemplaires] = useState([])
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -61,12 +62,17 @@ function App() {
             const empruntsFromServer = await fetchEmprunts();
             setEmprunts(empruntsFromServer)
         }
+        const getExemplaires = async () => {
+            const exemplairesFromServer = await fetchExemplaires();
+            setExemplaires(exemplairesFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
         getCds()
         getDvds()
         getEmprunts()
+        getExemplaires()
     }, [])
 
     const fetchAdmins = async () => {
@@ -137,6 +143,18 @@ function App() {
 
     const fetchEmprunt = async (id) => {
         const res = await fetch(`http://localhost:8080/emprunts/${id}`)
+        const data = await res.json()
+        return data
+    }
+
+    const fetchExemplaires = async () => {
+        const res = await fetch('http://localhost:8080/exemplaires')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchExemplaire = async (id) => {
+        const res = await fetch(`http://localhost:8080/exemplaires/${id}`)
         const data = await res.json()
         return data
     }

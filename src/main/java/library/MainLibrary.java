@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,17 +32,25 @@ public class MainLibrary implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Client client = serviceReact.saveClient(new Client("yan","zhou", 34));
-        Optional<Admin> admin = serviceReact.saveAdmin(new Admin("admin1","ad"));
+        Client client = serviceLibrary.saveClient(new Client("yan","zhou", 34));
+        Optional<Admin> admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
         System.out.println(serviceReact.getAllClients());
-        System.out.println(serviceLibrary.getAllAdmins());
-         Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
-        System.out.println(serviceLibrary.getAllBooks());
+        System.out.println(serviceReact.getAllAdmins());
+        Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
+        System.out.println(serviceReact.getAllBooks());
         CD cd = serviceLibrary.saveCD(new CD("cd1"));
-        System.out.println(serviceLibrary.getAllCds());
+        System.out.println(serviceReact.getAllCds());
         DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1"));
-        System.out.println(serviceLibrary.getAllDVDs());
+        System.out.println(serviceReact.getAllDVDs());
 
+//        List<Exemplaire> exemplaires = serviceLibrary.saveExemplaire(book, 10);
+//        book.setNombreExemplaires(exemplaires.size());
+//        serviceLibrary.saveArticle(book);
+//        book.setExemplaires(exemplaires);
+//        serviceLibrary.saveArticle(book);
+//        Emprunt emprunt = serviceLibrary.saveEmprunt(book, exemplaires, client, LocalDate.now());
+//
+//        System.out.println(emprunt);
         //        final Article book = serviceLibrary.saveArticle(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
 //        final Article cd = serviceLibrary.saveArticle(new CD("cd"));
 //        final Article dvd = serviceLibrary.saveArticle(new DVD("dvd"));

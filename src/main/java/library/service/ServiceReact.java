@@ -72,24 +72,24 @@ public class ServiceReact {
     }
 
     public Optional<Client> getClientById(Long id) {
-        return Optional.of(libraryUserRepository.findClientById(id));
+        return libraryUserRepository.findClientById(id);
     }
 
-    public Optional<Admin> saveAdmin(Admin admin) {
-        return Optional.of(libraryUserRepository.save(admin));
-    }
-    public Client saveClient(Client client) {
-        return  libraryUserRepository.save(client);
-    }
-    public CD saveCD(CD cd) {
-        return articleRepository.save(cd);
-    }
-    public DVD saveDVD(DVD dvd) {
-        return articleRepository.save(dvd);
-    }
-    public Book saveBook(Book book) {
-        return articleRepository.save(book);
-    }
+//    public Optional<Admin> saveAdmin(Admin admin) {
+//        return Optional.of(libraryUserRepository.save(admin));
+//    }
+//    public Optional<Client> saveClient(Client client) {
+//        return  Optional.of(libraryUserRepository.save(client));
+//    }
+//    public CD saveCD(CD cd) {
+//        return articleRepository.save(cd);
+//    }
+//    public DVD saveDVD(DVD dvd) {
+//        return articleRepository.save(dvd);
+//    }
+//    public Book saveBook(Book book) {
+//        return articleRepository.save(book);
+//    }
 
     public List<Emprunt> getAllEmprunts() {
         return empruntRepository.findAll();

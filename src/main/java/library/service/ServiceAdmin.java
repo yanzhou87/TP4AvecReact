@@ -74,18 +74,18 @@ public class ServiceAdmin {
         return empruntRepository.save(emprunt);
     }
 
-//    @Transactional
-//    public void addEmpruntToClient(long empruntId, long clientId) {
-//        var empruntOpt = empruntRepository.findEmpruntById(empruntId);
-//        var clientOpt = libraryUserRepository.findClientById(clientId);
-//
-//        Emprunt emprunt = empruntOpt.get();
-//       // Client client = clientOpt.get();
-//
-//        client.addEmprunt(emprunt);
-//        libraryUserRepository.save(client);
-//
-//    }
+    @Transactional
+    public void addEmpruntToClient(long empruntId, long clientId) {
+        var empruntOpt = empruntRepository.findEmpruntById(empruntId);
+        var clientOpt = libraryUserRepository.findClientById(clientId);
+
+        Emprunt emprunt = empruntOpt.get();
+        Client client = clientOpt.get();
+
+        client.addEmprunt(emprunt);
+        libraryUserRepository.save(client);
+
+    }
 
     public EmpruntRepository getEmpruntRepository() {
         return empruntRepository;
@@ -155,7 +155,7 @@ public class ServiceAdmin {
     }
 
     public Optional<Client> getClientById(Long id) {
-        return Optional.of(libraryUserRepository.findClientById(id));
+        return libraryUserRepository.findClientById(id);
     }
 
 
