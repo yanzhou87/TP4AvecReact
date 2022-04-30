@@ -63,4 +63,11 @@ public class ReactController {
     public List<DVD> getAllDVDs() {
         return serviceReact.getAllDVDs();
     }
+
+    @GetMapping("/emprunts")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Emprunt> getAllEmprunts() {
+        return serviceReact.getAllEmprunts();
+    }
+
 }

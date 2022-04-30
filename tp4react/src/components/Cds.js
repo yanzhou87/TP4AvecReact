@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const Cds = ({cds}) => {
     return (
-        <>
+        <div className="pageCenter">
             <table>
                 <thead>
                 <tr>
@@ -21,7 +21,7 @@ const Cds = ({cds}) => {
             </table>
 
             <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
-        </>
+        </div>
     )
 }
 Cds.propTypes = {

@@ -1,11 +1,10 @@
 
 import Button from "./Button";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-const Emprunts = ({emprunts}) => {
+const Emprunts = ({emprunts, admin}) => {
     return (
-        <>
+        <div className="pageCenter">
             <table>
                 <thead>
                 <tr>
@@ -24,14 +23,12 @@ const Emprunts = ({emprunts}) => {
                         <td>{emprunt.date_emprunt}</td>
                         <td>{emprunt.date_return}</td>
                         <td>{emprunt.is_return}</td>
-
                     </tr>
                 ))}
                 </thead>
             </table>
-
-            <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
-        </>
+            <Link to={`/admins/${admin.id}`}><Button color={'pink'} text={'Mon page'}/></Link>
+        </div>
     )
 }
 

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const Clients = ({clients, selectClient}) => {
     return (
-        <>
+        <div className="pageCenter">
             <table>
                 <thead>
                 <tr>
@@ -25,7 +25,7 @@ const Clients = ({clients, selectClient}) => {
             </table>
 
             <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
-        </>
+        </div>
     )
 }
 

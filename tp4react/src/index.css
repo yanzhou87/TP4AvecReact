@@ -14,7 +14,7 @@ code {
 
 table{
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
   text-align: left;
   margin: 20px;
 }
@@ -100,4 +100,11 @@ span{
 .form-control-check input {
   flex: 2;
   height: 20px;
+}
+
+h3, h2{
+  text-align: center;
+}
+.pageCenter{
+  text-align: center;
 }

@@ -6,7 +6,7 @@ import {FaGhost} from "react-icons/fa";
 
 const Admins = ({admins, selectAdmin}) => {
     return (
-        <>
+        <div className="pageCenter">
             <table>
                 <thead>
                 <tr>
@@ -28,7 +28,7 @@ const Admins = ({admins, selectAdmin}) => {
             </table>
 
             <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
-        </>
+        </div>
     )
 }
 

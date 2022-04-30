@@ -1,15 +1,11 @@
 import {Link} from "react-router-dom";
-import {FaHandPointRight, FaLaugh} from "react-icons/fa";
 import Button from "./Button";
-import PropTypes from "prop-types";
 
-const Client = ({empruntsForClient,client}) => {
-    return (
+const EmpruntsForClient = ({empruntsForClient, client}) => {
+
+    return(
         <div className="pageCenter">
-            <h2><span><FaHandPointRight/></span>{client.firstName} {client.lastName}</h2>
-            <Link to='/addEmprunt'><Button color={'pink'} text={'Create Emprunt'}/></Link>
-            <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
-            <h3>Emprunts</h3>
+            <h2>Client name : {client.lastName}</h2>
             <table>
                 <thead>
                 <tr>
@@ -28,11 +24,8 @@ const Client = ({empruntsForClient,client}) => {
                 ))}
                 </thead>
             </table>
+            <Link to='/clientsInfosForAdmins'><Button color={'pink'} text={'Clients'}/></Link>
         </div>
     )
 }
-
-Client.propTypes = {
-   // client:PropTypes.object,
-}
-export default Client
+export default EmpruntsForClient

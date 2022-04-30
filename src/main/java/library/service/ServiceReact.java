@@ -90,4 +90,8 @@ public class ServiceReact {
     public Book saveBook(Book book) {
         return articleRepository.save(book);
     }
+
+    public List<Emprunt> getAllEmprunts() {
+        return empruntRepository.findAll();
+    }
 }

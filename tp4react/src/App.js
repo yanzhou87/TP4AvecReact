@@ -16,6 +16,7 @@ import Dvds from "./components/Dvds";
 import AddArticle from "./components/AddArticle";
 import Book from "./components/Book";
 import Emprunts from "./components/Emprunts";
+import EmpruntsForClient from "./components/EmpruntsForClient";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
     const [dvds, setDvds] = useState([])
     const [dvd, setDvd] = useState({})
     const [emprunts, setEmprunts] = useState([])
+    const [empruntsForClient, setEmpruntsForClient] = useState([])
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
 
@@ -147,8 +149,17 @@ function App() {
 
     const selectClient = async (id)=>{
         const client = await fetchClient(id)
+        const emprunts = await fetchEmprunts()
+        setEmpruntsForClient([])
         setClient(client)
         setId(client.id)
+        if(emprunts.length!==0){
+            emprunts.forEach((emp)=>{
+                if(emp.client.id === client.id){
+                    setEmpruntsForClient([...empruntsForClient, emp])
+                }
+            })
+        }
     }
 
     const selectBook = async (id) => {
@@ -232,14 +243,15 @@ function App() {
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
                     <Route path='/admins/:id' element={ <Admin admin={admin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
-                    <Route path='/clients/:id' element={<Client client={client}/>}/>
-                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients} admin={admin}/>}/>
+                    <Route path='/clients/:id' element={<Client empruntsForClient={empruntsForClient} client={client}/>}/>
+                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients} admin={admin} selectClient={selectClient}/>}/>
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                     <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
                     {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
-                    <Route path='/emprunts' element={<Emprunts emprunts={emprunts}/>}/>
+                    <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
+                    <Route path='/emprunts/clientId:id' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
                 </Routes>
             </div>
         </Router>

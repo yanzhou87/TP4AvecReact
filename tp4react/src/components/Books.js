@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 const Books = ({books, selectBook}) => {
     return (
-        <>
+        <div className="pageCenter">
             <table>
                 <thead>
                 <tr>
@@ -24,7 +24,7 @@ const Books = ({books, selectBook}) => {
             </table>
 
             <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
-        </>
+        </div>
     )
 }
 
