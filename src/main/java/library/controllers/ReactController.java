@@ -2,6 +2,7 @@ package library.controllers;
 
 import library.model.Admin;
 import library.model.Book;
+import library.model.CD;
 import library.model.Client;
 import library.service.ServiceAdmin;
 import library.service.ServiceClient;
@@ -44,5 +45,10 @@ public class ReactController {
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Book> getAllBooks() {
         return serviceAdmin.getAllBooks();
+    }
+    @GetMapping("/cds")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<CD> getAllCDs() {
+        return serviceAdmin.getAllCDs();
     }
 }

@@ -89,6 +89,9 @@ public class ServiceAdmin {
         return empruntRepository;
     }
 
+
+
+
     public Client saveClient(Client client) {
         return  libraryUserRepository.save(client);
     }
@@ -116,6 +119,17 @@ public class ServiceAdmin {
             }
         }
         return books;
+    }
+
+    public List<CD> getAllCDs() {
+        List<CD> cds = new ArrayList<>();
+        List<Article> articles =  articleRepository.findAll();
+        for(Article cd : articles){
+            if(cd instanceof CD){
+                cds.add((CD)cd);
+            }
+        }
+        return cds;
     }
 
 
