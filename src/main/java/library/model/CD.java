@@ -26,4 +26,14 @@ public class CD extends Article{
     public int dayEmprunt() {
         return 3;
     }
+
+    @Override
+    public String toString() {
+        return "CD{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", durationMovie=" + durationMovie +
+                '}';
+    }
 }

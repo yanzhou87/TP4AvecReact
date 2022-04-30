@@ -16,7 +16,7 @@ const Clients = ({clients, selectClient}) => {
                 </tr>
                 {clients.map((client) => (
                     <tr  key={client.id} onClick={()=>selectClient(client.id)}>
-                        <td><Link to='/client'><span><FaLaugh/></span></Link></td>
+                        <td><Link to={`/clients/${client.id}`}><span><FaLaugh/></span></Link></td>
                         <td>{client.firstName}</td>
                         <td>{client.lastName}</td>
                     </tr>

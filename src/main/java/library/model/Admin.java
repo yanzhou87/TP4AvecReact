@@ -16,7 +16,12 @@ public class Admin extends LibraryUser {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
+    public void setId(long id){
+        this.id =id;
+    }
+    public long getId(){
+        return id;
+    }
     @Override
     public String toString() {
         return "Admin{" +

@@ -152,5 +152,52 @@
       "author": "dd3",
       "id": 3
     }
+  ],
+  "emprunts": [
+    {
+      "id": 1,
+      "client":  {
+        "id": 1,
+        "firstName": "client 1",
+        "lastName": "ccccc 1",
+        "age": 20,
+        "address": ""
+      },
+      "exemplaire": {
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
+     "date_emprunt": "2020-09-02",
+     "date_return": "",
+      "is_return": false
+    },
+    {
+      "id": 2,
+      "client":   {
+        "id": 2,
+        "firstName": "client 2",
+        "lastName": "cccccc 2",
+        "age": 30,
+        "address": ""
+      },
+      "exemplaire": {
+        "id": 1,
+        "title": "dvd1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "durationMovie": 2
+      },
+      "date_emprunt": "2020-04-02",
+      "date_return": "",
+      "is_return": false
+    }
   ]
 }

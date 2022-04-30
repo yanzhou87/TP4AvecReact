@@ -3,14 +3,13 @@ package library.controllers;
 import library.model.*;
 import library.service.ServiceAdmin;
 import library.service.ServiceClient;
+import library.service.ServiceReact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
@@ -18,41 +17,50 @@ public class ReactController {
 
     Logger logger = LoggerFactory.getLogger(ReactController.class);
 
-    private ServiceAdmin serviceAdmin;
-    private ServiceClient serviceClient;
-
-    public ReactController(ServiceAdmin serviceAdmin, ServiceClient serviceClient) {
-        this.serviceAdmin = serviceAdmin;
-        this.serviceClient = serviceClient;
+    private ServiceReact serviceReact;
+    public ReactController(ServiceReact serviceReact) {
+        this.serviceReact = serviceReact;
     }
 
     @GetMapping("/clients")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Client> getAllClients() {
-        return serviceAdmin.getAllClients();
+        return serviceReact.getAllClients();
+    }
+
+    @GetMapping("/clients/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Optional<Client> getClient(@PathVariable Long id) {
+        return serviceReact.getClientById(id);
     }
 
     @GetMapping("/admins")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Admin> getAllAdmins() {
-        return serviceAdmin.getAllAdmins();
+        return serviceReact.getAllAdmins();
+    }
+
+    @GetMapping("/admins/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Optional<Admin> getAdmin(@PathVariable Long id) {
+        return serviceReact.getAdminById(id);
     }
 
     @GetMapping("/books")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Book> getAllBooks() {
-        return serviceAdmin.getAllBooks();
+        return serviceReact.getAllBooks();
     }
 
     @GetMapping("/cds")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<CD> getAllCDs() {
-        return serviceAdmin.getAllCds();
+        return serviceReact.getAllCds();
     }
 
-    @GetMapping("/dvd")
+    @GetMapping("/dvds")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<DVD> getAllDVDs() {
-        return serviceAdmin.getAllDVDs();
+        return serviceReact.getAllDVDs();
     }
 }

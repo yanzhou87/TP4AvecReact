@@ -26,4 +26,14 @@ public class DVD extends Article {
     public int dayEmprunt() {
         return 7;
     }
+
+    @Override
+    public String toString() {
+        return "DVD{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", durationMovie=" + durationMovie +
+                '}';
+    }
 }

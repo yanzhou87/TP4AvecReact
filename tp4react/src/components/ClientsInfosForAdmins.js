@@ -4,7 +4,7 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 import Clients from "./Clients";
 
-const ClientsInfosForAdmins =({clients})=>{
+const ClientsInfosForAdmins =({clients,admin})=>{
     return (
         <>
             <table>
@@ -21,7 +21,7 @@ const ClientsInfosForAdmins =({clients})=>{
                 ))}
                 </thead>
             </table>
-            <Link to='/admin'><Button color={'pink'} text={'Mon page'}/></Link>
+            <Link to={`/admins/${admin.id}`}><Button color={'pink'} text={'Mon page'}/></Link>
         </>
 
     )

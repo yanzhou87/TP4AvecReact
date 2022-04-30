@@ -4,7 +4,7 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 
 const Admin = ({admin}) => {
-
+console.log(admin)
     return (
         <div>
             <h2><span> <FaHandPointRight/></span> {admin.firstName}  {admin.lastName}</h2>

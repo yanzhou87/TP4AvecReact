@@ -31,6 +31,7 @@ function App() {
     const [dvd, setDvd] = useState({})
     const [emprunts, setEmprunts] = useState([])
     const [emprunt, setEmprunt] = useState({})
+    const [id, setId] = useState({})
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -53,11 +54,16 @@ function App() {
             const dvdsFromServer = await fetchDvds()
             setDvds(dvdsFromServer)
         }
+        // const getEmprunts = async () => {
+        //     const empruntsFromServer = await fetchEmprunts();
+        //     setEmprunts(empruntsFromServer)
+        // }
         getAdmins()
         getClients()
         getBooks()
         getCds()
         getDvds()
+        // getEmprunts()
     }, [])
 
     const fetchAdmins = async () => {
@@ -69,6 +75,7 @@ function App() {
     const fetchAdmin = async (id) => {
         const res = await fetch(`http://localhost:8080/admins/${id}`)
         const data = await res.json()
+
         return data
     }
 
@@ -91,7 +98,7 @@ function App() {
     }
 
     const fetchBook = async (id) =>{
-        const res = await fetch(`http://localhost:8080/book/${id}`)
+        const res = await fetch(`http://localhost:8080/books/${id}`)
         const data = await res.json()
         return data
     }
@@ -102,7 +109,7 @@ function App() {
     }
 
     const fetchCd = async (id) =>{
-        const res = await fetch(`http://localhost:8080/cd/${id}`)
+        const res = await fetch(`http://localhost:8080/cds/${id}`)
         const data = await res.json()
         return data
     }
@@ -114,23 +121,40 @@ function App() {
     }
 
     const fetchDvd = async (id) =>{
-        const res = await fetch(`http://localhost:8080/dvd/${id}`)
+        const res = await fetch(`http://localhost:8080/dvds/${id}`)
         const data = await res.json()
         return data
     }
 
+    // const fetchEmprunts = async () => {
+    //     const res = await fetch('http://localhost:8080/emprunts')
+    //     const data = await res.json()
+    //     return data
+    // }
+    //
+    // const fetchEmprunt = async (id) => {
+    //     const res = await fetch(`http://localhost:8080/emprunts/${id}`)
+    //     const data = await res.json()
+    //     return data
+    // }
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
+        console.log(admin)
        setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
+        setId(admin.id)
     }
+
     const selectClient = async (id)=>{
         const client = await fetchClient(id)
         setClient(client)
+        setId(client.id)
     }
+
     const selectBook = async (id) => {
       const book = await fetchBook(id)
         setBook(book)
     }
+
     const addAdmin = async (admin) => {
 
         const res = await fetch('http://localhost:8080/admins',
@@ -144,6 +168,7 @@ function App() {
         const data = await res.json()
         setAdmins([...admins, data])
     }
+
     const addClient= async (client) => {
         const res = await fetch('http://localhost:8080/clients',
             {
@@ -156,6 +181,7 @@ function App() {
         const data = await res.json()
         setClients([...clients, data])
     }
+
     const onAddBook= async (book) => {
         const res = await fetch('http://localhost:8080/books',
             {
@@ -168,6 +194,7 @@ function App() {
         const data = await res.json()
         setBooks([...books, data])
     }
+
     const onAddCd= async (cd) => {
         const res = await fetch('http://localhost:8080/cds',
             {
@@ -180,6 +207,7 @@ function App() {
         const data = await res.json()
         setCds([...cds, data])
     }
+
     const onAddDvd= async (dvd) => {
             const res = await fetch('http://localhost:8080/dvds',
                 {
@@ -201,15 +229,15 @@ function App() {
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}  selectClient={selectClient}/>}/>
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
-                    <Route path='/admin' element={ <Admin admin={admin}/>}/>
+                    <Route path='/admins/:id' element={ <Admin admin={admin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
-                    <Route path='/client' element={<Client client={client}/>}/>
-                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients}/>}/>
+                    <Route path='/clients/:id' element={<Client client={client}/>}/>
+                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients} admin={admin}/>}/>
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                     <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
-                    <Route path='/book' element={<Book book={book}/>}/>
+                    {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
                 </Routes>
             </div>
         </Router>

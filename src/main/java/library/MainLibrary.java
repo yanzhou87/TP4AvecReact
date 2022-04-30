@@ -3,6 +3,7 @@ package library;
 import library.model.*;
 import library.service.ServiceClient;
 import library.service.ServiceAdmin;
+import library.service.ServiceReact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @SpringBootApplication
@@ -20,7 +22,8 @@ public class MainLibrary implements CommandLineRunner {
 
     @Autowired
     private ServiceClient serviceClient;
-
+    @Autowired
+    private ServiceReact serviceReact;
     public static void main(String[] args) {
         SpringApplication.run(MainLibrary.class, args);
     }
@@ -28,14 +31,16 @@ public class MainLibrary implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Client client = serviceLibrary.saveClient(new Client("yan","zhou", 34));
-        Admin admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
-        System.out.println(serviceLibrary.getAllClients());
+        Client client = serviceReact.saveClient(new Client("yan","zhou", 34));
+        Optional<Admin> admin = serviceReact.saveAdmin(new Admin("admin1","ad"));
+        System.out.println(serviceReact.getAllClients());
         System.out.println(serviceLibrary.getAllAdmins());
          Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
         System.out.println(serviceLibrary.getAllBooks());
         CD cd = serviceLibrary.saveCD(new CD("cd1"));
         System.out.println(serviceLibrary.getAllCds());
+        DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1"));
+        System.out.println(serviceLibrary.getAllDVDs());
 
         //        final Article book = serviceLibrary.saveArticle(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
 //        final Article cd = serviceLibrary.saveArticle(new CD("cd"));

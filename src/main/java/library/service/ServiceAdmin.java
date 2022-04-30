@@ -6,12 +6,14 @@ import library.repository.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Service
+
 @Component
 public class ServiceAdmin {
 
@@ -72,18 +74,18 @@ public class ServiceAdmin {
         return empruntRepository.save(emprunt);
     }
 
-    @Transactional
-    public void addEmpruntToClient(long empruntId, long clientId) {
-        var empruntOpt = empruntRepository.findEmpruntById(empruntId);
-        var clientOpt = libraryUserRepository.findClientById(clientId);
-
-        Emprunt emprunt = empruntOpt.get();
-        Client client = clientOpt.get();
-
-        client.addEmprunt(emprunt);
-        libraryUserRepository.save(client);
-
-    }
+//    @Transactional
+//    public void addEmpruntToClient(long empruntId, long clientId) {
+//        var empruntOpt = empruntRepository.findEmpruntById(empruntId);
+//        var clientOpt = libraryUserRepository.findClientById(clientId);
+//
+//        Emprunt emprunt = empruntOpt.get();
+//       // Client client = clientOpt.get();
+//
+//        client.addEmprunt(emprunt);
+//        libraryUserRepository.save(client);
+//
+//    }
 
     public EmpruntRepository getEmpruntRepository() {
         return empruntRepository;
@@ -102,8 +104,8 @@ public class ServiceAdmin {
         return libraryUserRepository.findAllAdmins();
     }
 
-    public Admin saveAdmin(Admin admin) {
-        return libraryUserRepository.save(admin);
+    public Optional<Admin> saveAdmin(Admin admin) {
+        return Optional.of(libraryUserRepository.save(admin));
     }
 
     public CD saveCD(CD cd) {
@@ -141,11 +143,19 @@ public class ServiceAdmin {
         List<DVD> dvds = new ArrayList<>();
         List<Article> articles =  articleRepository.findAll();
         for(Article dvd : articles){
-            if(dvd instanceof CD){
+            if(dvd instanceof DVD){
                 dvds.add((DVD) dvd);
             }
         }
         return dvds;
+    }
+
+    public Optional<Admin> getAdminById(Long id) {
+        return Optional.of(libraryUserRepository.findAdminById(id));
+    }
+
+    public Optional<Client> getClientById(Long id) {
+        return Optional.of(libraryUserRepository.findClientById(id));
     }
 
 
