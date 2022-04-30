@@ -137,6 +137,17 @@ public class ServiceAdmin {
         return cds;
     }
 
+    public List<DVD> getAllDVDs() {
+        List<DVD> dvds = new ArrayList<>();
+        List<Article> articles =  articleRepository.findAll();
+        for(Article dvd : articles){
+            if(dvd instanceof CD){
+                dvds.add((DVD) dvd);
+            }
+        }
+        return dvds;
+    }
+
 
 //    public Optional<Client> saveClient(Client newClient) {
 //        return libraryUserRepository.saveClient(newClient.getId(), newClient);

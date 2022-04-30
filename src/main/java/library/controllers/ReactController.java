@@ -1,9 +1,6 @@
 package library.controllers;
 
-import library.model.Admin;
-import library.model.Book;
-import library.model.CD;
-import library.model.Client;
+import library.model.*;
 import library.service.ServiceAdmin;
 import library.service.ServiceClient;
 import org.slf4j.Logger;
@@ -46,9 +43,16 @@ public class ReactController {
     public List<Book> getAllBooks() {
         return serviceAdmin.getAllBooks();
     }
+
     @GetMapping("/cds")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<CD> getAllCDs() {
-        return serviceAdmin.getAllCDs();
+        return serviceAdmin.getAllCds();
+    }
+
+    @GetMapping("/dvd")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<DVD> getAllDVDs() {
+        return serviceAdmin.getAllDVDs();
     }
 }

@@ -9,12 +9,12 @@ const Cds = ({cds}) => {
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
+                    <th>Duration Movie</th>
                 </tr>
                 {cds.map((cd) => (
                     <tr  key={cd.id}>
                         <td>{cd.title}</td>
-                        <td>{cd.author}</td>
+                        <td>{cd.durationMovie}</td>
                     </tr>
                 ))}
                 </thead>
