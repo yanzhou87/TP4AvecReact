@@ -17,7 +17,7 @@ const ClientsInfosForAdmins =({clients,admin})=>{
                 </tr>
                 {clients.map((client) => (
                     <tr  key={client.id}>
-                        {/*<td><Link to={`/emprunts/${client.lastName}`}><span><FaLaugh/></span></Link></td>*/}
+                        <td><Link to={`/emprunts/${client.lastName}`}><span><FaLaugh/></span></Link></td>
                         <td>{client.firstName}</td>
                         <td>{client.lastName}</td>
                     </tr>

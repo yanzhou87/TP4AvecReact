@@ -54,7 +54,7 @@
           },
           "date_emprunt": "2020-09-02",
           "date_return": "",
-          "is_return": false
+          "is_return": "false"
         }
       ]
     },
@@ -200,7 +200,7 @@
       },
      "date_emprunt": "2020-09-02",
      "date_return": "",
-      "is_return": false
+      "is_return": "false"
     },
     {
       "id": 2,
@@ -221,8 +221,8 @@
         "durationMovie": 2
       },
       "date_emprunt": "2020-04-02",
-      "date_return": "",
-      "is_return": false
+      "date_return": "2020-04-04",
+      "is_return": "true"
     }
   ]
 }

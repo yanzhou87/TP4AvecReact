@@ -13,6 +13,7 @@ const Header = ({title}) => {
                 <Link to='/books'><Button color={'Plum'} text={'Books'} /></Link>
                 <Link to='/cds'><Button color={'DarkSeaGreen'} text={'Cds'} /></Link>
                 <Link to='/dvds'><Button color={'LightSlateGray'} text={'Dvds'} /></Link>
+                <Link to='/emprunts'><Button color={'LightSlateGray'} text={'Emprunts'} /></Link>
             </div>
         </header>
     )

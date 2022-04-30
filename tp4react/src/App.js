@@ -15,6 +15,7 @@ import Cds from "./components/Cds";
 import Dvds from "./components/Dvds";
 import AddArticle from "./components/AddArticle";
 import Book from "./components/Book";
+import Emprunts from "./components/Emprunts";
 
 
 function App() {
@@ -238,6 +239,7 @@ function App() {
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                     <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
                     {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
+                    <Route path='/emprunts' element={<Emprunts emprunts={emprunts}/>}/>
                 </Routes>
             </div>
         </Router>
