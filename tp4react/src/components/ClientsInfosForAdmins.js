@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Button from "./Button";
 import PropTypes from "prop-types";
 import Clients from "./Clients";
+import {FaLaugh} from "react-icons/fa";
 
 const ClientsInfosForAdmins =({clients,admin})=>{
     return (
@@ -10,11 +11,13 @@ const ClientsInfosForAdmins =({clients,admin})=>{
             <table>
                 <thead>
                 <tr>
+                    {/*<th>Empruns</th>*/}
                     <th>First Name</th>
                     <th>Last Name</th>
                 </tr>
                 {clients.map((client) => (
                     <tr  key={client.id}>
+                        {/*<td><Link to={`/emprunts/${client.lastName}`}><span><FaLaugh/></span></Link></td>*/}
                         <td>{client.firstName}</td>
                         <td>{client.lastName}</td>
                     </tr>

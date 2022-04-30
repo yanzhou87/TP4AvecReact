@@ -31,7 +31,32 @@
       "firstName": "client 1",
       "lastName": "ccccc 1",
       "age": 20,
-      "address": ""
+      "address": "",
+      "emprunts": [
+        {
+          "id": 1,
+          "client":  {
+            "id": 1,
+            "firstName": "client 1",
+            "lastName": "ccccc 1",
+            "age": 20,
+            "address": ""
+          },
+          "exemplaire": {
+            "id": 1,
+            "title": "book1",
+            "author": "Vivi",
+            "yearPublication": "1988-09-23",
+            "articleType": "Roman",
+            "nombreExemplaires": 3,
+            "editor": "Michel",
+            "nombrePage": 301
+          },
+          "date_emprunt": "2020-09-02",
+          "date_return": "",
+          "is_return": false
+        }
+      ]
     },
     {
       "id": 2,

@@ -54,16 +54,16 @@ function App() {
             const dvdsFromServer = await fetchDvds()
             setDvds(dvdsFromServer)
         }
-        // const getEmprunts = async () => {
-        //     const empruntsFromServer = await fetchEmprunts();
-        //     setEmprunts(empruntsFromServer)
-        // }
+        const getEmprunts = async () => {
+            const empruntsFromServer = await fetchEmprunts();
+            setEmprunts(empruntsFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
         getCds()
         getDvds()
-        // getEmprunts()
+        getEmprunts()
     }, [])
 
     const fetchAdmins = async () => {
@@ -126,17 +126,17 @@ function App() {
         return data
     }
 
-    // const fetchEmprunts = async () => {
-    //     const res = await fetch('http://localhost:8080/emprunts')
-    //     const data = await res.json()
-    //     return data
-    // }
-    //
-    // const fetchEmprunt = async (id) => {
-    //     const res = await fetch(`http://localhost:8080/emprunts/${id}`)
-    //     const data = await res.json()
-    //     return data
-    // }
+    const fetchEmprunts = async () => {
+        const res = await fetch('http://localhost:8080/emprunts')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchEmprunt = async (id) => {
+        const res = await fetch(`http://localhost:8080/emprunts/${id}`)
+        const data = await res.json()
+        return data
+    }
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
         console.log(admin)
