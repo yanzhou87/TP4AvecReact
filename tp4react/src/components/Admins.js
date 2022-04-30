@@ -21,6 +21,7 @@ const Admins = ({admins, selectAdmin}) => {
                         <td><Link to='/admin'><span><FaGhost/></span></Link></td>
                         <td>{admin.firstName}</td>
                         <td>{admin.lastName}</td>
+
                     </tr>
                 ))}
                 </thead>

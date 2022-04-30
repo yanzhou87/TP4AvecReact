@@ -19,22 +19,30 @@ public class SaveBookForm {
     @NotNull
     private String author;
     private String articleType;
+    private String yearPublication;
+    private int nombreExemplaires = 0;
+    private String editor;
+    private int numbrePages;
 
-    public SaveBookForm(String id, String title, String author, String articleType) {
+    public SaveBookForm(String id, String title, String author, String articleType, String yearPublication, int nombreExemplaires, String editor, int numbrePages) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.articleType = articleType;
+        this.yearPublication = yearPublication;
+        this.nombreExemplaires = nombreExemplaires;
+        this.editor = editor;
+        this.numbrePages = numbrePages;
     }
 
     public SaveBookForm(){
         this(new Book());
     }
     public SaveBookForm(Book book){
-        this(Long.toString(book.getId()),book.getTitle(),book.getAuthor(),book.getArticleType());
+        this(Long.toString(book.getId()),book.getTitle(),book.getAuthor(),book.getArticleType(),book.getYearPublication(), book.getNombreExemplaires(), book.getEditor(),book.getNumbrePages());
     }
 
     public Book toBook(){
-        return new Book(title,author,articleType);
+        return new Book(title,author,articleType,yearPublication,nombreExemplaires,editor,numbrePages);
     }
 }

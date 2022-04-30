@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
-@Component
 public class ServiceClient {
-
+    private List<Client> clients = new ArrayList<>();
     @Autowired
     private ArticleRepository articleRepository;
 
@@ -102,4 +102,11 @@ public class ServiceClient {
     public Admin findAdminById(long id) {
         return libraryUserRepository.findAdminById(id);
     }
+
+    private Client save(Client client){
+        clients.add(client);
+        return client;
+    }
+
+
 }

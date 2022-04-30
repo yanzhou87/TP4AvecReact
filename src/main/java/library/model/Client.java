@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
 @Entity
 @Data
 @NoArgsConstructor
@@ -50,5 +51,12 @@ public class Client extends LibraryUser {
     public void addAmende(Amende amende) {
         amendes.add(amende);
         amende.setClient(this);
+    }
+
+    public void setId(long id){
+        this.id =id;
+    }
+    public long getId(){
+        return id;
     }
 }

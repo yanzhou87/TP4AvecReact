@@ -75,7 +75,7 @@
       "articleType": "Roman",
       "nombreExemplaires": 3,
       "editor": "Michel",
-      "numbrePage": 301
+      "nombrePage": 301
     },
     {
       "id": 2,
@@ -85,12 +85,22 @@
       "articleType": "Roman",
       "nombreExemplaires": 3,
       "editor": "Francois",
-      "numbrePage": 301
+      "nombrePage": 301
     },
     {
       "title": "book3",
       "author": "b3",
       "id": 3
+    },
+    {
+      "title": "book6",
+      "author": "bbb",
+      "yearPublication": "",
+      "articleType": "",
+      "nombreExemplaires": 0,
+      "editor": "",
+      "nombrePage": 0,
+      "id": 4
     }
   ],
   "cds": [

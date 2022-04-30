@@ -19,6 +19,16 @@ public class Book extends Article {
         this.title = name;
     }
 
+    public Book(String title, String author, String articleType, String yearPublication, int nombreExemplaires, String editor, int numbrePages) {
+        this.title = title;
+        this.author = author;
+        this.articleType =articleType;
+        this.yearPublication = yearPublication;
+        this.nombreExemplaires = nombreExemplaires;
+        this.editor = editor;
+        this.nombreExemplaires = nombreExemplaires;
+    }
+
     @Override
     public int dayEmprunt() {
         return 21;

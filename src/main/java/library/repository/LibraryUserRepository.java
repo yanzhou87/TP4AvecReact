@@ -22,4 +22,11 @@ public interface LibraryUserRepository extends JpaRepository<LibraryUser, Long> 
     List<Admin> findAllAdmins();
     @Query("select a from Admin a where a.id = :seachId")
     Admin findAdminById(@Param("seachId") long adminId);
+    @Query("select c from Client c ")
+    List<Client> finAllClients();
+
+
+
+//    @Query("select c from Client c left join fetch c.emprunts where c.id = :seachId")
+//    Optional<Client> saveClient(@Param("seachId") long id, Client newClient);
 }

@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import Button from "./Button";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import AddAdmin from "./AddAdmin";
 
 const AddClient = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')
@@ -44,5 +46,7 @@ const AddClient = ({onAdd}) => {
 
     )
 }
-
+AddClient.propTypes = {
+    onAdd: PropTypes.func,
+}
 export default AddClient

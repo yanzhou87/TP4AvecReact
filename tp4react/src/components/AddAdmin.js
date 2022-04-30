@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import {Link} from "react-router-dom";
 import Button from "./Button";
+import PropTypes from "prop-types";
+import AddArticle from "./AddArticle";
 
 const AddAdmin = ({onAdd}) => {
     const [firstName, setFirstName] = useState('')
@@ -38,9 +40,9 @@ const AddAdmin = ({onAdd}) => {
               <input type='submit' value='Save Admin' className='btn btn-block'/>
               <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
         </form>
-
-
     )
 }
-
+AddAdmin.propTypes = {
+    onAdd: PropTypes.func,
+}
 export default AddAdmin

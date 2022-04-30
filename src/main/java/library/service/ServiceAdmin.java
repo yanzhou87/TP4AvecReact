@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Component
-public class ServiceLibrary {
+public class ServiceAdmin {
 
     private ArticleRepository articleRepository;
 
@@ -25,7 +25,7 @@ public class ServiceLibrary {
 
     private AmendeRepository amendeRepository;
 
-    public ServiceLibrary(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository, ExemplaireRepository exemplaireRepository, EmpruntRepository empruntRepository, AmendeRepository amendeRepository) {
+    public ServiceAdmin(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository, ExemplaireRepository exemplaireRepository, EmpruntRepository empruntRepository, AmendeRepository amendeRepository) {
         this.articleRepository = articleRepository;
         this.libraryUserRepository = libraryUserRepository;
         this.exemplaireRepository = exemplaireRepository;
@@ -89,5 +89,38 @@ public class ServiceLibrary {
         return empruntRepository;
     }
 
+    public Client saveClient(Client client) {
+        return  libraryUserRepository.save(client);
+    }
+    public List<Client> getAllClients() {
+        return libraryUserRepository.finAllClients();
+    }
+    public List<Admin> getAllAdmins() {
+        return libraryUserRepository.findAllAdmins();
+    }
+
+    public Admin saveAdmin(Admin admin) {
+        return libraryUserRepository.save(admin);
+    }
+
+    public Book saveBook(Book book) {
+        return articleRepository.save(book);
+    }
+
+    public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        List<Article> articles =  articleRepository.findAll();
+        for(Article a : articles){
+            if(a instanceof Book){
+                books.add((Book)a);
+            }
+        }
+        return books;
+    }
+
+
+//    public Optional<Client> saveClient(Client newClient) {
+//        return libraryUserRepository.saveClient(newClient.getId(), newClient);
+//    }
 }
 

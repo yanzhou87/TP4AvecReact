@@ -14,6 +14,7 @@ import Client from "./components/Client";
 import Cds from "./components/Cds";
 import Dvds from "./components/Dvds";
 import AddArticle from "./components/AddArticle";
+import Book from "./components/Book";
 
 
 function App() {
@@ -60,60 +61,60 @@ function App() {
     }, [])
 
     const fetchAdmins = async () => {
-        const res = await fetch('http://localhost:5000/admins')
+        const res = await fetch('http://localhost:8080/admins')
         const data = await res.json()
         return data
     }
 
     const fetchAdmin = async (id) => {
-        const res = await fetch(`http://localhost:5000/admins/${id}`)
+        const res = await fetch(`http://localhost:8080/admins/${id}`)
         const data = await res.json()
         return data
     }
 
     const fetchClients = async () => {
-        const res = await fetch('http://localhost:5000/clients')
+        const res = await fetch('http://localhost:8080/clients')
         const data = await res.json()
         return data
     }
 
     const fetchClient = async (id) => {
-        const res = await fetch(`http://localhost:5000/clients/${id}`)
+        const res = await fetch(`http://localhost:8080/clients/${id}`)
         const data = await res.json()
         return data
     }
 
     const fetchBooks = async () =>{
-        const res = await fetch('http://localhost:5000/books')
+        const res = await fetch('http://localhost:8080/books')
         const data = await res.json()
         return data
     }
 
     const fetchBook = async (id) =>{
-        const res = await fetch(`http://localhost:5000/book/${id}`)
+        const res = await fetch(`http://localhost:8080/book/${id}`)
         const data = await res.json()
         return data
     }
     const fetchCds = async () =>{
-        const res = await fetch('http://localhost:5000/cds')
+        const res = await fetch('http://localhost:8080/cds')
         const data = await res.json()
         return data
     }
 
     const fetchCd = async (id) =>{
-        const res = await fetch(`http://localhost:5000/cd/${id}`)
+        const res = await fetch(`http://localhost:8080/cd/${id}`)
         const data = await res.json()
         return data
     }
 
     const fetchDvds = async () =>{
-        const res = await fetch('http://localhost:5000/dvds')
+        const res = await fetch('http://localhost:8080/dvds')
         const data = await res.json()
         return data
     }
 
     const fetchDvd = async (id) =>{
-        const res = await fetch(`http://localhost:5000/dvd/${id}`)
+        const res = await fetch(`http://localhost:8080/dvd/${id}`)
         const data = await res.json()
         return data
     }
@@ -124,7 +125,7 @@ function App() {
     }
     const selectClient = async (id)=>{
         const client = await fetchClient(id)
-        setClient({id:client.id, firstName : client.firstName,lastName:client.lastName, age:client.age, address :client.address })
+        setClient(client)
     }
     const selectBook = async (id) => {
       const book = await fetchBook(id)
@@ -132,7 +133,7 @@ function App() {
     }
     const addAdmin = async (admin) => {
 
-        const res = await fetch('http://localhost:5000/admins',
+        const res = await fetch('http://localhost:8080/admins',
             {
                 method: 'POST',
                 headers: {
@@ -144,7 +145,7 @@ function App() {
         setAdmins([...admins, data])
     }
     const addClient= async (client) => {
-        const res = await fetch('http://localhost:5000/clients',
+        const res = await fetch('http://localhost:8080/clients',
             {
                 method: 'POST',
                 headers: {
@@ -156,7 +157,7 @@ function App() {
         setClients([...clients, data])
     }
     const onAddBook= async (book) => {
-        const res = await fetch('http://localhost:5000/books',
+        const res = await fetch('http://localhost:8080/books',
             {
                 method: 'POST',
                 headers: {
@@ -168,7 +169,7 @@ function App() {
         setBooks([...books, data])
     }
     const onAddCd= async (cd) => {
-        const res = await fetch('http://localhost:5000/cds',
+        const res = await fetch('http://localhost:8080/cds',
             {
                 method: 'POST',
                 headers: {
@@ -180,7 +181,7 @@ function App() {
         setCds([...cds, data])
     }
     const onAddDvd= async (dvd) => {
-            const res = await fetch('http://localhost:5000/dvds',
+            const res = await fetch('http://localhost:8080/dvds',
                 {
                     method: 'POST',
                     headers: {
@@ -208,6 +209,7 @@ function App() {
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                     <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
+                    <Route path='/book' element={<Book book={book}/>}/>
                 </Routes>
             </div>
         </Router>
