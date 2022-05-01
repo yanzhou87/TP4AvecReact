@@ -35,7 +35,7 @@
       "emprunts": [
         {
           "id": 1,
-          "client":  {
+          "client": {
             "id": 1,
             "firstName": "client 1",
             "lastName": "ccccc 1",
@@ -126,6 +126,16 @@
       "editor": "",
       "nombrePage": 0,
       "id": 4
+    },
+    {
+      "title": "book6",
+      "author": "Mini",
+      "yearPublication": "2020-02-09",
+      "articleType": "Roman",
+      "nombreExemplaires": 0,
+      "editor": "Mickey",
+      "nombrePage": "130",
+      "id": 5
     }
   ],
   "cds": [
@@ -151,6 +161,15 @@
       "title": "cd 3",
       "author": "c3",
       "id": 5
+    },
+    {
+      "title": "cd44",
+      "author": "yy",
+      "yearPublication": "",
+      "articleType": "",
+      "nombreExemplaires": 0,
+      "durationMovie": 0,
+      "id": 6
     }
   ],
   "dvds": [
@@ -176,12 +195,30 @@
       "title": "dvd3",
       "author": "dd3",
       "id": 3
+    },
+    {
+      "title": "dvd44",
+      "author": "",
+      "yearPublication": "",
+      "articleType": "",
+      "nombreExemplaires": 0,
+      "durationMovie": 0,
+      "id": 4
+    },
+    {
+      "title": "dvd55",
+      "author": "David",
+      "yearPublication": "",
+      "articleType": "",
+      "nombreExemplaires": 0,
+      "durationMovie": 0,
+      "id": 5
     }
   ],
   "exemplaires": [
     {
       "id": 1,
-      "article":{
+      "article": {
         "id": 1,
         "title": "book1",
         "author": "Vivi",
@@ -191,12 +228,12 @@
         "editor": "Michel",
         "nombrePage": 301
       },
-      "isBorrowed" : "false",
-      "empruntId" : -1
+      "isBorrowed": "false",
+      "empruntId": ""
     },
     {
       "id": 2,
-      "article":{
+      "article": {
         "id": 1,
         "title": "book1",
         "author": "Vivi",
@@ -206,14 +243,44 @@
         "editor": "Michel",
         "nombrePage": 301
       },
-      "isBorrowed" : "false",
-      "empruntId" : -1
+      "isBorrowed": "false",
+      "empruntId": ""
+    },
+    {
+      "article": {
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
+      "isBorrowed": "false",
+      "empruntId": "",
+      "id": 4
+    },
+    {
+      "article": {
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 3,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
+      "isBorrowed": "false",
+      "empruntId": "",
+      "id": 5
     }
   ],
   "emprunts": [
     {
       "id": 1,
-      "client":  {
+      "client": {
         "id": 1,
         "firstName": "client 1",
         "lastName": "ccccc 1",
@@ -230,13 +297,13 @@
         "editor": "Michel",
         "nombrePage": 301
       },
-     "date_emprunt": "2020-09-02",
-     "date_return": "",
+      "date_emprunt": "2020-09-02",
+      "date_return": "",
       "is_return": "false"
     },
     {
       "id": 2,
-      "client":   {
+      "client": {
         "id": 2,
         "firstName": "client 2",
         "lastName": "cccccc 2",

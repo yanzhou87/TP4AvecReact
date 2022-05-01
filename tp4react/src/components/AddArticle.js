@@ -3,7 +3,7 @@ import Button from "./Button";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
-const AddArticle = ({onAddBook, onAddCd, onAddDvd}) => {
+const AddArticle = ({onAddBook, onAddCd, onAddDvd, admin}) => {
     const [arType, setType] = useState('')
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -66,31 +66,25 @@ const AddArticle = ({onAddBook, onAddCd, onAddDvd}) => {
                 <label>Year Publication</label>
                 <input type='text' placeholder='YYYY-MM-JJ'
                        value={yearPublication}
-                       onChange={(e) => setAuthor(e.target.value)}/>
+                       onChange={(e) => setYearPublication(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>ArticleType</label>
                 <input type='text' placeholder='Roman or Manuel Scolaire or Etude or Magazine For Book'
                        value={articleType}
-                       onChange={(e) => setAuthor(e.target.value)}/>
-            </div>
-            <div className='form-control'>
-                <label>NombreExemplaires</label>
-                <input type='number' placeholder='Nombre Exemplaires'
-                       value={nombreExemplaires}
-                       onChange={(e) => setAuthor(e.target.value)}/>
+                       onChange={(e) => setArticleType(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Editor</label>
                 <input type='text' placeholder='Editor'
                        value={editor}
-                       onChange={(e) => setAuthor(e.target.value)}/>
+                       onChange={(e) => setEditor(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre Page</label>
                 <input type='number' placeholder='Nombre Page For Book'
                        value={nombrePage}
-                       onChange={(e) => setAuthor(e.target.value)}/>
+                       onChange={(e) => setNombrePage(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>DurationMovie</label>
@@ -101,7 +95,7 @@ const AddArticle = ({onAddBook, onAddCd, onAddDvd}) => {
 
             <input type='submit' value='Save Article' className='btn btn-block'
             />
-            <Link to='/Admin'><Button color={'red'} text={'Exit'}/></Link>
+            <Link to={`/admins/${admin.id}`}><Button color={'pink'} text={'My Page'}/></Link>
         </form>
     )
 }

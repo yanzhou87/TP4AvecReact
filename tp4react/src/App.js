@@ -17,6 +17,8 @@ import AddArticle from "./components/AddArticle";
 import Book from "./components/Book";
 import Emprunts from "./components/Emprunts";
 import EmpruntsForClient from "./components/EmpruntsForClient";
+import Exemplaires from "./components/Exemplaires";
+import AddExemplaire from "./components/AddExemplaire";
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
     const [exemplaires, setExemplaires] = useState([])
+     const [exemplaire, setExemplaire] = useState({})
+
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -183,7 +187,15 @@ function App() {
     const selectBook = async (id) => {
       const book = await fetchBook(id)
         setBook(book)
+
+        console.log("dans select BOOK : " +book.id)
     }
+
+    const selectCd = async (id) => {
+        const cd = await fetchCd(id)
+        setCd(cd)
+    }
+
 
     const addAdmin = async (admin) => {
 
@@ -223,6 +235,7 @@ function App() {
             })
         const data = await res.json()
         setBooks([...books, data])
+
     }
 
     const onAddCd= async (cd) => {
@@ -250,12 +263,28 @@ function App() {
             const data = await res.json()
             setDvds([...dvds, data])
         }
+    const onAddExemplaireForBook= async () => {
+
+       setExemplaire({ "article" : book, "isBorrowed" : "false", "empruntId" :""})
+
+        const res = await fetch('http://localhost:8080/exemplaires',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(exemplaire)
+            })
+
+        const data = await res.json()
+        setExemplaires([...exemplaires, data])
+    }
 
     return (
         <Router>
             <div className="container">
                 <Routes>
-                    <Route path='/' element={<Header title={'Library'}/>}/>
+                    <Route exact path='/' element={<Header title={'Library'}/>}/>
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={ <Clients clients={clients}  selectClient={selectClient}/>}/>
                     <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
@@ -266,10 +295,13 @@ function App() {
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
-                    <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd}/>}/>
+                    <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
                     <Route path='/emprunts/clientId:id' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
+                    <Route path='/exemplaires' element={<Exemplaires exemplaires={exemplaires} admin={admin} />}/>
+                    <Route path='/addExemplaire' element={<AddExemplaire
+                        onAddExemplaireForBook={onAddExemplaireForBook} admin={admin} selectBook={selectBook}/>}/>
                 </Routes>
             </div>
         </Router>
