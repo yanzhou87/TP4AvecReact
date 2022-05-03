@@ -10,9 +10,7 @@ const Admin = ({admin}) => {
             <Link to='/addClient'><Button color={'LightBlue'} text={'Create Client'}/></Link>
             {/*<Link to='/addBook'><Button color={'Plum'} text={'Create Book'}/></Link>*/}
             <Link to='/addArticle'><Button color={'CornflowerBlue'} text={'Create Article'}/></Link>
-            <Link to='/addExemplaire'><Button color={'CornflowerBlue'} text={'Create Exemplaire'}/></Link>
             <Link to='/clientsInfosForAdmins'><Button color={'pink'} text={'List Clients'}/></Link>
-            <Link to='/exemplaires'><Button color={'Plum'} text={'Exemplaires'}/></Link>
             <Link to='/emprunts'><Button color={'LightSlateGray'} text={'Emprunts'} /></Link>
             <Link to='/admins'><Button color={'red'} text={'Exit'}/></Link>
         </div>

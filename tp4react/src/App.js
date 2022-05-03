@@ -17,8 +17,8 @@ import AddArticle from "./components/AddArticle";
 import Book from "./components/Book";
 import Emprunts from "./components/Emprunts";
 import EmpruntsForClient from "./components/EmpruntsForClient";
-import Exemplaires from "./components/Exemplaires";
-import AddExemplaire from "./components/AddExemplaire";
+import AddBook from "./components/AddBook";
+import AddCdOrDvd from "./components/AddCdOrDvd";
 
 
 function App() {
@@ -37,9 +37,6 @@ function App() {
     const [empruntsForClient, setEmpruntsForClient] = useState([])
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
-    const [exemplaires, setExemplaires] = useState([])
-     const [exemplaire, setExemplaire] = useState({})
-
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -66,17 +63,12 @@ function App() {
             const empruntsFromServer = await fetchEmprunts();
             setEmprunts(empruntsFromServer)
         }
-        const getExemplaires = async () => {
-            const exemplairesFromServer = await fetchExemplaires();
-            setExemplaires(exemplairesFromServer)
-        }
         getAdmins()
         getClients()
         getBooks()
         getCds()
         getDvds()
         getEmprunts()
-        getExemplaires()
     }, [])
 
     const fetchAdmins = async () => {
@@ -150,18 +142,6 @@ function App() {
         const data = await res.json()
         return data
     }
-
-    const fetchExemplaires = async () => {
-        const res = await fetch('http://localhost:8080/exemplaires')
-        const data = await res.json()
-        return data
-    }
-
-    const fetchExemplaire = async (id) => {
-        const res = await fetch(`http://localhost:8080/exemplaires/${id}`)
-        const data = await res.json()
-        return data
-    }
     const selectAdmin = async (id)=>{
         const admin = await fetchAdmin(id)
         console.log(admin)
@@ -198,7 +178,7 @@ function App() {
 
 
     const addAdmin = async (admin) => {
-
+       console.log(admin)
         const res = await fetch('http://localhost:8080/admins',
             {
                 method: 'POST',
@@ -212,6 +192,7 @@ function App() {
     }
 
     const addClient= async (client) => {
+        console.log(client)
         const res = await fetch('http://localhost:8080/clients',
             {
                 method: 'POST',
@@ -222,6 +203,7 @@ function App() {
             })
         const data = await res.json()
         setClients([...clients, data])
+
     }
 
     const onAddBook= async (book) => {
@@ -263,22 +245,6 @@ function App() {
             const data = await res.json()
             setDvds([...dvds, data])
         }
-    const onAddExemplaireForBook= async () => {
-
-       setExemplaire({ "article" : book, "isBorrowed" : "false", "empruntId" :""})
-
-        const res = await fetch('http://localhost:8080/exemplaires',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(exemplaire)
-            })
-
-        const data = await res.json()
-        setExemplaires([...exemplaires, data])
-    }
 
     return (
         <Router>
@@ -295,13 +261,12 @@ function App() {
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
-                    <Route path='/addArticle' element={<AddArticle onAddBook={onAddBook} onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
+                    <Route path='/addArticle' element={<AddArticle  admin={admin}/>}/>
                     {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
                     <Route path='/emprunts/clientId:id' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
-                    <Route path='/exemplaires' element={<Exemplaires exemplaires={exemplaires} admin={admin} />}/>
-                    <Route path='/addExemplaire' element={<AddExemplaire
-                        onAddExemplaireForBook={onAddExemplaireForBook} admin={admin} selectBook={selectBook}/>}/>
+                    <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
+                    <Route path='/addCdOrDvd' element={<AddCdOrDvd  onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                 </Routes>
             </div>
         </Router>

@@ -13,16 +13,13 @@ public class ServiceReact {
 
     private LibraryUserRepository libraryUserRepository;
 
-    private ExemplaireRepository exemplaireRepository;
-
     private EmpruntRepository empruntRepository;
 
     private AmendeRepository amendeRepository;
 
-    public ServiceReact(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository, ExemplaireRepository exemplaireRepository, EmpruntRepository empruntRepository, AmendeRepository amendeRepository) {
+    public ServiceReact(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository, EmpruntRepository empruntRepository, AmendeRepository amendeRepository) {
         this.articleRepository = articleRepository;
         this.libraryUserRepository = libraryUserRepository;
-        this.exemplaireRepository = exemplaireRepository;
         this.empruntRepository = empruntRepository;
         this.amendeRepository = amendeRepository;
     }
@@ -93,5 +90,26 @@ public class ServiceReact {
 
     public List<Emprunt> getAllEmprunts() {
         return empruntRepository.findAll();
+    }
+
+
+    public Optional<Client> saveClient(Client newClient) {
+        return Optional.of(libraryUserRepository.save(newClient));
+    }
+
+    public Optional<Book> getBookById(Long id) {
+        return articleRepository.getBookById(id);
+    }
+
+    public Optional<Client> findById(Long id) {
+        return libraryUserRepository.findClientById(id);
+    }
+
+    public Optional<Admin> saveAdmin(Admin newAdmin) {
+        return Optional.of(libraryUserRepository.save(newAdmin));
+    }
+
+    public Optional<Emprunt> saveEmprunt(Emprunt newEmprunt) {
+        return Optional.of(empruntRepository.save(newEmprunt));
     }
 }

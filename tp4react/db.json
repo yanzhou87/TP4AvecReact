@@ -136,6 +136,16 @@
       "editor": "Mickey",
       "nombrePage": "130",
       "id": 5
+    },
+    {
+      "title": "book00",
+      "author": "yy",
+      "yearPublication": "2020-04-28",
+      "articleType": "Roman",
+      "nombreExemplaires": 0,
+      "editor": "bb",
+      "nombrePage": "200",
+      "id": 6
     }
   ],
   "cds": [
@@ -215,68 +225,6 @@
       "id": 5
     }
   ],
-  "exemplaires": [
-    {
-      "id": 1,
-      "article": {
-        "id": 1,
-        "title": "book1",
-        "author": "Vivi",
-        "yearPublication": "1988-09-23",
-        "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "editor": "Michel",
-        "nombrePage": 301
-      },
-      "isBorrowed": "false",
-      "empruntId": ""
-    },
-    {
-      "id": 2,
-      "article": {
-        "id": 1,
-        "title": "book1",
-        "author": "Vivi",
-        "yearPublication": "1988-09-23",
-        "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "editor": "Michel",
-        "nombrePage": 301
-      },
-      "isBorrowed": "false",
-      "empruntId": ""
-    },
-    {
-      "article": {
-        "id": 1,
-        "title": "book1",
-        "author": "Vivi",
-        "yearPublication": "1988-09-23",
-        "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "editor": "Michel",
-        "nombrePage": 301
-      },
-      "isBorrowed": "false",
-      "empruntId": "",
-      "id": 4
-    },
-    {
-      "article": {
-        "id": 1,
-        "title": "book1",
-        "author": "Vivi",
-        "yearPublication": "1988-09-23",
-        "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "editor": "Michel",
-        "nombrePage": 301
-      },
-      "isBorrowed": "false",
-      "empruntId": "",
-      "id": 5
-    }
-  ],
   "emprunts": [
     {
       "id": 1,
@@ -287,16 +235,16 @@
         "age": 20,
         "address": ""
       },
-      "exemplaire": {
-        "id": 1,
-        "title": "book1",
-        "author": "Vivi",
-        "yearPublication": "1988-09-23",
-        "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "editor": "Michel",
-        "nombrePage": 301
-      },
+      "book": {
+      "id": 1,
+      "title": "book1",
+      "author": "Vivi",
+      "yearPublication": "1988-09-23",
+      "articleType": "Roman",
+      "nombreExemplaires": 2,
+      "editor": "Michel",
+      "nombrePage": 301
+    },
       "date_emprunt": "2020-09-02",
       "date_return": "",
       "is_return": "false"
@@ -310,18 +258,19 @@
         "age": 30,
         "address": ""
       },
-      "exemplaire": {
+      "book": {
         "id": 1,
-        "title": "dvd1",
+        "title": "book1",
         "author": "Vivi",
         "yearPublication": "1988-09-23",
         "articleType": "Roman",
-        "nombreExemplaires": 3,
-        "durationMovie": 2
+        "nombreExemplaires": 2,
+        "editor": "Michel",
+        "nombrePage": 301
       },
-      "date_emprunt": "2020-04-02",
-      "date_return": "2020-04-04",
-      "is_return": "true"
+      "dateEmprunt": "2020-04-02",
+      "dateReturn": "2020-04-04",
+      "isReturn": "true"
     }
   ]
 }

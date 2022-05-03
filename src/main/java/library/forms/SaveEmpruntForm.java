@@ -19,7 +19,7 @@ public class SaveEmpruntForm {
     }
 
     public SaveEmpruntForm(Emprunt emprunt) {
-        this(Long.toString(emprunt.getId()),emprunt.getClient().getId(),emprunt.getExemplaire().getArticle().getId());
+        this(Long.toString(emprunt.getId()),emprunt.getClient().getId(), emprunt.getArticle().getId());
     }
 
 

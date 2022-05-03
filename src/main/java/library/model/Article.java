@@ -22,15 +22,11 @@ public abstract class Article {
     @GeneratedValue(generator = "article_seq")
     protected long id;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    protected List<Exemplaire> exemplaires;
-
     protected String title;
     protected String author;
     protected String yearPublication;
     protected String articleType;
-    protected int nombreExemplaires = 0;
+    protected int nombreExemplaires = 0 ;
 
     public Article(String title) {
         this.title = title;

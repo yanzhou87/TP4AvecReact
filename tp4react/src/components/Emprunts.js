@@ -19,10 +19,10 @@ const Emprunts = ({emprunts, admin}) => {
                     <tr key={emprunt.id}>
                         <td>{emprunt.client.lastName}</td>
                         <td>{emprunt.client.firstName}</td>
-                        <td>{emprunt.exemplaire.title}</td>
-                        <td>{emprunt.date_emprunt}</td>
-                        <td>{emprunt.date_return}</td>
-                        <td>{emprunt.is_return}</td>
+                        <td>{emprunt.article.title}</td>
+                        <td>{emprunt.dateEmprunt}</td>
+                        <td>{emprunt.dateReturn}</td>
+                        <td>{emprunt.isReturn}</td>
                     </tr>
                 ))}
                 </thead>

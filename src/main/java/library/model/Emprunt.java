@@ -25,20 +25,18 @@ public class Emprunt {
 
     @OneToOne
     @JoinColumn(name = "EXEMPLAIRE_ID")
-    private Exemplaire exemplaire;
+    private Article article;
 
     private LocalDate dateEmprunt;
     private LocalDate dateReturn;
     private boolean isReturn = false;
 
-    public Emprunt(Client client, Exemplaire exemplaire) {
+    public Emprunt(Client client, Article article) {
         this.client = client;
-        this.exemplaire = exemplaire;
     }
 
-    public Emprunt(Client client, Exemplaire exemplaire, LocalDate dateReturn,boolean isReturn) {
+    public Emprunt(Client client, LocalDate dateReturn,boolean isReturn) {
         this.client = client;
-        this.exemplaire = exemplaire;
         this.dateEmprunt = dateReturn;
         this.isReturn = isReturn;
     }
@@ -52,7 +50,6 @@ public class Emprunt {
         return "Emprunt{" +
                 "id=" + id +
                 ", client=" + client.firstName +
-                ", exemplaire=" + exemplaire+
                 ", date=" + dateEmprunt +
                 ", isReturn=" + isReturn +
                 '}';

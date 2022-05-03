@@ -21,9 +21,6 @@ public class ServiceClient {
     private LibraryUserRepository libraryUserRepository;
 
     @Autowired
-    private ExemplaireRepository exemplaireRepository;
-
-    @Autowired
     private EmpruntRepository empruntRepository;
 
     @Autowired
@@ -87,13 +84,6 @@ public class ServiceClient {
         return empruntRepository.findAll();
     }
 
-    public Exemplaire findExemplaireByid(long exemplaireId) {
-        return exemplaireRepository.findById(exemplaireId).get();
-    }
-
-    public List<Exemplaire> findALLExemplairesByArticleId(long articleId) {
-        return exemplaireRepository.findByArticleId(articleId);
-    }
 
     public List<Admin> getAllAdmins() {
        return   libraryUserRepository.findAllAdmins();
