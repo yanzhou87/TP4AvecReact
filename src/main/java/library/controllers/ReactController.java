@@ -1,9 +1,6 @@
 package library.controllers;
 
-import library.forms.SaveAdminForm;
-import library.forms.SaveBookForm;
-import library.forms.SaveClientForm;
-import library.forms.SaveEmpruntForm;
+import library.forms.*;
 import library.model.*;
 import library.service.ServiceReact;
 import org.slf4j.Logger;
@@ -76,8 +73,8 @@ public class ReactController {
 
     @GetMapping("/cds")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<CD> getAllCDs() {
-        return serviceReact.getAllCds();
+    public  ResponseEntity<List<SaveCdForm>> getAllCDs() {
+        return new ResponseEntity<>(serviceReact.getAllCds(), HttpStatus.OK);
     }
 
     @GetMapping("/dvds")

@@ -25,5 +25,4 @@ public class SaveCdForm {
     private String author;
     private double durationMovie;
 
-
 }

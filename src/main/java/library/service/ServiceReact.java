@@ -1,9 +1,6 @@
 package library.service;
 
-import library.forms.SaveAdminForm;
-import library.forms.SaveBookForm;
-import library.forms.SaveClientForm;
-import library.forms.SaveEmpruntForm;
+import library.forms.*;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Service;
@@ -65,15 +62,17 @@ public class ServiceReact {
         return bookForms;
     }
 
-    public List<CD> getAllCds() {
-        List<CD> cds = new ArrayList<>();
+    public List<SaveCdForm> getAllCds() {
+        List<SaveCdForm> cdForms = new ArrayList<>();
         List<Article> articles = articleRepository.findAll();
         for (Article cd : articles) {
             if (cd instanceof CD) {
-                cds.add((CD) cd);
+              SaveCdForm saveCdForm = new SaveCdForm(cd.getId(),cd.getTitle(),
+                      cd.getAuthor(),((CD) cd).getDurationMovie());
+              cdForms.add(saveCdForm);
             }
         }
-        return cds;
+        return cdForms;
     }
 
     public List<DVD> getAllDVDs() {
