@@ -22,6 +22,14 @@ public class CD extends Article{
         super(title);
     }
 
+    public CD(long id, String title, String author, int nombreExemplaires, double durationMovie) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.nombreExemplaires = nombreExemplaires;
+        this.durationMovie = durationMovie;
+    }
+
     @Override
     public int dayEmprunt() {
         return 3;

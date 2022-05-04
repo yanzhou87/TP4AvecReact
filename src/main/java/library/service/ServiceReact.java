@@ -68,22 +68,24 @@ public class ServiceReact {
         for (Article cd : articles) {
             if (cd instanceof CD) {
               SaveCdForm saveCdForm = new SaveCdForm(cd.getId(),cd.getTitle(),
-                      cd.getAuthor(),((CD) cd).getDurationMovie());
+                      cd.getAuthor(),cd.getNombreExemplaires(),((CD) cd).getDurationMovie());
               cdForms.add(saveCdForm);
             }
         }
         return cdForms;
     }
 
-    public List<DVD> getAllDVDs() {
-        List<DVD> dvds = new ArrayList<>();
+    public List<SaveDvdForm> getAllDVDs() {
+        List<SaveDvdForm> dvdForms = new ArrayList<>();
         List<Article> articles = articleRepository.findAll();
         for (Article dvd : articles) {
             if (dvd instanceof DVD) {
-                dvds.add((DVD) dvd);
+                SaveDvdForm saveDvdForm = new SaveDvdForm(dvd.getId(),dvd.getTitle(),
+                        dvd.getAuthor(),dvd.getNombreExemplaires(),((DVD) dvd).getDurationMovie());
+                dvdForms.add(saveDvdForm);
             }
         }
-        return dvds;
+        return dvdForms;
     }
 
 
@@ -193,5 +195,16 @@ public class ServiceReact {
                 myBook.getAuthor(), myBook.getArticleType(), myBook.getYearPublication(),
                 myBook.getNombreExemplaires(), myBook.getEditor(), myBook.getNumbrePages());
         return saveBookForm;
+    }
+
+    public SaveCdForm saveCd(SaveCdForm newCd) {
+        CD cd = new CD(newCd.getId(), newCd.getTitle(),
+                newCd.getAuthor(),
+                newCd.getNombreExemplaires(),
+                newCd.getDurationMovie());
+        CD myCd = articleRepository.save(cd);
+        SaveCdForm saveCdForm = new SaveCdForm(myCd.getId(), myCd.getTitle(),
+                myCd.getAuthor(), myCd.getNombreExemplaires(), myCd.getDurationMovie());
+        return saveCdForm;
     }
 }

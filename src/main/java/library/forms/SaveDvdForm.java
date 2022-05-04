@@ -20,6 +20,7 @@ public class SaveDvdForm {
     private String title;
     @NotNull
     private String author;
+    private int nombreExemplaires = 0;
     private double durationMovie;
 
 

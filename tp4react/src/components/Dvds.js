@@ -9,11 +9,13 @@ const Dvds = ({dvds}) => {
                 <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Author</th>
                     <th>Duration Movie</th>
                 </tr>
                 {dvds.map((dvd) => (
                     <tr  key={dvd.id}>
                         <td>{dvd.title}</td>
+                        <td>{dvd.author}</td>
                         <td>{dvd.durationMovie}</td>
                     </tr>
                 ))}

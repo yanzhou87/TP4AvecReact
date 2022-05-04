@@ -7,8 +7,6 @@ const AddCdOrDvd = ({onAddCd, onAddDvd, admin}) => {
     const [type, setType] = useState('')
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
-    const [yearPublication, setYearPublication] = useState('')
-    const [articleType, setArticleType] = useState('')
     const [nombreExemplaires, setNombreExemplaires] = useState(0)
     const [durationMovie, setDurationMovie] = useState(0)
 
@@ -20,18 +18,16 @@ const AddCdOrDvd = ({onAddCd, onAddDvd, admin}) => {
             return
         }
 
-        if(choix === 'cd'){
-            onAddCd({title, author, yearPublication, articleType, nombreExemplaires,durationMovie})
+        if(type === 'cd'){
+            onAddCd({title, author,nombreExemplaires,durationMovie})
         }
-        if(choix === 'dvd'){
-            onAddDvd({title, author, yearPublication, articleType, nombreExemplaires, durationMovie})
+        if(type === 'dvd'){
+            onAddDvd({title, author, nombreExemplaires, durationMovie})
         }
 
         setType('')
         setTitle('')
         setAuthor('')
-        setYearPublication('')
-        setArticleType('')
         setNombreExemplaires(0)
         setDurationMovie(0)
     }
@@ -39,7 +35,7 @@ const AddCdOrDvd = ({onAddCd, onAddDvd, admin}) => {
     return  (
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
-                <label>Title</label>
+                <label>Type</label>
                 <input type='text' placeholder='cd or dvd'
                        value={type}
                        onChange={(e) => setType(e.target.value)}/>
@@ -56,23 +52,18 @@ const AddCdOrDvd = ({onAddCd, onAddDvd, admin}) => {
                    value={author}
                    onChange={(e) => setAuthor(e.target.value)}/>
         </div>
+
         <div className='form-control'>
-            <label>Year Publication</label>
-            <input type='text' placeholder='YYYY-MM-JJ'
-                   value={yearPublication}
-                   onChange={(e) => setYearPublication(e.target.value)}/>
-        </div>
-        <div className='form-control'>
-            <label>ArticleType</label>
-            <input type='text' placeholder='Roman or Manuel Scolaire or Etude or Magazine For Book'
-                   value={articleType}
-                   onChange={(e) => setArticleType(e.target.value)}/>
+            <label>Nombre Exemplaires</label>
+            <input type='number' placeholder='Roman or Manuel Scolaire or Etude or Magazine For Book'
+                   value={nombreExemplaires}
+                   onChange={(e) => setNombreExemplaires(e.target.value)}/>
         </div>
         <div className='form-control'>
             <label>DurationMovie</label>
             <input type='number' placeholder='Duration Movie For CD and DVD'
                    value={durationMovie}
-                   onChange={(e) => setAuthor(e.target.value)}/>
+                   onChange={(e) => setDurationMovie(e.target.value)}/>
         </div>
 
         <input type='submit' value='Save Article' className='btn btn-block'

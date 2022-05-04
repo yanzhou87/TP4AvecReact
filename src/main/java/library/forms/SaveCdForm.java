@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class SaveCdForm {
@@ -23,6 +22,6 @@ public class SaveCdForm {
 
     @NotNull
     private String author;
+    private int nombreExemplaires = 0;
     private double durationMovie;
-
 }
