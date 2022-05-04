@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 public class SaveClientForm {
-    private String id;
+    private long id;
     private  String firstName;
     private  String lastName;
     private  int age;
 
-    public SaveClientForm(String id, String firstName, String lastName, int age) {
+    public SaveClientForm(long id, String firstName, String lastName, int age) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,7 +19,7 @@ public class SaveClientForm {
 
     public SaveClientForm(){}
     public SaveClientForm(Client client){
-        this(Long.toString(client.getId()),client.getFirstName(),client.getLastName(),client.getAge());
+        this(client.getId(),client.getFirstName(),client.getLastName(),client.getAge());
     }
 
     public Client toClient(){

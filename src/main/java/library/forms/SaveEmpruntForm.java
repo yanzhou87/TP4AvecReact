@@ -1,26 +1,18 @@
 package library.forms;
 
-import library.model.Emprunt;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SaveEmpruntForm {
-    private String id;
+    private long id;
     private long clientId;
     private long articleId;
-
-    public SaveEmpruntForm(String id, long clientId, long articleId) {
-        this.id = id;
-        this.clientId = clientId;
-        this.articleId = articleId;
-    }
-
-    public SaveEmpruntForm() {
-    }
-
-    public SaveEmpruntForm(Emprunt emprunt) {
-        this(Long.toString(emprunt.getId()),emprunt.getClient().getId(), emprunt.getArticle().getId());
-    }
-
-
+    private String dateEmprunt;
+    private String dateReturn;
+    private boolean returnEmprdunt = false;
 }

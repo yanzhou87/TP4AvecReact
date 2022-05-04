@@ -1,9 +1,10 @@
 package library.controllers;
 
+import library.forms.SaveAdminForm;
+import library.forms.SaveBookForm;
 import library.forms.SaveClientForm;
+import library.forms.SaveEmpruntForm;
 import library.model.*;
-import library.service.ServiceAdmin;
-import library.service.ServiceClient;
 import library.service.ServiceReact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,41 +26,52 @@ public class ReactController {
     public ReactController(ServiceReact serviceReact) {
         this.serviceReact = serviceReact;
     }
-//TODO probleme sur dto
+
     @GetMapping("/clients")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<Client>> getAllClients() {
+    public ResponseEntity<List<SaveClientForm>> getAllClients() {
         return new ResponseEntity<>(serviceReact.getAllClients(), HttpStatus.OK);
     }
-
+    @GetMapping("/clients/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<SaveClientForm> getClient(@PathVariable Long id) {
+        logger.info("getAllTodos");
+        return  serviceReact.findClientById(id)
+                .map(client -> ResponseEntity.status(HttpStatus.OK).body(client))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
 //    @GetMapping("/clients/{id}")
 //    @CrossOrigin(origins = "http://localhost:3000")
-//    public Optional<Client> getClient(@PathVariable Long id) {
-//        return serviceReact.getClientById(id);
+//    public ResponseEntity<SaveClientForm> getClient(@PathVariable Long id) {
+//        return new ResponseEntity<>(serviceReact.findClientById(id).get(), HttpStatus.OK);
 //    }
 
     @GetMapping("/admins")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Admin> getAllAdmins() {
-        return serviceReact.getAllAdmins();
+    public  ResponseEntity<List<SaveAdminForm>> getAllAdmins() {
+        return new ResponseEntity<>(serviceReact.getAllAdmins(),HttpStatus.OK);
     }
 
     @GetMapping("/admins/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Optional<Admin> getAdmin(@PathVariable Long id) {
-        return serviceReact.getAdminById(id);
+    public ResponseEntity<SaveAdminForm> getAdmin(@PathVariable Long id) {
+        return  serviceReact.findAdminsById(id)
+                .map(admin -> ResponseEntity.status(HttpStatus.OK).body(admin))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @GetMapping("/books")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Book> getAllBooks() {
-        return serviceReact.getAllBooks();
+    public ResponseEntity<List<SaveBookForm>> getAllBooks() {
+        return new ResponseEntity<>(serviceReact.getAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("/books/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public Optional<Book> getBook(@PathVariable Long id) {
-        return serviceReact.getBookById(id);
+    public ResponseEntity<SaveBookForm> getBook(@PathVariable Long id) {
+        return  serviceReact.findBookById(id)
+                .map(book -> ResponseEntity.status(HttpStatus.OK).body(book))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @GetMapping("/cds")
@@ -76,44 +88,41 @@ public class ReactController {
 
     @GetMapping("/emprunts")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Emprunt> getAllEmprunts() {
-        return serviceReact.getAllEmprunts();
+    public ResponseEntity<List<SaveEmpruntForm>> getAllEmprunts() {
+        return new ResponseEntity<>( serviceReact.getAllEmprunts(), HttpStatus.OK);
     }
 
-
-    @GetMapping("/clients/{id}")
+    @GetMapping("/emprunts/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Client> getClient(@PathVariable Long id) {
+    public ResponseEntity<SaveEmpruntForm> getEmprunt(@PathVariable Long id) {
         logger.info("getAllTodos");
-        return  serviceReact.findById(id)
-                .map(client -> ResponseEntity.status(HttpStatus.CREATED).body(client))
+        return  serviceReact.findEmpruntById(id)
+                .map(emprunt -> ResponseEntity.status(HttpStatus.CREATED).body(emprunt))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
-//    @PostMapping("/clients")
-//    @CrossOrigin(origins = "http://localhost:3000")
-//    public ResponseEntity<Client> addClient(@RequestBody Client newClient, @PathVariable Long id) {
-//        return serviceReact.saveClient(newClient).map(client -> ResponseEntity.status(HttpStatus.CREATED).body(client))
-//                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
-//    }
 
     @PostMapping("/clients")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Client> addClient(@RequestBody Client newClient) {
-        serviceReact.saveClient(newClient);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<SaveClientForm> addClient(@RequestBody SaveClientForm newClient) {
+        return new ResponseEntity<>(serviceReact.saveClient(newClient),HttpStatus.CREATED);
     }
 
     @PostMapping("/admins")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Admin> addClient(@RequestBody Admin newAdmin) {
-        serviceReact.saveAdmin(newAdmin);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<SaveAdminForm> addClient(@RequestBody SaveAdminForm newAdmin) {
+        return new ResponseEntity<>(serviceReact.saveAdmin(newAdmin), HttpStatus.CREATED);
     }
 
+    @PostMapping("/books")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<SaveBookForm> addBook(@RequestBody SaveBookForm newBook) {
+        return new ResponseEntity<>(serviceReact.saveBook(newBook), HttpStatus.CREATED);
+    }
     @PostMapping("/emprunts")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Emprunt> addClient(@RequestBody Emprunt newEmprunt) {
-        serviceReact.saveEmprunt(newEmprunt);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<SaveEmpruntForm> addEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
+        return new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);
     }
+
+
 }

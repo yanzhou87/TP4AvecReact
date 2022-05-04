@@ -1,12 +1,18 @@
 package library.service;
 
+import library.forms.SaveAdminForm;
+import library.forms.SaveBookForm;
+import library.forms.SaveClientForm;
+import library.forms.SaveEmpruntForm;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class ServiceReact {
     private ArticleRepository articleRepository;
@@ -24,30 +30,47 @@ public class ServiceReact {
         this.amendeRepository = amendeRepository;
     }
 
-    public List<Client> getAllClients() {
-        return libraryUserRepository.finAllClients();
-    }
-    public List<Admin> getAllAdmins() {
-        return libraryUserRepository.findAllAdmins();
+    public List<SaveClientForm> getAllClients() {
+        List<SaveClientForm> clientForms = new ArrayList<>();
+        List<Client> clients = libraryUserRepository.finAllClients();
+        for (int i = 0; i < clients.size(); i++) {
+            Client client = clients.get(i);
+            SaveClientForm clientForm = new SaveClientForm(client.getId(),client.getFirstName(),client.getLastName(),client.getAge());
+            clientForms.add(clientForm);
+        }
+        return clientForms;
     }
 
-    public List<Book> getAllBooks() {
-        List<Book> books = new ArrayList<>();
-        List<Article> articles =  articleRepository.findAll();
-        for(Article a : articles){
-            if(a instanceof Book){
-                books.add((Book)a);
+    public List<SaveAdminForm> getAllAdmins() {
+        List<SaveAdminForm> adminDtos = new ArrayList<>();
+        List<Admin> admins = libraryUserRepository.findAllAdmins();
+        for (Admin admin : admins) {
+            SaveAdminForm adminDto = new SaveAdminForm(admin.getId(), admin.getFirstName(), admin.getLastName(), admin.getAge());
+            adminDtos.add(adminDto);
+        }
+        return adminDtos;
+    }
+
+    public List<SaveBookForm> getAllBooks() {
+        List<SaveBookForm> bookForms = new ArrayList<>();
+        List<Article> articles = articleRepository.findAll();
+        for (Article a : articles) {
+            if (a instanceof Book) {
+                SaveBookForm bookForm = new SaveBookForm(a.getId(),a.getTitle(),
+                        a.getAuthor(),a.getArticleType(),a.getYearPublication(),
+                        a.getNombreExemplaires(),((Book) a).getEditor(),((Book) a).getNumbrePages());
+                bookForms.add(bookForm);
             }
         }
-        return books;
+        return bookForms;
     }
 
     public List<CD> getAllCds() {
         List<CD> cds = new ArrayList<>();
-        List<Article> articles =  articleRepository.findAll();
-        for(Article cd : articles){
-            if(cd instanceof CD){
-                cds.add((CD)cd);
+        List<Article> articles = articleRepository.findAll();
+        for (Article cd : articles) {
+            if (cd instanceof CD) {
+                cds.add((CD) cd);
             }
         }
         return cds;
@@ -55,22 +78,17 @@ public class ServiceReact {
 
     public List<DVD> getAllDVDs() {
         List<DVD> dvds = new ArrayList<>();
-        List<Article> articles =  articleRepository.findAll();
-        for(Article dvd : articles){
-            if(dvd instanceof DVD){
+        List<Article> articles = articleRepository.findAll();
+        for (Article dvd : articles) {
+            if (dvd instanceof DVD) {
                 dvds.add((DVD) dvd);
             }
         }
         return dvds;
     }
 
-    public Optional<Admin> getAdminById(Long id) {
-        return Optional.of(libraryUserRepository.findAdminById(id));
-    }
 
-    public Optional<Client> getClientById(Long id) {
-        return libraryUserRepository.findClientById(id);
-    }
+
 
 //    public Optional<Admin> saveAdmin(Admin admin) {
 //        return Optional.of(libraryUserRepository.save(admin));
@@ -88,30 +106,93 @@ public class ServiceReact {
 //        return articleRepository.save(book);
 //    }
 
-    public List<Emprunt> getAllEmprunts() {
-        return empruntRepository.findAll();
+    public List<SaveEmpruntForm> getAllEmprunts() {
+        List<SaveEmpruntForm> listEmpruntsDto = new ArrayList<>();
+        List<Emprunt> listEmprunts = empruntRepository.findAll();
+        for (int i = 0; i < listEmprunts.size(); i++) {
+            Emprunt emprunt = listEmprunts.get(i);
+            SaveEmpruntForm empruntForm = new SaveEmpruntForm(emprunt.getId(),
+                    emprunt.getClient().getId(), emprunt.getArticle().getId(),
+                    emprunt.getDateEmprunt().toString(), emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
+                    emprunt.isReturnEmprdunt());
+            listEmpruntsDto.add(empruntForm);
+        }
+
+        return listEmpruntsDto;
     }
 
 
-    public Optional<Client> saveClient(Client newClient) {
-        return Optional.of(libraryUserRepository.save(newClient));
+    public SaveClientForm saveClient(SaveClientForm newClient) {
+       Client client = new Client(newClient.getId(), newClient.getFirstName(), newClient.getLastName(), newClient.getAge());
+        Client myclient = libraryUserRepository.save(client);
+        System.out.println(myclient);
+        SaveClientForm saveClientForm = new SaveClientForm(myclient.getId(),myclient.getFirstName(), myclient.getLastName(), myclient.getAge());
+        return saveClientForm;
     }
 
+    public SaveAdminForm saveAdmin(SaveAdminForm newAdmin) {
+        Admin admin = new Admin(newAdmin.getId(), newAdmin.getFirstName(), newAdmin.getLastName(), newAdmin.getAge());
+        Admin myAdmin = libraryUserRepository.save(admin);
+        SaveAdminForm saveAdminForm = new SaveAdminForm(myAdmin.getId(), myAdmin.getFirstName(), myAdmin.getLastName(), myAdmin.getAge());
+        return saveAdminForm;
+    }
+
+    public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) {
+        Emprunt emprunt = new Emprunt(newEmprunt.getId(),
+                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),
+                articleRepository.findArticleById(newEmprunt.getArticleId()).get(),
+                LocalDate.now(),
+                LocalDate.parse(newEmprunt.getDateReturn()), newEmprunt.isReturnEmprdunt());
+        Emprunt myEmprunt = empruntRepository.save(emprunt);
+        SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
+                myEmprunt.getClient().getId(),myEmprunt.getArticle().getId(),
+                myEmprunt.getDateEmprunt().toString(),myEmprunt.getDateReturn().toString(), myEmprunt.isReturnEmprdunt());
+        return saveEmpruntForm;
+    }
     public Optional<Book> getBookById(Long id) {
-        return articleRepository.getBookById(id);
+        return articleRepository.findBookById(id);
     }
 
-    public Optional<Client> findById(Long id) {
-        return libraryUserRepository.findClientById(id);
+    public Optional<SaveClientForm> findClientById(Long id) {
+        Client client = libraryUserRepository.findClientById(id).get();
+
+        SaveClientForm saveClientForm = new SaveClientForm(client.getId(), client.getFirstName(), client.getLastName(), client.getAge());
+        return Optional.of(saveClientForm);
+    }
+    public Optional<SaveAdminForm> findAdminsById(Long id) {
+        Admin admin = libraryUserRepository.findAdminById(id);
+        SaveAdminForm saveAdminForm = new SaveAdminForm(admin.getId(),admin.getFirstName(),admin.getLastName(),admin.getAge());
+        return Optional.of(saveAdminForm);
     }
 
-    public Optional<Admin> saveAdmin(Admin newAdmin) {
-        return Optional.of(libraryUserRepository.save(newAdmin));
+    public Optional<SaveEmpruntForm> findEmpruntById(Long id) {
+        Emprunt emprunt = empruntRepository.findEmpruntById(id).get();
+        SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(emprunt.getId(),emprunt.getClient().getId(),
+                emprunt.getArticle().getId(),emprunt.getDateEmprunt().toString(),
+                emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
+                emprunt.isReturnEmprdunt());
+        return Optional.of(saveEmpruntForm);
     }
 
-    public Optional<Emprunt> saveEmprunt(Emprunt newEmprunt) {
-        return Optional.of(empruntRepository.save(newEmprunt));
+    public Optional<SaveBookForm> findBookById(Long id) {
+        Book book = articleRepository.findBookById(id).get();
+        SaveBookForm bookForm = new SaveBookForm(book.getId(), book.getTitle(),
+                book.getAuthor(), book.getArticleType(), book.getYearPublication(),
+                book.getNombreExemplaires(), book.getEditor(), book.getNumbrePages());
+        return Optional.of(bookForm);
     }
 
 
+    public SaveBookForm saveBook(SaveBookForm newBook) {
+
+        Book book = new Book(newBook.getId(), newBook.getTitle(),
+                newBook.getAuthor(),
+                newBook.getArticleType(),newBook.getYearPublication(), newBook.getNombreExemplaires(),
+                newBook.getEditor(), newBook.getNumbrePages());
+        Book myBook = articleRepository.save(book);
+        SaveBookForm saveBookForm = new SaveBookForm(myBook.getId(), myBook.getTitle(),
+                myBook.getAuthor(), myBook.getArticleType(), myBook.getYearPublication(),
+                myBook.getNombreExemplaires(), myBook.getEditor(), myBook.getNumbrePages());
+        return saveBookForm;
+    }
 }

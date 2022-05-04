@@ -20,10 +20,10 @@ const Client = ({empruntsForClient,client}) => {
                 </tr>
                 {empruntsForClient.map((emprunt) => (
                     <tr key={emprunt.id}>
-                        <td>{emprunt.exemplaire.title}</td>
-                        <td>{emprunt.date_emprunt}</td>
-                        <td>{emprunt.date_return}</td>
-                        <td>{emprunt.is_return}</td>
+                        <td>{emprunt.articleId}</td>
+                        <td>{emprunt.dateEmprunt}</td>
+                        <td>{emprunt.dateReturn}</td>
+                        <td>{emprunt.returnEmprdunt}</td>
                     </tr>
                 ))}
                 </thead>

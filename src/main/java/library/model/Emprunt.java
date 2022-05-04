@@ -29,16 +29,17 @@ public class Emprunt {
 
     private LocalDate dateEmprunt;
     private LocalDate dateReturn;
-    private boolean isReturn = false;
+    private boolean returnEmprdunt = false;
 
     public Emprunt(Client client, Article article) {
         this.client = client;
+        this.article = article;
     }
 
-    public Emprunt(Client client, LocalDate dateReturn,boolean isReturn) {
+    public Emprunt(Client client, LocalDate dateReturn,boolean ReturnEmprdunt) {
         this.client = client;
         this.dateEmprunt = dateReturn;
-        this.isReturn = isReturn;
+        this.returnEmprdunt = ReturnEmprdunt;
     }
 
     public Emprunt(Client client) {
@@ -50,8 +51,10 @@ public class Emprunt {
         return "Emprunt{" +
                 "id=" + id +
                 ", client=" + client.firstName +
-                ", date=" + dateEmprunt +
-                ", isReturn=" + isReturn +
+                ", article=" + article.title +
+                ", dateEmprunt=" + dateEmprunt +
+                ", dateReturn=" + dateReturn +
+                ", returnEmprdunt=" + returnEmprdunt +
                 '}';
     }
 }

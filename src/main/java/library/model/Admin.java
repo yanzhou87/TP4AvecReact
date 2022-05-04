@@ -16,6 +16,14 @@ public class Admin extends LibraryUser {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public Admin(long id, String firstName, String lastName, int age) {
+        this.id =id;
+        this.firstName=firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
     public void setId(long id){
         this.id =id;
     }

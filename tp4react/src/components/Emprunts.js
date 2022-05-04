@@ -8,8 +8,8 @@ const Emprunts = ({emprunts, admin}) => {
             <table>
                 <thead>
                 <tr>
-                    <th>lastName</th>
-                    <th>firstName</th>
+                    <th>Client Id</th>
+                    <th>Article Id</th>
                     <th>Article</th>
                     <th>Date Emprunt</th>
                     <th>Date Return</th>
@@ -17,12 +17,11 @@ const Emprunts = ({emprunts, admin}) => {
                 </tr>
                 {emprunts.map((emprunt) => (
                     <tr key={emprunt.id}>
-                        <td>{emprunt.client.lastName}</td>
-                        <td>{emprunt.client.firstName}</td>
-                        <td>{emprunt.article.title}</td>
+                        <td>{emprunt.clientId}</td>
+                        <td>{emprunt.articleId}</td>
                         <td>{emprunt.dateEmprunt}</td>
                         <td>{emprunt.dateReturn}</td>
-                        <td>{emprunt.isReturn}</td>
+                        <td>{emprunt.returnEmprdunt}</td>
                     </tr>
                 ))}
                 </thead>

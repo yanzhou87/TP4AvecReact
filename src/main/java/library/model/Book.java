@@ -43,11 +43,18 @@ public class Book extends Article {
         this.numbrePages = numbrePages;
     }
 
-    public Book(String title, String author, String articleType) {
+
+    public Book(long id, String title, String author, String yearPublication, String articleType, int nombreExemplaires, String editor, int numbrePages) {
+        this.id = id;
         this.title = title;
         this.author = author;
+        this.yearPublication = yearPublication;
         this.articleType = articleType;
+        this.nombreExemplaires = nombreExemplaires;
+        this.editor = editor;
+        this.numbrePages = numbrePages;
     }
+
 
     @Override
     public String toString() {

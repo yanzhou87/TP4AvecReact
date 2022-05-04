@@ -20,6 +20,7 @@ import EmpruntsForClient from "./components/EmpruntsForClient";
 import AddBook from "./components/AddBook";
 import AddCdOrDvd from "./components/AddCdOrDvd";
 import PageNotFind from "./components/PageNotFind";
+import AddEmprunt from "./components/AddEmprunt";
 
 
 function App() {
@@ -158,7 +159,7 @@ function App() {
         setId(client.id)
         if(emprunts.length!==0){
             emprunts.forEach((emp)=>{
-                if(emp.client.id === client.id){
+                if(emp.clientId === id){
                     setEmpruntsForClient([...empruntsForClient, emp])
                 }
             })
@@ -168,8 +169,6 @@ function App() {
     const selectBook = async (id) => {
       const book = await fetchBook(id)
         setBook(book)
-
-        console.log("dans select BOOK : " +book.id)
     }
 
     const selectCd = async (id) => {
@@ -184,11 +183,11 @@ function App() {
             {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(admin)
             })
-        const data = await res.json()
+        const data = await res.json();
         setAdmins([...admins, data])
     }
 
@@ -247,6 +246,22 @@ function App() {
             setDvds([...dvds, data])
         }
 
+    const onAddEmprunt= async (emprunt) => {
+       if (await fetchBook(emprunt.articleId) == null && await fetchCd(emprunt.articleId) && await fetchDvd(emprunt.articleId)){
+           alert('No article id found')
+       }
+        const res = await fetch('http://localhost:8080/emprunts',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(emprunt)
+            })
+        const data = await res.json()
+        setDvds([...emprunts, data])
+    }
+
     return (
         <Router>
             <div className="container">
@@ -265,10 +280,11 @@ function App() {
                     <Route path='/addArticle' element={<AddArticle  admin={admin}/>}/>
                     {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
-                    <Route path='/emprunts/clientId:id' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
+                    <Route path='/clients/:id/emprunts' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
                     <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
                     <Route path='/addCdOrDvd' element={<AddCdOrDvd  onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     <Route path='*' element={<PageNotFind/>}/>
+                    <Route path='/addEmprunt' element={<AddEmprunt onAddEmprunt={onAddEmprunt} client={client}/>}/>
                 </Routes>
             </div>
         </Router>
