@@ -45,12 +45,9 @@ public class MainLibrary implements CommandLineRunner {
         System.out.println(serviceReact.getAllCds());
         DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1"));
         System.out.println(serviceReact.getAllDVDs());
- //TODO
- //TODO est ce que c'est oblicatoire de utiliser serviceClient et serviceAdmin
- //TODO quand ajouter client dans la page web, il montre une erreur, puis faire rafraîchir, puis l'erreur disparaît
-//TODO si ajouter emprunt, probleme sur client et emprunt, il y a des erreurs
-        Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.now());
-        System.out.println(emprunt);
+
+       // Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.now());
+       // System.out.println(emprunt);
 
 
 

@@ -112,4 +112,6 @@ public class ServiceReact {
     public Optional<Emprunt> saveEmprunt(Emprunt newEmprunt) {
         return Optional.of(empruntRepository.save(newEmprunt));
     }
+
+
 }

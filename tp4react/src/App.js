@@ -19,6 +19,7 @@ import Emprunts from "./components/Emprunts";
 import EmpruntsForClient from "./components/EmpruntsForClient";
 import AddBook from "./components/AddBook";
 import AddCdOrDvd from "./components/AddCdOrDvd";
+import PageNotFind from "./components/PageNotFind";
 
 
 function App() {
@@ -267,6 +268,7 @@ function App() {
                     <Route path='/emprunts/clientId:id' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
                     <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
                     <Route path='/addCdOrDvd' element={<AddCdOrDvd  onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
+                    <Route path='*' element={<PageNotFind/>}/>
                 </Routes>
             </div>
         </Router>

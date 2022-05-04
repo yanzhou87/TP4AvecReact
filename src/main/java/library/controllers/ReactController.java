@@ -1,5 +1,6 @@
 package library.controllers;
 
+import library.forms.SaveClientForm;
 import library.model.*;
 import library.service.ServiceAdmin;
 import library.service.ServiceClient;
@@ -24,11 +25,11 @@ public class ReactController {
     public ReactController(ServiceReact serviceReact) {
         this.serviceReact = serviceReact;
     }
-
+//TODO probleme sur dto
     @GetMapping("/clients")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<Client> getAllClients() {
-        return serviceReact.getAllClients();
+    public ResponseEntity<List<Client>> getAllClients() {
+        return new ResponseEntity<>(serviceReact.getAllClients(), HttpStatus.OK);
     }
 
 //    @GetMapping("/clients/{id}")
