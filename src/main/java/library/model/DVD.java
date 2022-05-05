@@ -22,6 +22,21 @@ public class DVD extends Article {
         super(title);
     }
 
+    public DVD(long id, String title, String author, int nombreExemplaires, double durationMovie) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.nombreExemplaires = nombreExemplaires;
+        this.durationMovie = durationMovie;
+    }
+
+    public DVD(String title, String author, int nombreExemplaires, double durationMovie) {
+        this.title = title;
+        this.author = author;
+        this.nombreExemplaires = nombreExemplaires;
+        this.durationMovie = durationMovie;
+    }
+
     @Override
     public int dayEmprunt() {
         return 7;

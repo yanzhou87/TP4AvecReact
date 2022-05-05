@@ -15,4 +15,11 @@ public class SaveEmpruntForm {
     private String dateEmprunt;
     private String dateReturn;
     private boolean returnEmprdunt = false;
+
+    public SaveEmpruntForm(long id, long clientId, long articleId, String dateEmprunt) {
+         this.id =id;
+         this.clientId = clientId;
+         this.articleId = articleId;
+         this.dateEmprunt = dateEmprunt;
+    }
 }

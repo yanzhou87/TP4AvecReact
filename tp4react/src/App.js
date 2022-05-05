@@ -152,8 +152,11 @@ function App() {
     }
 
     const selectClient = async (id)=>{
+        console.log(id)
         const client = await fetchClient(id)
+        console.log("select client " + client)
         const emprunts = await fetchEmprunts()
+        console.log("client emprunts : " +emprunts)
         setEmpruntsForClient([])
         setClient(client)
         setId(client.id)
@@ -221,6 +224,7 @@ function App() {
     }
 
     const onAddCd= async (cd) => {
+        console.log(cd)
         const res = await fetch('http://localhost:8080/cds',
             {
                 method: 'POST',
@@ -234,6 +238,7 @@ function App() {
     }
 
     const onAddDvd= async (dvd) => {
+        console.log(dvd)
             const res = await fetch('http://localhost:8080/dvds',
                 {
                     method: 'POST',
@@ -245,11 +250,7 @@ function App() {
             const data = await res.json()
             setDvds([...dvds, data])
         }
-
-    const onAddEmprunt= async (emprunt) => {
-       if (await fetchBook(emprunt.articleId) == null && await fetchCd(emprunt.articleId) && await fetchDvd(emprunt.articleId)){
-           alert('No article id found')
-       }
+    const addEmprunt = async (emprunt) =>{
         const res = await fetch('http://localhost:8080/emprunts',
             {
                 method: 'POST',
@@ -260,6 +261,28 @@ function App() {
             })
         const data = await res.json()
         setDvds([...emprunts, data])
+    }
+    const valideAddEmprunt= async (type, emprunt) => {
+        console.log(emprunt.articleId)
+        if(type ==="book"){
+            const book = await fetchBook(emprunt.articleId)
+           if(book!==undefined){
+              await addEmprunt(emprunt)
+           }
+        }
+        if (type === "cd") {
+            const cd = await fetchCd(emprunt.articleId)
+            if(cd!==undefined){
+               await addEmprunt(emprunt)
+            }
+        }
+        if (type === "dvd") {
+            const dvd = await fetchDvd(emprunt.articleId)
+
+            if(dvd!==undefined){
+                await addEmprunt(emprunt)
+            }
+        }
     }
 
     return (
@@ -278,13 +301,12 @@ function App() {
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
                     <Route path='/addArticle' element={<AddArticle  admin={admin}/>}/>
-                    {/*<Route path='/book/:id' element={<Book book={book}/>}/>*/}
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
                     <Route path='/clients/:id/emprunts' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
                     <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
                     <Route path='/addCdOrDvd' element={<AddCdOrDvd  onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     <Route path='*' element={<PageNotFind/>}/>
-                    <Route path='/addEmprunt' element={<AddEmprunt onAddEmprunt={onAddEmprunt} client={client}/>}/>
+                    <Route path='/addEmprunt' element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client}/>}/>
                 </Routes>
             </div>
         </Router>

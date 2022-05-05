@@ -27,7 +27,7 @@ public class Emprunt {
     @JoinColumn(name = "EXEMPLAIRE_ID")
     private Article article;
 
-    private LocalDate dateEmprunt;
+    private LocalDate dateEmprunt = LocalDate.now();
     private LocalDate dateReturn;
     private boolean returnEmprdunt = false;
 
@@ -44,6 +44,12 @@ public class Emprunt {
 
     public Emprunt(Client client) {
         this.client = client;
+    }
+
+    public Emprunt(long id, Client client, Article article) {
+        this.id = id;
+        this.client = client;
+        this.article = article;
     }
 
     @Override

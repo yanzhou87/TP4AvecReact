@@ -236,15 +236,15 @@
         "address": ""
       },
       "book": {
-      "id": 1,
-      "title": "book1",
-      "author": "Vivi",
-      "yearPublication": "1988-09-23",
-      "articleType": "Roman",
-      "nombreExemplaires": 2,
-      "editor": "Michel",
-      "nombrePage": 301
-    },
+        "id": 1,
+        "title": "book1",
+        "author": "Vivi",
+        "yearPublication": "1988-09-23",
+        "articleType": "Roman",
+        "nombreExemplaires": 2,
+        "editor": "Michel",
+        "nombrePage": 301
+      },
       "date_emprunt": "2020-09-02",
       "date_return": "",
       "is_return": false
@@ -271,6 +271,21 @@
       "dateEmprunt": "2020-04-02",
       "dateReturn": "2020-04-04",
       "isReturn": "true"
+    },
+    {
+      "clientId": 1,
+      "articleId": "1",
+      "dateEmprunt": "",
+      "dateReturn": "",
+      "returnEmprdunt": false,
+      "id": 3
+    },
+    {
+      "articleId": "2",
+      "dateEmprunt": "",
+      "dateReturn": "",
+      "returnEmprdunt": false,
+      "id": 4
     }
   ]
 }

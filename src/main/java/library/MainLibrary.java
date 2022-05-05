@@ -43,7 +43,7 @@ public class MainLibrary implements CommandLineRunner {
         System.out.println(serviceReact.getAllBooks());
         CD cd = serviceLibrary.saveCD(new CD("cd1"));
         System.out.println(serviceReact.getAllCds());
-        DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1"));
+        DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1","author11",3,1));
         System.out.println(serviceReact.getAllDVDs());
 
         Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.now());

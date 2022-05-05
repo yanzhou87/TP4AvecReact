@@ -6,9 +6,11 @@ import library.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ServiceReact {
@@ -141,13 +143,12 @@ public class ServiceReact {
     public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) {
         Emprunt emprunt = new Emprunt(newEmprunt.getId(),
                 libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),
-                articleRepository.findArticleById(newEmprunt.getArticleId()).get(),
-                LocalDate.now(),
-                LocalDate.parse(newEmprunt.getDateReturn()), newEmprunt.isReturnEmprdunt());
+                articleRepository.findArticleById(newEmprunt.getArticleId()).get());
+        System.out.println(emprunt);
         Emprunt myEmprunt = empruntRepository.save(emprunt);
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
                 myEmprunt.getClient().getId(),myEmprunt.getArticle().getId(),
-                myEmprunt.getDateEmprunt().toString(),myEmprunt.getDateReturn().toString(), myEmprunt.isReturnEmprdunt());
+                myEmprunt.getDateEmprunt().toString());
         return saveEmpruntForm;
     }
     public Optional<Book> getBookById(Long id) {
@@ -206,5 +207,16 @@ public class ServiceReact {
         SaveCdForm saveCdForm = new SaveCdForm(myCd.getId(), myCd.getTitle(),
                 myCd.getAuthor(), myCd.getNombreExemplaires(), myCd.getDurationMovie());
         return saveCdForm;
+    }
+
+    public SaveDvdForm saveDvd(SaveDvdForm newDvd) {
+        DVD dvd = new DVD(newDvd.getId(), newDvd.getTitle(),
+                newDvd.getAuthor(),
+                newDvd.getNombreExemplaires(),
+                newDvd.getDurationMovie());
+        DVD myDvd = articleRepository.save(dvd);
+        SaveDvdForm saveDvdForm = new SaveDvdForm(myDvd.getId(), myDvd.getTitle(),
+                myDvd.getAuthor(), myDvd.getNombreExemplaires(), myDvd.getDurationMovie());
+        return saveDvdForm;
     }
 }

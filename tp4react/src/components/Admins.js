@@ -18,7 +18,7 @@ const Admins = ({admins, selectAdmin}) => {
                     <tr key={admin.id} onClick={() => {
                         selectAdmin(admin.id)
                     }}>
-                        <td><Link to={`/admins/${admin.id}`}><span><FaGhost/></span></Link></td>
+                        <td><Link to={`/admins/${admin.id}`}><span><FaGhost/></span>   I'm </Link></td>
                         <td>{admin.firstName}</td>
                         <td>{admin.lastName}</td>
 

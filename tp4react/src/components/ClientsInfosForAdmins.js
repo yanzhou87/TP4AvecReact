@@ -18,7 +18,7 @@ const ClientsInfosForAdmins =({clients,admin,selectClient})=>{
                     <tr  key={client.id} onClick={()=>selectClient(client.id)}>
                         <td>{client.firstName}</td>
                         <td>{client.lastName}</td>
-                        <td><Link to={`/clients/${client.id}/emprunts`}><span><AiFillStar/></span></Link></td>
+                        <td><Link to={`/clients/${client.id}`}><span><AiFillStar/></span></Link></td>
                     </tr>
                 ))}
                 </thead>
@@ -29,7 +29,6 @@ const ClientsInfosForAdmins =({clients,admin,selectClient})=>{
     )
 }
 ClientsInfosForAdmins.propTypes = {
-   // clients:PropTypes.object,
     selectClient:PropTypes.func
 }
 export default ClientsInfosForAdmins

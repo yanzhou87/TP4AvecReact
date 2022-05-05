@@ -105,10 +105,11 @@ public class ReactController {
     public ResponseEntity<SaveCdForm> addCd(@RequestBody SaveCdForm newCd) {
         return new ResponseEntity<>(serviceReact.saveCd(newCd), HttpStatus.CREATED);
     }
-//    @PostMapping("/dvds")
-//    public ResponseEntity<SaveDvdForm> addDvd(@RequestBody SaveDvdForm newDvd) {
-//        return new ResponseEntity<>(serviceReact.saveDvd(newDvd), HttpStatus.CREATED);
-//    }
+
+    @PostMapping("/dvds")
+    public ResponseEntity<SaveDvdForm> addDvd(@RequestBody SaveDvdForm newDvd) {
+        return new ResponseEntity<>(serviceReact.saveDvd(newDvd), HttpStatus.CREATED);
+    }
     @PostMapping("/emprunts")
     public ResponseEntity<SaveEmpruntForm> addEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
         return new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);

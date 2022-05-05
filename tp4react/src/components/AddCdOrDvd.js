@@ -74,7 +74,6 @@ const AddCdOrDvd = ({onAddCd, onAddDvd, admin}) => {
 }
 
 AddCdOrDvd.propTypes = {
-    onAddBook: PropTypes.func,
     onAddCd: PropTypes.func,
     onAddDvd: PropTypes.func
 }
