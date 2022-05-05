@@ -245,9 +245,9 @@
         "editor": "Michel",
         "nombrePage": 301
       },
-      "date_emprunt": "2020-09-02",
-      "date_return": "",
-      "is_return": false
+      "dateEmprunt": "2020-09-02",
+      "dateReturn": "",
+      "returnEmprdunt": "false"
     },
     {
       "id": 2,
@@ -270,21 +270,21 @@
       },
       "dateEmprunt": "2020-04-02",
       "dateReturn": "2020-04-04",
-      "isReturn": "true"
+      "returnEmprdunt": "true"
     },
     {
       "clientId": 1,
       "articleId": "1",
-      "dateEmprunt": "",
+      "dateEmprunt": "2020-09-08",
       "dateReturn": "",
-      "returnEmprdunt": false,
+      "returnEmprdunt": "false",
       "id": 3
     },
     {
       "articleId": "2",
-      "dateEmprunt": "",
+      "dateEmprunt": "2001-10-01",
       "dateReturn": "",
-      "returnEmprdunt": false,
+      "returnEmprdunt": "false",
       "id": 4
     }
   ]

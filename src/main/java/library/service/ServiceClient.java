@@ -33,41 +33,36 @@ public class ServiceClient {
     public List<Object[]> findBookBySeach(String seach) {
         return articleRepository.findBookBySeach(seach);
     }
-//
-//    public Optional<Client> findClientById(long id) {
-//        return libraryUserRepository.findClientById(id);
-//    }
 
     public List<Object[]> findEmpruntByClientId(long id) {
         return empruntRepository.findEmpruntByClientId(id);
     }
 
-//    public void returnEmprunt(Client client, long bookId, LocalDate dateReturn) {
-//
-//        for (Emprunt emprunt : client.getEmprunts()) {
-//            if (emprunt.getExemplaire().getArticle().getId() == bookId) {
-//                emprunt.setReturn(true);
-//                emprunt.getExemplaire().getArticle().setNombreExemplaires(emprunt.getExemplaire().getArticle().getNombreExemplaires() + 1);
-//                emprunt.getExemplaire().setBorrowed(false);
-//                emprunt.setDateReturn(dateReturn);
-//
-//                articleRepository.save(emprunt.getExemplaire().getArticle());
-//                exemplaireRepository.save(emprunt.getExemplaire());
-//                empruntRepository.save(emprunt);
-//
-//                long duration = ChronoUnit.DAYS.between(emprunt.getDateEmprunt(),emprunt.getDateReturn());
-//
-//                if (duration > emprunt.getExemplaire().getArticle().dayEmprunt()) {
-//                    Amende amende = new Amende(client, duration);
-//                    amendeRepository.save(amende);
-//                    client.addAmende(amende);
-//                    Client client1 = libraryUserRepository.getClientWithAmendes(client.getId()).get();
-//                    client1.setEmprunts(libraryUserRepository.findClientById(client.getId()).get().getEmprunts());
-//                    libraryUserRepository.save(client1);
-//                }
-//             }
-//        }
-//    }
+    public void returnEmprunt(Client client, long bookId, LocalDate dateReturn) {
+
+        for (Emprunt emprunt : client.getEmprunts()) {
+
+            if(emprunt.getArticle().getId() == bookId){
+
+                emprunt.setDateReturn(dateReturn);
+                emprunt.setReturnEmprdunt(true);
+             Article article =  articleRepository.findArticleById(bookId).get();
+             article.setNombreExemplaires(article.getNombreExemplaires() +1);
+             articleRepository.save(article);
+             empruntRepository.save(emprunt);
+
+                long duration = ChronoUnit.DAYS.between(emprunt.getDateEmprunt(),emprunt.getDateReturn());
+                if (duration > emprunt.getArticle().dayEmprunt()) {
+                    Amende amende = new Amende(client, duration);
+                    amendeRepository.save(amende);
+                    client.addAmende(amende);
+                    Client client1 = libraryUserRepository.getClientWithAmendes(client.getId()).get();
+                    client1.setEmprunts(libraryUserRepository.findClientById(client.getId()).get().getEmprunts());
+                    libraryUserRepository.save(client1);
+                }
+            }
+        }
+    }
 
     public List<LibraryUser> findAllClients() {
         return libraryUserRepository.findAll();

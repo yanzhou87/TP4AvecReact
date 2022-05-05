@@ -2,58 +2,77 @@ import {useState} from 'react'
 import Button from "./Button";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {BsFillInboxesFill} from "react-icons/bs";
 
-const AddEmprunt = ({onAddEmprunt, client}) => {
-
-    const [type, setType] = useState('')
-    const [articleId, setArticleId] = useState('')
-    const [clientId, setClientId] = useState(client.id)
-    const [dateEmprunt, setDateEmprunt] = useState("")
-    const [dateReturn, setDateReturn] = useState('')
-    const [returnEmprdunt, setReturnEmprdunt] = useState(false)
-
-    const onSubmit = (e) => {
-        e.preventDefault()
-
-        if (!articleId || !type) {
-            alert('Please add article id et type')
-            return
-        }
-        if (type === "book") {
-            onAddEmprunt("book",{clientId, articleId, dateEmprunt,dateReturn,returnEmprdunt})
-        }else
-        if (type === "cd") {
-            onAddEmprunt("book",{clientId, articleId, dateEmprunt,dateReturn,returnEmprdunt})
-        }else
-        if (type === "dcd") {
-            onAddEmprunt("book",{clientId, articleId, dateEmprunt,dateReturn,returnEmprdunt})
-        }else{
-            alert('all lowercase， type is between book, cd and dvd')
-            return
-        }
-
-       setArticleId('')
-    }
+const AddEmprunt = ({onAddEmprunt, client, books, cds, dvds}) => {
 
     return (
-
-        <form className='add-form' onSubmit={onSubmit}>
-            <div className='form-control'>
-                <label>Type</label>
-                <input type='text' placeholder='book or cd or dvd'
-                       value={type}
-                       onChange={(e) => setType(e.target.value)}/>
-            </div>
-            <div className='form-control'>
-                <label>Article Id</label>
-                <input type='number' placeholder='1,2,3.....'
-                       value={articleId}
-                       onChange={(e) => setArticleId(e.target.value)}/>
-            </div>
-
-            <input type='submit' value='Save Emprunt' className='btn btn-block'/>
-            <Link to={`/clients/${client.id}`}><Button color={'pink'} text={'My Page'}/></Link>
-        </form>
+        <div className="pageCenter">
+            <h3>Books</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Click</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Nombre Exemplaires</th>
+                </tr>
+                {books.map((book) => (
+                    <tr key={book.id} >
+                        <td onClick={() => {
+                            onAddEmprunt(book.id)
+                        }}><span><BsFillInboxesFill/></span>   Emprunt ?</td>
+                        <td>{book.title}</td>
+                        <td>{book.author}</td>
+                        <td> {book.nombreExemplaires}</td>
+                    </tr>
+                ))}
+                </thead>
+            </table>
+            <h3>Cds</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Click</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Nombre Exemplaires</th>
+                </tr>
+                {cds.map((cd) => (
+                    <tr key={cd.id} >
+                        <td onClick={() => {
+                            onAddEmprunt(cd.id)
+                        }}><span><BsFillInboxesFill/></span>   Emprunt ?</td>
+                        <td>{cd.title}</td>
+                        <td>{cd.author}</td>
+                        <td> {cd.nombreExemplaires}</td>
+                    </tr>
+                ))}
+                </thead>
+            </table>
+            <h3>Dvds</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Click</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Nombre Exemplaires</th>
+                </tr>
+                {dvds.map((dvd) => (
+                    <tr key={dvd.id} >
+                        <td onClick={() => {
+                            onAddEmprunt(dvd.id)
+                        }}><span><BsFillInboxesFill/></span>   Emprunt ?</td>
+                        <td>{dvd.title}</td>
+                        <td>{dvd.author}</td>
+                        <td> {dvd.nombreExemplaires}</td>
+                    </tr>
+                ))}
+                </thead>
+            </table>
+            <Link to='/'> <Button color={'red'} text={'Exit'}/></Link>
+        </div>
     )
 }
 AddEmprunt.propTypes = {

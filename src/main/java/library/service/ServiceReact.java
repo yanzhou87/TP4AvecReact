@@ -5,8 +5,6 @@ import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -116,7 +114,8 @@ public class ServiceReact {
             Emprunt emprunt = listEmprunts.get(i);
             SaveEmpruntForm empruntForm = new SaveEmpruntForm(emprunt.getId(),
                     emprunt.getClient().getId(), emprunt.getArticle().getId(),
-                    emprunt.getDateEmprunt().toString(), emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
+                    emprunt.getDateEmprunt().toString(),emprunt.getDateReturnAttendu().toString(),
+                    emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
                     emprunt.isReturnEmprdunt());
             listEmpruntsDto.add(empruntForm);
         }
@@ -148,7 +147,7 @@ public class ServiceReact {
         Emprunt myEmprunt = empruntRepository.save(emprunt);
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
                 myEmprunt.getClient().getId(),myEmprunt.getArticle().getId(),
-                myEmprunt.getDateEmprunt().toString());
+                myEmprunt.getDateEmprunt().toString(), myEmprunt.getDateReturnAttendu().toString());
         return saveEmpruntForm;
     }
     public Optional<Book> getBookById(Long id) {
@@ -170,7 +169,7 @@ public class ServiceReact {
     public Optional<SaveEmpruntForm> findEmpruntById(Long id) {
         Emprunt emprunt = empruntRepository.findEmpruntById(id).get();
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(emprunt.getId(),emprunt.getClient().getId(),
-                emprunt.getArticle().getId(),emprunt.getDateEmprunt().toString(),
+                emprunt.getArticle().getId(),emprunt.getDateEmprunt().toString(),emprunt.getDateReturnAttendu().toString(),
                 emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
                 emprunt.isReturnEmprdunt());
         return Optional.of(saveEmpruntForm);
@@ -218,5 +217,23 @@ public class ServiceReact {
         SaveDvdForm saveDvdForm = new SaveDvdForm(myDvd.getId(), myDvd.getTitle(),
                 myDvd.getAuthor(), myDvd.getNombreExemplaires(), myDvd.getDurationMovie());
         return saveDvdForm;
+    }
+
+    public List<SaveArticleForm> findAllArticles() {
+        List<Article> articles = articleRepository.findAll();
+        List<SaveArticleForm> articleForms = new ArrayList<>();
+        for(Article article :articles){
+            SaveArticleForm articleForm = new SaveArticleForm(article.getId(),
+                    article.getTitle(),article.getAuthor(),article.getNombreExemplaires());
+            articleForms.add(articleForm);
+        }
+        return articleForms;
+    }
+
+    public Optional<SaveArticleForm> findArticleById(Long id) {
+        Article article = articleRepository.findArticleById(id).get();
+        SaveArticleForm articleForm = new SaveArticleForm(article.getId(),article.getTitle(),
+                article.getAuthor(),article.getNombreExemplaires());
+        return Optional.of(articleForm);
     }
 }

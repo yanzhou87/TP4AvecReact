@@ -34,6 +34,7 @@ public class MainLibrary implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Client client = serviceLibrary.saveClient(new Client("yan","zhou", 34));
+        Client client1 = serviceLibrary.saveClient(new Client("client", "clicli", 20));
         Optional<Admin> admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
         System.out.println(serviceReact.getAllClients());
         System.out.println(serviceReact.getAllAdmins());
@@ -47,6 +48,8 @@ public class MainLibrary implements CommandLineRunner {
         System.out.println(serviceReact.getAllDVDs());
 
         Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.now());
+        System.out.println(emprunt);
+        serviceClient.returnEmprunt(client, book.getId(), LocalDate.of(2022,6,1));
         System.out.println(emprunt);
 
         //final Article book = serviceLibrary.saveArticle(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));

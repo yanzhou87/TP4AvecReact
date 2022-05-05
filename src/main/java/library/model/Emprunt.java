@@ -28,6 +28,7 @@ public class Emprunt {
     private Article article;
 
     private LocalDate dateEmprunt = LocalDate.now();
+    private LocalDate dateReturnAttendu;
     private LocalDate dateReturn;
     private boolean returnEmprdunt = false;
 
@@ -59,6 +60,7 @@ public class Emprunt {
                 ", client=" + client.firstName +
                 ", article=" + article.title +
                 ", dateEmprunt=" + dateEmprunt +
+                ", dateReturnAttendu=" + dateReturnAttendu +
                 ", dateReturn=" + dateReturn +
                 ", returnEmprdunt=" + returnEmprdunt +
                 '}';

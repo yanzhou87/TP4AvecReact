@@ -10,18 +10,17 @@ const Emprunts = ({emprunts, admin}) => {
                 <tr>
                     <th>Client Id</th>
                     <th>Article Id</th>
-                    <th>Article</th>
                     <th>Date Emprunt</th>
+                    <th>Date Return Attendu</th>
                     <th>Date Return</th>
-                    <th>Is Return</th>
                 </tr>
                 {emprunts.map((emprunt) => (
                     <tr key={emprunt.id}>
                         <td>{emprunt.clientId}</td>
                         <td>{emprunt.articleId}</td>
                         <td>{emprunt.dateEmprunt}</td>
+                        <td>{emprunt.dateReturnAttendu}</td>
                         <td>{emprunt.dateReturn}</td>
-                        <td>{emprunt.returnEmprdunt}</td>
                     </tr>
                 ))}
                 </thead>

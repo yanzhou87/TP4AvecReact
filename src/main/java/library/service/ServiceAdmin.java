@@ -4,9 +4,7 @@ package library.service;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -51,10 +49,12 @@ public class ServiceAdmin {
                     emprunt.setClient(client);
                     emprunt.setDateEmprunt(date);
                     article.setNombreExemplaires(article.getNombreExemplaires()-1);
+                    emprunt.setDateReturnAttendu(emprunt.getDateEmprunt().plusDays(article.dayEmprunt()));
         }
 
         article.setNombreExemplaires(article.getNombreExemplaires() - 1);
         articleRepository.save(article);
+        client.addEmprunt(emprunt);
         return empruntRepository.save(emprunt);
     }
 

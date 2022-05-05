@@ -10,6 +10,7 @@ const Header = ({title}) => {
                 <Link to='/admins'><Button color={'green'} text={'Admins'}/></Link>
                 <Link to='/clients'><Button color={'pink'} text={'Client'}/></Link>
                 <Link to='/addAdmin'><Button color={'SkyBlue'} text={'Add admin'} /></Link>
+                <Link to='/articles'><Button color={'pink'} text={'Show Articles'}/></Link>
                 <Link to='/books'><Button color={'Plum'} text={'Books'} /></Link>
                 <Link to='/cds'><Button color={'DarkSeaGreen'} text={'Cds'} /></Link>
                 <Link to='/dvds'><Button color={'LightSlateGray'} text={'Dvds'} /></Link>

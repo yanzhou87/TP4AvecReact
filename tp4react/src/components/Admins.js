@@ -21,7 +21,6 @@ const Admins = ({admins, selectAdmin}) => {
                         <td><Link to={`/admins/${admin.id}`}><span><FaGhost/></span>   I'm </Link></td>
                         <td>{admin.firstName}</td>
                         <td>{admin.lastName}</td>
-
                     </tr>
                 ))}
                 </thead>
@@ -33,7 +32,6 @@ const Admins = ({admins, selectAdmin}) => {
 }
 
 Admins.propTypes = {
-  //  admins:PropTypes.object,
     selectAdmin: PropTypes.func,
 }
 export default Admins

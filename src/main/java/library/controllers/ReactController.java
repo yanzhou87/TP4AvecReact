@@ -81,9 +81,20 @@ public class ReactController {
 
     @GetMapping("/emprunts/{id}")
     public ResponseEntity<SaveEmpruntForm> getEmprunt(@PathVariable Long id) {
-        logger.info("getAllTodos");
+
         return  serviceReact.findEmpruntById(id)
-                .map(emprunt -> ResponseEntity.status(HttpStatus.CREATED).body(emprunt))
+                .map(emprunt -> ResponseEntity.status(HttpStatus.OK).body(emprunt))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+    @GetMapping("/articles")
+    public ResponseEntity<List<SaveArticleForm>> getAllArticles() {
+        return new ResponseEntity<>(serviceReact.findAllArticles(), HttpStatus.OK);
+    }
+
+    @GetMapping("/articles/{id}")
+    public ResponseEntity<SaveArticleForm> getArticle(@PathVariable Long id) {
+        return  serviceReact.findArticleById(id)
+                .map(article -> ResponseEntity.status(HttpStatus.OK).body(article))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
@@ -113,5 +124,10 @@ public class ReactController {
     @PostMapping("/emprunts")
     public ResponseEntity<SaveEmpruntForm> addEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
         return new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);
+    }
+
+    @PutMapping("emprunts/{id}")
+    public ResponseEntity<SaveEmpruntForm> updateEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
+        return  new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);
     }
 }

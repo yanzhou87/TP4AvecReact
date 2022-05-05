@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from "react";
 import Admins from "./components/Admins";
@@ -14,24 +13,23 @@ import Client from "./components/Client";
 import Cds from "./components/Cds";
 import Dvds from "./components/Dvds";
 import AddArticle from "./components/AddArticle";
-import Book from "./components/Book";
 import Emprunts from "./components/Emprunts";
 import EmpruntsForClient from "./components/EmpruntsForClient";
 import AddBook from "./components/AddBook";
 import AddCdOrDvd from "./components/AddCdOrDvd";
 import PageNotFind from "./components/PageNotFind";
 import AddEmprunt from "./components/AddEmprunt";
-
+import Articles from "./components/Articles";
 
 function App() {
-   
+
     const [admins, setAdmins] = useState([])
     const [clients, setClients] = useState([])
     const [admin, setAdmin] = useState({})
     const [client, setClient] = useState({})
     const [books, setBooks] = useState([])
     const [book, setBook] = useState({})
-    const [cds,setCds] = useState([])
+    const [cds, setCds] = useState([])
     const [cd, setCd] = useState({})
     const [dvds, setDvds] = useState([])
     const [dvd, setDvd] = useState({})
@@ -39,6 +37,7 @@ function App() {
     const [empruntsForClient, setEmpruntsForClient] = useState([])
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
+    const [articles, setArticles] = useState([])
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -50,14 +49,14 @@ function App() {
             setClients(clientsFromServer)
         }
         const getBooks = async () => {
-          const booksFromServer = await fetchBooks()
+            const booksFromServer = await fetchBooks()
             setBooks(booksFromServer)
         }
-        const getCds = async () =>{
+        const getCds = async () => {
             const cdsFromServer = await fetchCds()
             setCds(cdsFromServer)
         }
-        const getDvds = async () =>{
+        const getDvds = async () => {
             const dvdsFromServer = await fetchDvds()
             setDvds(dvdsFromServer)
         }
@@ -65,12 +64,17 @@ function App() {
             const empruntsFromServer = await fetchEmprunts();
             setEmprunts(empruntsFromServer)
         }
+        const getArticles = async () => {
+            const articlesFromServer = await fetchArticles();
+            setArticles(articlesFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
         getCds()
         getDvds()
         getEmprunts()
+        getArticles()
     }, [])
 
     const fetchAdmins = async () => {
@@ -98,37 +102,48 @@ function App() {
         return data
     }
 
-    const fetchBooks = async () =>{
+    const fetchBooks = async () => {
         const res = await fetch('http://localhost:8080/books')
         const data = await res.json()
         return data
     }
 
-    const fetchBook = async (id) =>{
+    const fetchBook = async (id) => {
         const res = await fetch(`http://localhost:8080/books/${id}`)
         const data = await res.json()
         return data
     }
-    const fetchCds = async () =>{
+    const fetchCds = async () => {
         const res = await fetch('http://localhost:8080/cds')
         const data = await res.json()
         return data
     }
 
-    const fetchCd = async (id) =>{
+    const fetchCd = async (id) => {
         const res = await fetch(`http://localhost:8080/cds/${id}`)
         const data = await res.json()
         return data
     }
 
-    const fetchDvds = async () =>{
+    const fetchDvds = async () => {
         const res = await fetch('http://localhost:8080/dvds')
         const data = await res.json()
         return data
     }
 
-    const fetchDvd = async (id) =>{
+    const fetchDvd = async (id) => {
         const res = await fetch(`http://localhost:8080/dvds/${id}`)
+        const data = await res.json()
+        return data
+    }
+    const fetchArticles = async () => {
+        const res = await fetch('http://localhost:8080/articles')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchArticle = async (id) => {
+        const res = await fetch(`http://localhost:8080/articles/${id}`)
         const data = await res.json()
         return data
     }
@@ -144,25 +159,29 @@ function App() {
         const data = await res.json()
         return data
     }
-    const selectAdmin = async (id)=>{
+    const selectAdmin = async (id) => {
         const admin = await fetchAdmin(id)
         console.log(admin)
-       setAdmin({id:admin.id, firstName : admin.firstName,lastName:admin.lastName, age:admin.age, address :admin.address })
+        setAdmin({
+            id: admin.id,
+            firstName: admin.firstName,
+            lastName: admin.lastName,
+            age: admin.age,
+            address: admin.address
+        })
         setId(admin.id)
     }
 
-    const selectClient = async (id)=>{
+    const selectClient = async (id) => {
         console.log(id)
         const client = await fetchClient(id)
-        console.log("select client " + client)
         const emprunts = await fetchEmprunts()
-        console.log("client emprunts : " +emprunts)
         setEmpruntsForClient([])
         setClient(client)
         setId(client.id)
-        if(emprunts.length!==0){
-            emprunts.forEach((emp)=>{
-                if(emp.clientId === id){
+        if (emprunts.length !== 0) {
+            emprunts.forEach((emp) => {
+                if (emp.clientId === id) {
                     setEmpruntsForClient([...empruntsForClient, emp])
                 }
             })
@@ -170,7 +189,7 @@ function App() {
     }
 
     const selectBook = async (id) => {
-      const book = await fetchBook(id)
+        const book = await fetchBook(id)
         setBook(book)
     }
 
@@ -181,7 +200,7 @@ function App() {
 
 
     const addAdmin = async (admin) => {
-       console.log(admin)
+        console.log(admin)
         const res = await fetch('http://localhost:8080/admins',
             {
                 method: 'POST',
@@ -194,7 +213,7 @@ function App() {
         setAdmins([...admins, data])
     }
 
-    const addClient= async (client) => {
+    const addClient = async (client) => {
         console.log(client)
         const res = await fetch('http://localhost:8080/clients',
             {
@@ -209,7 +228,7 @@ function App() {
 
     }
 
-    const onAddBook= async (book) => {
+    const onAddBook = async (book) => {
         const res = await fetch('http://localhost:8080/books',
             {
                 method: 'POST',
@@ -223,7 +242,7 @@ function App() {
 
     }
 
-    const onAddCd= async (cd) => {
+    const onAddCd = async (cd) => {
         console.log(cd)
         const res = await fetch('http://localhost:8080/cds',
             {
@@ -237,20 +256,20 @@ function App() {
         setCds([...cds, data])
     }
 
-    const onAddDvd= async (dvd) => {
+    const onAddDvd = async (dvd) => {
         console.log(dvd)
-            const res = await fetch('http://localhost:8080/dvds',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(dvd)
-                })
-            const data = await res.json()
-            setDvds([...dvds, data])
-        }
-    const addEmprunt = async (emprunt) =>{
+        const res = await fetch('http://localhost:8080/dvds',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(dvd)
+            })
+        const data = await res.json()
+        setDvds([...dvds, data])
+    }
+    const addEmprunt = async (emprunt) => {
         const res = await fetch('http://localhost:8080/emprunts',
             {
                 method: 'POST',
@@ -262,27 +281,41 @@ function App() {
         const data = await res.json()
         setDvds([...emprunts, data])
     }
-    const valideAddEmprunt= async (type, emprunt) => {
-        console.log(emprunt.articleId)
-        if(type ==="book"){
-            const book = await fetchBook(emprunt.articleId)
-           if(book!==undefined){
-              await addEmprunt(emprunt)
-           }
+    const valideAddEmprunt = async (id, clientId) => {
+         const myArticle = await fetchArticle(id)
+        if (myArticle.id !== undefined && myArticle.nombreExemplaires !== 0) {
+            await addEmprunt({clientId,id})
         }
-        if (type === "cd") {
-            const cd = await fetchCd(emprunt.articleId)
-            if(cd!==undefined){
-               await addEmprunt(emprunt)
-            }
-        }
-        if (type === "dvd") {
-            const dvd = await fetchDvd(emprunt.articleId)
+    }
+    const valideReturnEmprunt = async (myEmprunt) => {
+        console.log(" dans la fonction valide return emprunt : " +myEmprunt.articleId)
+        if (myEmprunt.id !== undefined) {
+            const article = await fetchArticle(myEmprunt.articleId)
 
-            if(dvd!==undefined){
-                await addEmprunt(emprunt)
+            if (article.id !== undefined) {
+                await returnEmprunt(myEmprunt)
+                article.nombreExemplaires += 1
             }
-        }
+         }
+    }
+    const returnEmprunt = async (myEmprunt) => {
+        console.log("return emprunt: " + myEmprunt.id)
+
+            const res = await fetch(`http://localhost:8080/emprunts/${id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(myEmprunt)
+                })
+            const data = await res.json()
+        setEmprunts(
+            emprunts.map(
+                (emprunt) => emprunt.id === myEmprunt.id ?
+                    {...emprunt, returnEmprdunt: true} : emprunt
+            )
+        )
     }
 
     return (
@@ -291,22 +324,29 @@ function App() {
                 <Routes>
                     <Route exact path='/' element={<Header title={'Library'}/>}/>
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
-                    <Route path='/clients' element={ <Clients clients={clients}  selectClient={selectClient}/>}/>
-                    <Route path='/addAdmin' element={ <AddAdmin onAdd={addAdmin} />}/>
-                    <Route path='/admins/:id' element={ <Admin admin={admin}/>}/>
+                    <Route path='/clients' element={<Clients clients={clients} selectClient={selectClient}/>}/>
+                    <Route path='/addAdmin' element={<AddAdmin onAdd={addAdmin}/>}/>
+                    <Route path='/admins/:id' element={<Admin admin={admin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
-                    <Route path='/clients/:id' element={<Client empruntsForClient={empruntsForClient} client={client}/>}/>
-                    <Route path='/clientsInfosForAdmins' element={<ClientsInfosForAdmins clients={clients} admin={admin} selectClient={selectClient}/>}/>
+                    <Route path='/clients/:id'
+                           element={<Client empruntsForClient={empruntsForClient} client={client} valideReturnEmprunt={(valideReturnEmprunt)}/>}/>
+                    <Route path='/clientsInfosForAdmins'
+                           element={<ClientsInfosForAdmins clients={clients} admin={admin}
+                                                           selectClient={selectClient}/>}/>
                     <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
-                    <Route path='/addArticle' element={<AddArticle  admin={admin}/>}/>
+                    <Route path='/addArticle' element={<AddArticle admin={admin}/>}/>
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
-                    <Route path='/clients/:id/emprunts' element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
+                    <Route path='/clients/:id/emprunts'
+                           element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
                     <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
-                    <Route path='/addCdOrDvd' element={<AddCdOrDvd  onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
+                    <Route path='/addCdOrDvd'
+                           element={<AddCdOrDvd onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     <Route path='*' element={<PageNotFind/>}/>
-                    <Route path='/addEmprunt' element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client}/>}/>
+                    <Route path='/addEmprunt'
+                           element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client} books={books} cds={cds} dvds={dvds}/>}/>
+                    <Route path='/articles' element={<Articles articles={articles}/>}/>
                 </Routes>
             </div>
         </Router>
