@@ -38,8 +38,9 @@ public class MainLibrary implements CommandLineRunner {
         Optional<Admin> admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
         System.out.println(serviceReact.getAllClients());
         System.out.println(serviceReact.getAllAdmins());
-        Book book = serviceLibrary.saveBook(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
-        book.setNombreExemplaires(10);
+        Book book = serviceLibrary.saveBook(new Book("book", "yan",  "Roman",
+                "2010-02-09",10,"yanZhou", 300));
+
         serviceLibrary.saveBook(book);
         System.out.println(serviceReact.getAllBooks());
         CD cd = serviceLibrary.saveCD(new CD("cd1"));

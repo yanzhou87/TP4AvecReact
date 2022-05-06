@@ -10,9 +10,11 @@ const Admin = ({admin}) => {
     return (
         <div className="pageCenter">
             <h2><span> <FaHandPointRight/></span> {admin.firstName}  {admin.lastName}</h2>
-            <Link to='/addClient'><Button color={'LightBlue'} text={'Create Client'}/></Link>
-            <Link to='/addArticle'><Button color={'CornflowerBlue'} text={'Create Article'}/></Link>
+            <Link to='/addAdmin'><Button color={'SkyBlue'} text={'Add admin'} /></Link>
+            <Link to='/addClient'><Button color={'LightBlue'} text={'Add Client'}/></Link>
+            <Link to='/addArticle'><Button color={'CornflowerBlue'} text={'Add Article'}/></Link>
             <Link to='/clientsInfosForAdmins'><Button color={'pink'} text={'List Clients'}/></Link>
+            <Link to='/articles'><Button color={'DarkSeaGreen'} text={'Show Articles'}/></Link>
             <Link to='/emprunts'><Button color={'LightSlateGray'} text={'Emprunts'} /></Link>
             <Link to='/admins'><Button color={'red'} text={'Exit'}/></Link>
         </div>

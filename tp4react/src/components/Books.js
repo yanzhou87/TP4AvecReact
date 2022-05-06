@@ -11,12 +11,14 @@ const Books = ({books, selectBook}) => {
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Article Type</th>
                     <th>Year Publication</th>
                 </tr>
                 {books.map((book) => (
                     <tr key={book.id} onClick={()=>selectBook(book.id)}>
                         <td>{book.title}</td>
                         <td>{book.author}</td>
+                        <td>{book.articleType}</td>
                         <td>{book.yearPublication}</td>
                     </tr>
                 ))}
@@ -29,7 +31,6 @@ const Books = ({books, selectBook}) => {
 }
 
 Books.propTypes = {
-   // books : PropTypes.object,
     selectBook: PropTypes.func,
 }
 export default Books

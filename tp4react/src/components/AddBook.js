@@ -7,7 +7,7 @@ const AddBook = ({onAddBook,admin}) => {
 
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
-    const [yearPublication, setYearPublication] = useState('')
+    let [yearPublication, setYearPublication] = useState('')
     const [articleType, setArticleType] = useState('')
     const [nombreExemplaires, setNombreExemplaires] = useState(0)
     const [editor, setEditor] = useState('')
@@ -15,10 +15,21 @@ const AddBook = ({onAddBook,admin}) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-
+        var date = RegExp("[0-9][0-9][0-9][0-9]\\-[0-1][0-9]\\-[0-3][0-9]")
         if (!title ) {
             alert('Please add title')
             return
+        }
+        if(articleType !== "Roman" && articleType !== "Manuel"  &&
+            articleType !== "Scolaire" && articleType !== "Etude" && articleType !== "Magazine"){
+            alert('Please fill in the following types Roman or Manuel Scolaire or Etude or Magazine,' +
+                ' Please note capitalization')
+            return
+        }
+        console.log("regexp : " + date.exec(yearPublication) )
+        if(!date.exec(yearPublication)){
+            alert("Pay attention to the time format yyyy-MM-dd (MM: 1-12) ！！！！")
+            return;
         }
         onAddBook({title, author, yearPublication, articleType, nombreExemplaires, editor, nombrePage})
         setTitle('')
@@ -62,6 +73,12 @@ const AddBook = ({onAddBook,admin}) => {
                 <input type='text' placeholder='Editor'
                        value={editor}
                        onChange={(e) => setEditor(e.target.value)}/>
+            </div>
+            <div className='form-control'>
+                <label>Nombre Exemplaires</label>
+                <input type='number' placeholder='1,2,3......'
+                       value={nombreExemplaires}
+                       onChange={(e) => setNombreExemplaires(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre Page</label>

@@ -200,7 +200,9 @@ public class ServiceReact {
                 newBook.getAuthor(),
                 newBook.getArticleType(),newBook.getYearPublication(), newBook.getNombreExemplaires(),
                 newBook.getEditor(), newBook.getNumbrePages());
+
         Book myBook = articleRepository.save(book);
+
         SaveBookForm saveBookForm = new SaveBookForm(myBook.getId(), myBook.getTitle(),
                 myBook.getAuthor(), myBook.getArticleType(), myBook.getYearPublication(),
                 myBook.getNombreExemplaires(), myBook.getEditor(), myBook.getNumbrePages());

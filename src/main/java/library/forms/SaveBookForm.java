@@ -28,6 +28,4 @@ public class SaveBookForm {
     private int nombreExemplaires = 0;
     private String editor;
     private int numbrePages;
-
-
 }

@@ -26,35 +26,25 @@ public class Book extends Article {
         this.yearPublication = yearPublication;
         this.nombreExemplaires = nombreExemplaires;
         this.editor = editor;
-        this.nombreExemplaires = nombreExemplaires;
+        this.numbrePages = numbrePages;
     }
+
+    public Book(long id, String title, String author, String articleType,  String yearPublication,int nombreExemplaires, String editor, int numbrePages) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.articleType = articleType;
+        this.yearPublication = yearPublication;
+        this.nombreExemplaires = nombreExemplaires;
+        this.editor = editor;
+        this.numbrePages = numbrePages;
+    }
+
 
     @Override
     public int dayEmprunt() {
         return 21;
     }
-
-    public Book(String title, String author, String yearPublication, String articleType, String editor, int numbrePages) {
-        this.title = title;
-        this.author = author;
-        this.yearPublication = yearPublication;
-        this.articleType = articleType;
-        this.editor = editor;
-        this.numbrePages = numbrePages;
-    }
-
-
-    public Book(long id, String title, String author, String yearPublication, String articleType, int nombreExemplaires, String editor, int numbrePages) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.yearPublication = yearPublication;
-        this.articleType = articleType;
-        this.nombreExemplaires = nombreExemplaires;
-        this.editor = editor;
-        this.numbrePages = numbrePages;
-    }
-
 
     @Override
     public String toString() {

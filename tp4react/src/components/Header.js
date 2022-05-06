@@ -7,13 +7,11 @@ const Header = ({title}) => {
         <header className='header'>
             <h1>{title}</h1>
             <div>
-                <Link to='/admins'><Button color={'green'} text={'Admins'}/></Link>
-                <Link to='/clients'><Button color={'pink'} text={'Client'}/></Link>
-                <Link to='/addAdmin'><Button color={'SkyBlue'} text={'Add admin'} /></Link>
-                <Link to='/articles'><Button color={'pink'} text={'Show Articles'}/></Link>
-                <Link to='/books'><Button color={'Plum'} text={'Books'} /></Link>
-                <Link to='/cds'><Button color={'DarkSeaGreen'} text={'Cds'} /></Link>
-                <Link to='/dvds'><Button color={'LightSlateGray'} text={'Dvds'} /></Link>
+                <Link to='/admins'><Button color={'SkyBlue'} text={'Admins'}/></Link>
+                <Link to='/clients'><Button color={'pink'} text={'Clients'}/></Link>
+                <Link to='/books'><Button color={'PowderBlue'} text={'Books'} /></Link>
+                <Link to='/cds'><Button color={'PowderBlue'} text={'Cds'} /></Link>
+                <Link to='/dvds'><Button color={'PowderBlue'} text={'Dvds'} /></Link>
             </div>
         </header>
     )

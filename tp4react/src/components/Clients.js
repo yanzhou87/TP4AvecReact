@@ -32,7 +32,6 @@ const Clients = ({clients, selectClient}) => {
 
 
 Clients.propTypes = {
-    // clients:PropTypes.object,
     selectClient: PropTypes.func,
 }
 export default Clients
