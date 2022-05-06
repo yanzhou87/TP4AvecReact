@@ -98,6 +98,18 @@ public class ReactController {
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
+    @GetMapping("/amendes")
+    public ResponseEntity<List<SaveAmendeFrom>> getAllAmendes() {
+        return new ResponseEntity<>(serviceReact.findAllAmendes(), HttpStatus.OK);
+    }
+
+    @GetMapping("/amendes/{id}")
+    public ResponseEntity<SaveAmendeFrom> getAmende(@PathVariable Long id) {
+        return  serviceReact.findAmendeById(id)
+                .map(amende -> ResponseEntity.status(HttpStatus.OK).body(amende))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
     @PostMapping("/clients")
     public ResponseEntity<SaveClientForm> addClient(@RequestBody SaveClientForm newClient) {
         return new ResponseEntity<>(serviceReact.saveClient(newClient),HttpStatus.CREATED);
@@ -128,6 +140,6 @@ public class ReactController {
 
     @PutMapping("emprunts/{id}")
     public ResponseEntity<SaveEmpruntForm> updateEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
-        return  new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);
+        return  new ResponseEntity<>(serviceReact.updateEmprunt(newEmprunt).get(), HttpStatus.CREATED);
     }
 }

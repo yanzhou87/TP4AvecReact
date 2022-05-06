@@ -5,6 +5,8 @@ import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +22,19 @@ public class ServiceReact {
 
     private AmendeRepository amendeRepository;
 
-    public ServiceReact(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository, EmpruntRepository empruntRepository, AmendeRepository amendeRepository) {
+    private ServiceAdmin serviceAdmin;
+
+    private ServiceClient serviceClient;
+
+    public ServiceReact(ArticleRepository articleRepository, LibraryUserRepository libraryUserRepository,
+                        EmpruntRepository empruntRepository, AmendeRepository amendeRepository,
+                        ServiceAdmin serviceAdmin, ServiceClient serviceClient) {
         this.articleRepository = articleRepository;
         this.libraryUserRepository = libraryUserRepository;
         this.empruntRepository = empruntRepository;
         this.amendeRepository = amendeRepository;
+        this.serviceAdmin = serviceAdmin;
+        this.serviceClient = serviceClient;
     }
 
     public List<SaveClientForm> getAllClients() {
@@ -140,14 +150,14 @@ public class ServiceReact {
     }
 
     public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) {
-        Emprunt emprunt = new Emprunt(newEmprunt.getId(),
-                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),
-                articleRepository.findArticleById(newEmprunt.getArticleId()).get());
-        System.out.println(emprunt);
-        Emprunt myEmprunt = empruntRepository.save(emprunt);
+        System.out.println("emprunt saveEmprunt newEmprunt: " + newEmprunt);
+        Emprunt myEmprunt = serviceAdmin.saveEmprunt(articleRepository.findArticleById(newEmprunt.getArticleId()).get() ,
+                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),LocalDate.now());
+        System.out.println(myEmprunt);
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
                 myEmprunt.getClient().getId(),myEmprunt.getArticle().getId(),
                 myEmprunt.getDateEmprunt().toString(), myEmprunt.getDateReturnAttendu().toString());
+        System.out.println(saveEmpruntForm);
         return saveEmpruntForm;
     }
     public Optional<Book> getBookById(Long id) {
@@ -235,5 +245,35 @@ public class ServiceReact {
         SaveArticleForm articleForm = new SaveArticleForm(article.getId(),article.getTitle(),
                 article.getAuthor(),article.getNombreExemplaires());
         return Optional.of(articleForm);
+    }
+
+    public Optional<SaveEmpruntForm> updateEmprunt(SaveEmpruntForm newEmprunt) {
+        Emprunt myEmprunt = serviceClient.returnEmprunt(
+                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),
+                newEmprunt.getArticleId(), LocalDate.now());
+        SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
+                myEmprunt.getClient().getId(), myEmprunt.getArticle().getId(),
+                myEmprunt.getDateEmprunt().toString(), myEmprunt.getDateReturnAttendu().toString(),
+                myEmprunt.getDateReturn().toString(), myEmprunt.isReturnEmprdunt());
+       return Optional.of(saveEmpruntForm);
+
+    }
+
+    public List<SaveAmendeFrom> findAllAmendes() {
+        List<Amende> amendes = amendeRepository.findAll();
+        List<SaveAmendeFrom> amendeFroms = new ArrayList<>();
+        for(Amende amende : amendes){
+            SaveAmendeFrom amendeFrom = new SaveAmendeFrom(amende.getId(),
+                    amende.getClient().getId(), amende.getAmendeForDay(),amende.getSommeAmende());
+            amendeFroms.add(amendeFrom);
+        }
+        return amendeFroms;
+    }
+
+    public Optional<SaveAmendeFrom> findAmendeById(Long id) {
+        Amende amende = amendeRepository.findAmendeById(id).get();
+        SaveAmendeFrom amendeFrom = new SaveAmendeFrom(amende.getId(),amende.getClient().getId(),
+                amende.getAmendeForDay(),amende.getSommeAmende());
+        return Optional.of(amendeFrom);
     }
 }

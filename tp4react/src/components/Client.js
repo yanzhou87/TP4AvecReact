@@ -4,13 +4,12 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 import Header from "./Header";
 
-const Client = ({empruntsForClient,client, valideReturnEmprunt}) => {
+const Client = ({empruntsForClient,client, valideReturnEmprunt, amende}) => {
 
     if(client.firstName === undefined){
         return  <Header/>
     }
     return (
-
             <div className="pageCenter">
             <h2><span><FaHandPointRight/></span>{client.firstName} {client.lastName}</h2>
             <Link to='/addEmprunt'><Button color={'pink'} text={'Create Emprunt'}/></Link>
@@ -24,6 +23,7 @@ const Client = ({empruntsForClient,client, valideReturnEmprunt}) => {
                     <th>Date Return Attendu</th>
                     <th>Date Return</th>
                     <th>Return</th>
+                    <th>Amende</th>
                 </tr>
                 {empruntsForClient.map((emprunt) => (
                     <tr key={emprunt.id}>
@@ -31,7 +31,8 @@ const Client = ({empruntsForClient,client, valideReturnEmprunt}) => {
                         <td>{emprunt.dateEmprunt}</td>
                         <td>{emprunt.dateReturnAttendu}</td>
                         <td>{emprunt.dateReturn}</td>
-                        <td><Button color={'Plum'} text={'Return'} onClick={()=>valideReturnEmprunt(emprunt)}/></td>
+                        <td onClick={()=>valideReturnEmprunt(emprunt)}><Button color={'Plum'} text={'Return'} /></td>
+                        <td>{amende}</td>
                     </tr>
                 ))}
                 </thead>

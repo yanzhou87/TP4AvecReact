@@ -18,5 +18,4 @@ const AddArticle = ({admin}) => {
 
 AddArticle.propTypes = {}
 
-
 export default AddArticle

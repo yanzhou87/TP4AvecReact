@@ -51,6 +51,7 @@ public class MainLibrary implements CommandLineRunner {
         System.out.println(emprunt);
         serviceClient.returnEmprunt(client, book.getId(), LocalDate.of(2022,6,1));
         System.out.println(emprunt);
+        System.out.println(serviceClient.findAllClients());
 
         //final Article book = serviceLibrary.saveArticle(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
 //        final Article cd = serviceLibrary.saveArticle(new CD("cd"));

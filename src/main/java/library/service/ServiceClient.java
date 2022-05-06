@@ -38,8 +38,8 @@ public class ServiceClient {
         return empruntRepository.findEmpruntByClientId(id);
     }
 
-    public void returnEmprunt(Client client, long bookId, LocalDate dateReturn) {
-
+    public Emprunt returnEmprunt(Client client, long bookId, LocalDate dateReturn) {
+       Emprunt myEmprunt = new Emprunt();
         for (Emprunt emprunt : client.getEmprunts()) {
 
             if(emprunt.getArticle().getId() == bookId){
@@ -60,8 +60,10 @@ public class ServiceClient {
                     client1.setEmprunts(libraryUserRepository.findClientById(client.getId()).get().getEmprunts());
                     libraryUserRepository.save(client1);
                 }
+                myEmprunt = emprunt;
             }
         }
+        return myEmprunt;
     }
 
     public List<LibraryUser> findAllClients() {

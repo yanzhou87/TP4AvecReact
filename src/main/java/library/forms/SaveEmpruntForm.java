@@ -15,7 +15,7 @@ public class SaveEmpruntForm {
     private String dateEmprunt;
     private String dateReturnAttendu;
     private String dateReturn;
-    private boolean returnEmprdunt = true;
+    private boolean returnEmprdunt = false;
 
     public SaveEmpruntForm(long id, long clientId, long articleId, String dateEmprunt, String dateReturnAttendu) {
          this.id =id;
@@ -24,4 +24,5 @@ public class SaveEmpruntForm {
          this.dateEmprunt = dateEmprunt;
          this.dateReturnAttendu = dateReturnAttendu;
     }
+
 }

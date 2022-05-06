@@ -38,6 +38,8 @@ function App() {
     const [emprunt, setEmprunt] = useState({})
     const [id, setId] = useState({})
     const [articles, setArticles] = useState([])
+    const [amendes, setAmendes] = useState([])
+    const [amendeForClient, setAmendeForClient] = useState(0)
 
     useEffect(() => {
         const getAdmins = async () => {
@@ -68,6 +70,10 @@ function App() {
             const articlesFromServer = await fetchArticles();
             setArticles(articlesFromServer)
         }
+        const getAmends = async () => {
+            const amendesFromServer = await fetchAmendes();
+            setAmendes(amendesFromServer)
+        }
         getAdmins()
         getClients()
         getBooks()
@@ -75,6 +81,7 @@ function App() {
         getDvds()
         getEmprunts()
         getArticles()
+        getAmends()
     }, [])
 
     const fetchAdmins = async () => {
@@ -159,6 +166,18 @@ function App() {
         const data = await res.json()
         return data
     }
+
+    const fetchAmendes = async () => {
+        const res = await fetch('http://localhost:8080/amendes')
+        const data = await res.json()
+        return data
+    }
+
+    const fetchAmende = async (id) => {
+        const res = await fetch(`http://localhost:8080/amendes/${id}`)
+        const data = await res.json()
+        return data
+    }
     const selectAdmin = async (id) => {
         const admin = await fetchAdmin(id)
         console.log(admin)
@@ -176,16 +195,30 @@ function App() {
         console.log(id)
         const client = await fetchClient(id)
         const emprunts = await fetchEmprunts()
-        setEmpruntsForClient([])
-        setClient(client)
-        setId(client.id)
-        if (emprunts.length !== 0) {
-            emprunts.forEach((emp) => {
-                if (emp.clientId === id) {
-                    setEmpruntsForClient([...empruntsForClient, emp])
-                }
-            })
+        const amendes = await fetchAmendes()
+        if(client.id !== undefined){
+            setEmpruntsForClient([])
+            setAmendes([])
+            setAmendeForClient(0)
+            setClient(client)
+            setId(client.id)
+            if (emprunts.length !== 0) {
+                emprunts.forEach((emp) => {
+                    if (emp.clientId === id) {
+                        setEmpruntsForClient([...empruntsForClient, emp])
+                    }
+                })
+            }
+            if (amendes.length !== 0) {
+                amendes.forEach((myAmende) => {
+                    if (myAmende.clientId === id) {
+                        setAmendes([...amendes, myAmende])
+                        setAmendeForClient(amendeForClient + myAmende.sommeAmende)
+                    }
+                })
+            }
         }
+
     }
 
     const selectBook = async (id) => {
@@ -197,7 +230,6 @@ function App() {
         const cd = await fetchCd(id)
         setCd(cd)
     }
-
 
     const addAdmin = async (admin) => {
         console.log(admin)
@@ -282,13 +314,17 @@ function App() {
         setDvds([...emprunts, data])
     }
     const valideAddEmprunt = async (id, clientId) => {
-         const myArticle = await fetchArticle(id)
+
+        const myArticle = await fetchArticle(id)
+        if (myArticle.nombreExemplaires === 0) {
+            alert("nombre exemplaires is 0， Please select another article")
+        }
         if (myArticle.id !== undefined && myArticle.nombreExemplaires !== 0) {
-            await addEmprunt({clientId,id})
+            setEmprunt({"clientId": clientId, "articleId": id})
+            await addEmprunt({"clientId": clientId, "articleId": id})
         }
     }
     const valideReturnEmprunt = async (myEmprunt) => {
-        console.log(" dans la fonction valide return emprunt : " +myEmprunt.articleId)
         if (myEmprunt.id !== undefined) {
             const article = await fetchArticle(myEmprunt.articleId)
 
@@ -296,20 +332,18 @@ function App() {
                 await returnEmprunt(myEmprunt)
                 article.nombreExemplaires += 1
             }
-         }
+        }
     }
     const returnEmprunt = async (myEmprunt) => {
-        console.log("return emprunt: " + myEmprunt.id)
-
-            const res = await fetch(`http://localhost:8080/emprunts/${id}`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                    },
-                    body: JSON.stringify(myEmprunt)
-                })
-            const data = await res.json()
+        const res = await fetch(`http://localhost:8080/emprunts/${id}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(myEmprunt)
+            })
+        const data = await res.json()
         setEmprunts(
             emprunts.map(
                 (emprunt) => emprunt.id === myEmprunt.id ?
@@ -329,7 +363,8 @@ function App() {
                     <Route path='/admins/:id' element={<Admin admin={admin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
                     <Route path='/clients/:id'
-                           element={<Client empruntsForClient={empruntsForClient} client={client} valideReturnEmprunt={(valideReturnEmprunt)}/>}/>
+                           element={<Client empruntsForClient={empruntsForClient} client={client}
+                                            valideReturnEmprunt={(valideReturnEmprunt)} amende={amendeForClient}/>}/>
                     <Route path='/clientsInfosForAdmins'
                            element={<ClientsInfosForAdmins clients={clients} admin={admin}
                                                            selectClient={selectClient}/>}/>
@@ -345,7 +380,7 @@ function App() {
                            element={<AddCdOrDvd onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     <Route path='*' element={<PageNotFind/>}/>
                     <Route path='/addEmprunt'
-                           element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client} books={books} cds={cds} dvds={dvds}/>}/>
+                           element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client} articles={articles}/>}/>
                     <Route path='/articles' element={<Articles articles={articles}/>}/>
                 </Routes>
             </div>
