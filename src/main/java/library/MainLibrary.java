@@ -35,6 +35,7 @@ public class MainLibrary implements CommandLineRunner {
 
         Client client = serviceLibrary.saveClient(new Client("yan","zhou", 34));
         Client client1 = serviceLibrary.saveClient(new Client("client", "clicli", 20));
+        Client client2 = serviceLibrary.saveClient(new Client("client22", "clicli22", 40));
         Optional<Admin> admin = serviceLibrary.saveAdmin(new Admin("admin1","ad"));
         System.out.println(serviceReact.getAllClients());
         System.out.println(serviceReact.getAllAdmins());
@@ -48,45 +49,11 @@ public class MainLibrary implements CommandLineRunner {
         DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1","author11",3,1));
         System.out.println(serviceReact.getAllDVDs());
 
-        Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.now());
-        System.out.println(emprunt);
+        Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.of(2022,4,1));
+        System.out.println("Avant retour : " +emprunt);
         serviceClient.returnEmprunt(client, book.getId(), LocalDate.of(2022,6,1));
-        System.out.println(emprunt);
+        System.out.println("Après retour : " + emprunt);
         System.out.println(serviceClient.findAllClients());
-
-        //final Article book = serviceLibrary.saveArticle(new Book("book", "yan", "2010-02-09", "Roman", "yanZhou", 300));
-//        final Article cd = serviceLibrary.saveArticle(new CD("cd"));
-//        final Article dvd = serviceLibrary.saveArticle(new DVD("dvd"));
-//
-//        List<Exemplaire> exemplaires = serviceLibrary.saveExemplaire(book, 10);
-//        book.setNombreExemplaires(exemplaires.size());
-//        serviceLibrary.saveArticle(book);
-//        book.setExemplaires(exemplaires);
-//        serviceLibrary.saveArticle(book);
-//
-//        System.out.println("////// Recherche d’un document selon les criteres /////////");
-//        List<Object[]> books = serviceClient.findBookBySeach("Roman");
-//        Object[] book1 = books.get(0);
-//        System.out.println(book1[0]);
-//
-//        LibraryUser client = serviceLibrary.saveUser(new Client("Yan", "Zhou", 99));
-//
-//        Emprunt emprunt = serviceLibrary.saveEmprunt(book, exemplaires, (Client) client, LocalDate.now());
-//        emprunt.getExemplaire().setEmpruntId(emprunt.getId());
-//
-//        List<Object[]> emprunts = serviceClient.findEmpruntByClientId(client.getId());
-//        Object[] emprunt1 = emprunts.get(0);
-//        System.out.println(emprunt1[0]);
-//
-//        serviceLibrary.addEmpruntToClient(emprunt.getId(), client.getId());
-//        //serviceLibrary.addEmpruntToClient(emprunt, (Client)client); 哪个好
-//
-//        System.out.println("///// Avant retourner un emprunt //////");
-//        System.out.println(serviceClient.findClientById(client.getId()));
-//
-//        System.out.println("///// après retourner un emprunt //////");
-//        serviceClient.returnEmprunt((Client) client, book.getId(), LocalDate.of(2022,6,1));
-//        System.out.println(serviceClient.findClientById(client.getId()));
 
     }
 }

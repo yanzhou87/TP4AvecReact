@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 import {FaLaugh} from "react-icons/fa";
 import PropTypes from "prop-types";
 
-//TODO clique deux fois, l'emprunt de client rajouter l'autre fois, erreur(encountered two children with the same key)
-const Clients = ({clients, selectClient}) => {
+//TODO clicque un client, mais il est appellé deux fois, erreur(encountered two children with the same key)
+const Clients = ({clients,selectClient}) => {
     return (
         <div className="pageCenter">
             <table>

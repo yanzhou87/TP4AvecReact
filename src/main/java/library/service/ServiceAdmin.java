@@ -1,6 +1,7 @@
 package library.service;
 
 
+import library.exception.UnsufficientFunds;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Component;
@@ -34,16 +35,16 @@ public class ServiceAdmin {
         return articleRepository.save(article);
     }
 
-
-
     public LibraryUser saveUser(LibraryUser libraryUseruser) {
         return libraryUserRepository.save(libraryUseruser);
     }
 
-    public Emprunt saveEmprunt(Article article, Client client, LocalDate date) {
+    public Emprunt saveEmprunt(Article article, Client client, LocalDate date) throws UnsufficientFunds {
 
         Emprunt emprunt = new Emprunt();
-
+        if(article.getNombreExemplaires() == 0 ){
+            throw new UnsufficientFunds("nombre exemplaires = 0");
+        }
         if (article.getNombreExemplaires() != 0) {
                     emprunt.setArticle(article);
                     emprunt.setClient(client);
@@ -142,9 +143,5 @@ public class ServiceAdmin {
         return libraryUserRepository.findClientById(id);
     }
 
-
-//    public Optional<Client> saveClient(Client newClient) {
-//        return libraryUserRepository.saveClient(newClient.getId(), newClient);
-//    }
 }
 

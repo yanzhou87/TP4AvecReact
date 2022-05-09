@@ -1,5 +1,6 @@
 package library.controllers;
 
+import library.exception.UnsufficientFunds;
 import library.forms.*;
 import library.service.ServiceReact;
 import org.slf4j.Logger;
@@ -134,7 +135,7 @@ public class ReactController {
         return new ResponseEntity<>(serviceReact.saveDvd(newDvd), HttpStatus.CREATED);
     }
     @PostMapping("/emprunts")
-    public ResponseEntity<SaveEmpruntForm> addEmprunt(@RequestBody SaveEmpruntForm newEmprunt) {
+    public ResponseEntity<SaveEmpruntForm> addEmprunt(@RequestBody SaveEmpruntForm newEmprunt) throws UnsufficientFunds {
         return new ResponseEntity<>(serviceReact.saveEmprunt(newEmprunt), HttpStatus.CREATED);
     }
 

@@ -41,9 +41,7 @@ public class ServiceClient {
     public Emprunt returnEmprunt(Client client, long bookId, LocalDate dateReturn) {
        Emprunt myEmprunt = new Emprunt();
         for (Emprunt emprunt : client.getEmprunts()) {
-
             if(emprunt.getArticle().getId() == bookId){
-
                 emprunt.setDateReturn(dateReturn);
                 emprunt.setReturnEmprdunt(true);
              Article article =  articleRepository.findArticleById(bookId).get();
@@ -80,7 +78,6 @@ public class ServiceClient {
     public List<Emprunt> findAllEmprunts() {
         return empruntRepository.findAll();
     }
-
 
     public List<Admin> getAllAdmins() {
        return   libraryUserRepository.findAllAdmins();

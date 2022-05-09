@@ -14,7 +14,6 @@ import Cds from "./components/Cds";
 import Dvds from "./components/Dvds";
 import AddArticle from "./components/AddArticle";
 import Emprunts from "./components/Emprunts";
-import EmpruntsForClient from "./components/EmpruntsForClient";
 import AddBook from "./components/AddBook";
 import AddCdOrDvd from "./components/AddCdOrDvd";
 import PageNotFind from "./components/PageNotFind";
@@ -28,15 +27,10 @@ function App() {
     const [admin, setAdmin] = useState({})
     const [client, setClient] = useState({})
     const [books, setBooks] = useState([])
-    const [book, setBook] = useState({})
     const [cds, setCds] = useState([])
-    const [cd, setCd] = useState({})
     const [dvds, setDvds] = useState([])
-    const [dvd, setDvd] = useState({})
     const [emprunts, setEmprunts] = useState([])
     const [empruntsForClient, setEmpruntsForClient] = useState([])
-    const [emprunt, setEmprunt] = useState({})
-    const [id, setId] = useState({})
     const [articles, setArticles] = useState([])
     const [amendes, setAmendes] = useState([])
     const [amendeForClient, setAmendeForClient] = useState(0)
@@ -188,48 +182,50 @@ function App() {
             age: admin.age,
             address: admin.address
         })
-        setId(admin.id)
     }
 
-    const selectClient = async (id) => {
-        console.log(id)
-        const client = await fetchClient(id)
+    const selectClient = async (myId) => {
+
+        const client = await fetchClient(myId)
         const emprunts = await fetchEmprunts()
         const amendes = await fetchAmendes()
-        if(client.id !== undefined){
+        console.log("dons fonction select : " + {client})
+
+        if (client.id !== undefined) {
             setEmpruntsForClient([])
             setAmendes([])
             setAmendeForClient(0)
             setClient(client)
-            setId(client.id)
+
             if (emprunts.length !== 0) {
                 emprunts.forEach((emp) => {
-                    if (emp.clientId === id) {
+                    if (emp.clientId === myId) {
                         setEmpruntsForClient([...empruntsForClient, emp])
                     }
                 })
             }
+            console.log("dons fonction select : " + {client})
             if (amendes.length !== 0) {
                 amendes.forEach((myAmende) => {
-                    if (myAmende.clientId === id) {
+                    if (myAmende.clientId === myId) {
                         setAmendes([...amendes, myAmende])
                         setAmendeForClient(amendeForClient + myAmende.sommeAmende)
                     }
                 })
             }
+            console.log("dons fonction select : " + {client})
         }
-
     }
 
-    const selectBook = async (id) => {
-        const book = await fetchBook(id)
-        setBook(book)
-    }
+    // const selectBook = async (id) => {
+    //     const book = await fetchBook(id)
+    //     setBook(book)
+    // }
 
-    const selectCd = async (id) => {
-        const cd = await fetchCd(id)
-        setCd(cd)
-    }
+    // const selectCd = async (id) => {
+    //     const cd = await fetchCd(id)
+    //     setCd(cd)
+    // }
 
     const addAdmin = async (admin) => {
         console.log(admin)
@@ -246,6 +242,7 @@ function App() {
     }
 
     const addClient = async (client) => {
+        console.log("dans la fonction add Client : " + client)
         console.log(client)
         const res = await fetch('http://localhost:8080/clients',
             {
@@ -311,7 +308,7 @@ function App() {
                 body: JSON.stringify(emprunt)
             })
         const data = await res.json()
-        setDvds([...emprunts, data])
+        setEmprunts([...emprunts, data])
     }
     const valideAddEmprunt = async (id, clientId) => {
 
@@ -320,7 +317,6 @@ function App() {
             alert("nombre exemplaires is 0， Please select another article")
         }
         if (myArticle.id !== undefined && myArticle.nombreExemplaires !== 0) {
-            setEmprunt({"clientId": clientId, "articleId": id})
             await addEmprunt({"clientId": clientId, "articleId": id})
         }
     }
@@ -335,7 +331,7 @@ function App() {
         }
     }
     const returnEmprunt = async (myEmprunt) => {
-        const res = await fetch(`http://localhost:8080/emprunts/${id}`,
+        const res = await fetch(`http://localhost:8080/emprunts/${myEmprunt.id}`,
             {
                 method: 'PUT',
                 headers: {
@@ -359,29 +355,27 @@ function App() {
                     <Route exact path='/' element={<Header title={'Library'}/>}/>
                     <Route path='/admins' element={<Admins admins={admins} selectAdmin={selectAdmin}/>}/>
                     <Route path='/clients' element={<Clients clients={clients} selectClient={selectClient}/>}/>
-                    <Route path='/addAdmin' element={<AddAdmin onAdd={addAdmin}/>}/>
-                    <Route path='/admins/:id' element={<Admin admin={admin}/>}/>
-                    <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
-                    <Route path='/clients/:id'
-                           element={<Client empruntsForClient={empruntsForClient} client={client}
-                                            valideReturnEmprunt={(valideReturnEmprunt)} amende={amendeForClient}/>}/>
-                    <Route path='/clientsInfosForAdmins'
-                           element={<ClientsInfosForAdmins clients={clients} admin={admin}
-                                                           selectClient={selectClient}/>}/>
-                    <Route path='/books' element={<Books books={books} selectBook={selectBook}/>}/>
+                    <Route path='/books' element={<Books books={books} />}/>
                     <Route path='/cds' element={<Cds cds={cds}/>}/>
                     <Route path='/dvds' element={<Dvds dvds={dvds}/>}/>
-                    <Route path='/addArticle' element={<AddArticle admin={admin}/>}/>
                     <Route path='/emprunts' element={<Emprunts emprunts={emprunts} admin={admin}/>}/>
-                    <Route path='/clients/:id/emprunts'
-                           element={<EmpruntsForClient empruntsForClient={empruntsForClient} client={client}/>}/>
+                    <Route path='/articles' element={<Articles articles={articles}/>}/>
+                    <Route path='/admins/:id' element={<Admin admin={admin}/>}/>
+                    <Route path='/clients/:id'
+                           element={<Client empruntsForClient={empruntsForClient} client={client}
+                                            valideReturnEmprunt={(valideReturnEmprunt)} amende={amendeForClient} amendes={amendes}/>}/>
+                    <Route path='/addAdmin' element={<AddAdmin onAdd={addAdmin}/>}/>
+                    <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
+                    <Route path='/addArticle' element={<AddArticle admin={admin}/>}/>
                     <Route path='/addBook' element={<AddBook onAddBook={onAddBook} admin={admin}/>}/>
                     <Route path='/addCdOrDvd'
                            element={<AddCdOrDvd onAddCd={onAddCd} onAddDvd={onAddDvd} admin={admin}/>}/>
                     <Route path='*' element={<PageNotFind/>}/>
                     <Route path='/addEmprunt'
                            element={<AddEmprunt onAddEmprunt={valideAddEmprunt} client={client} articles={articles}/>}/>
-                    <Route path='/articles' element={<Articles articles={articles}/>}/>
+                    <Route path='/clientsInfosForAdmins'
+                           element={<ClientsInfosForAdmins clients={clients} admin={admin}
+                                                           selectClient={selectClient}/>}/>
                 </Routes>
             </div>
         </Router>

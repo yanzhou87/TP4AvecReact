@@ -27,6 +27,5 @@ const Dvds = ({dvds}) => {
     )
 }
 Dvds.propTypes = {
-    // cds: PropTypes.object
 }
 export default Dvds

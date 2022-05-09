@@ -27,6 +27,5 @@ const Cds = ({cds}) => {
     )
 }
 Cds.propTypes = {
-   // cds: PropTypes.object
 }
 export default Cds

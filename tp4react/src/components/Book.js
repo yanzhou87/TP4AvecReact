@@ -1,6 +1,4 @@
 
-import PropTypes from "prop-types";
-
 const Book = ({book}) => {
     return (
         <div className="pageCenter">
@@ -18,7 +16,6 @@ const Book = ({book}) => {
 }
 
 Book.propTypes = {
-   // book:PropTypes.object,
 }
 export default Book
 

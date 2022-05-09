@@ -1,4 +1,4 @@
-import Admin from "./Admin";
+
 import Button from "./Button";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";

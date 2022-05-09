@@ -1,11 +1,11 @@
-import {Link, Route} from "react-router-dom";
-import {FaHandPointRight, FaLaugh} from "react-icons/fa";
+import {Link} from "react-router-dom";
+import {FaHandPointRight} from "react-icons/fa";
 import Button from "./Button";
 import PropTypes from "prop-types";
 import Header from "./Header";
 
-const Client = ({empruntsForClient,client, valideReturnEmprunt, amende}) => {
-
+const Client = ({empruntsForClient,client, valideReturnEmprunt, amende, amendes}) => {
+console.log("dans fonction client " + client)
     if(client.firstName === undefined){
         return  <Header/>
     }
@@ -23,7 +23,7 @@ const Client = ({empruntsForClient,client, valideReturnEmprunt, amende}) => {
                     <th>Date Return Attendu</th>
                     <th>Date Return</th>
                     <th>Return</th>
-                    <th>Amende</th>
+                    <th>Amende Total</th>
                 </tr>
                 {empruntsForClient.map((emprunt) => (
                     <tr key={emprunt.id}>
@@ -42,7 +42,6 @@ const Client = ({empruntsForClient,client, valideReturnEmprunt, amende}) => {
 }
 
 Client.propTypes = {
-   // client:PropTypes.object,
     valideReturnEmprunt : PropTypes.func
 }
 export default Client

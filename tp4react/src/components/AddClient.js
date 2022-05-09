@@ -40,8 +40,6 @@ const AddClient = ({onAdd}) => {
                   />
     <Link to='/'><Button color={'red'} text={'Exit'}/></Link>
         </form>
-
-
     )
 }
 AddClient.propTypes = {

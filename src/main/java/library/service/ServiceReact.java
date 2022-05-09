@@ -1,12 +1,12 @@
 package library.service;
 
+import library.exception.UnsufficientFunds;
 import library.forms.*;
 import library.model.*;
 import library.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -98,25 +98,6 @@ public class ServiceReact {
         return dvdForms;
     }
 
-
-
-
-//    public Optional<Admin> saveAdmin(Admin admin) {
-//        return Optional.of(libraryUserRepository.save(admin));
-//    }
-//    public Optional<Client> saveClient(Client client) {
-//        return  Optional.of(libraryUserRepository.save(client));
-//    }
-//    public CD saveCD(CD cd) {
-//        return articleRepository.save(cd);
-//    }
-//    public DVD saveDVD(DVD dvd) {
-//        return articleRepository.save(dvd);
-//    }
-//    public Book saveBook(Book book) {
-//        return articleRepository.save(book);
-//    }
-
     public List<SaveEmpruntForm> getAllEmprunts() {
         List<SaveEmpruntForm> listEmpruntsDto = new ArrayList<>();
         List<Emprunt> listEmprunts = empruntRepository.findAll();
@@ -149,7 +130,7 @@ public class ServiceReact {
         return saveAdminForm;
     }
 
-    public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) {
+    public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) throws UnsufficientFunds {
         System.out.println("emprunt saveEmprunt newEmprunt: " + newEmprunt);
         Emprunt myEmprunt = serviceAdmin.saveEmprunt(articleRepository.findArticleById(newEmprunt.getArticleId()).get() ,
                 libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),LocalDate.now());
