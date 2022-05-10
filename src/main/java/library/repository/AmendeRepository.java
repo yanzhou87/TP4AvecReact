@@ -12,4 +12,7 @@ import java.util.Optional;
 public interface AmendeRepository extends JpaRepository<Amende, Long> {
     @Query("select a from Amende a where a.id = :bookId")
     Optional<Amende> findAmendeById(@Param("bookId") long bookId);
+
+    @Query("select a from Amende a where a.client.id = :clientId")
+    List<Amende> findAmendeByClientId(@Param("clientId") long clientId);
 }

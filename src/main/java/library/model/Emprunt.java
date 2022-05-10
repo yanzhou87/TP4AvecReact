@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -16,7 +17,8 @@ import java.time.LocalDate;
 @Table(name = "EMPRUNT")
 public class Emprunt {
     @Id
-    @GeneratedValue(generator = "emprunt_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(generator = "emprunt_seq")
     private long id;
 
     @ManyToOne
@@ -52,6 +54,15 @@ public class Emprunt {
         this.client = client;
         this.article = article;
     }
+
+    public Emprunt(long id, Client client, Article article, String dateEmprunt,  String dateReturnAttendu) {
+        this.id = id;
+        this.client = client;
+        this.article = article;
+        this.dateEmprunt = LocalDate.parse(dateEmprunt, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.dateReturnAttendu = LocalDate.parse(dateReturnAttendu, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
 
     @Override
     public String toString() {

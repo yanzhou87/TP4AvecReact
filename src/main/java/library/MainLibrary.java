@@ -30,7 +30,6 @@ public class MainLibrary implements CommandLineRunner {
     }
 
     @Override
-    @Transactional
     public void run(String... args) throws Exception {
 
         Client client = serviceLibrary.saveClient(new Client("yan","zhou", 34));
@@ -49,11 +48,16 @@ public class MainLibrary implements CommandLineRunner {
         DVD dvd = serviceLibrary.saveDVD(new DVD("dvd1","author11",3,1));
         System.out.println(serviceReact.getAllDVDs());
 
-        Emprunt emprunt = serviceLibrary.saveEmprunt(book,  client, LocalDate.of(2022,4,1));
-        System.out.println("Avant retour : " +emprunt);
-        serviceClient.returnEmprunt(client, book.getId(), LocalDate.of(2022,6,1));
-        System.out.println("Après retour : " + emprunt);
-        System.out.println(serviceClient.findAllClients());
+        Object[] bookSeach = serviceClient.findBookBySeach("bo").get(0);
+        System.out.println("find book By seach by name bo : " + bookSeach[0]);
 
+        Emprunt emprunt = serviceLibrary.saveEmprunt(book,  serviceLibrary.findClientById(1L), LocalDate.of(2022,4,1));
+        Emprunt emprunt1 = serviceLibrary.saveEmprunt(dvd, serviceLibrary.findClientById(1L), LocalDate.of(2022,5,1));
+
+        System.out.println("Avant retour : " +emprunt);
+        serviceClient.returnEmprunt(serviceLibrary.findClientById(1L), book.getId(), LocalDate.of(2022,6,1));
+
+        System.out.println(emprunt1);
+        System.out.println("Après retour : " + emprunt);
     }
 }

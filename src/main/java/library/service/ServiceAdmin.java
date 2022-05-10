@@ -135,13 +135,12 @@ public class ServiceAdmin {
         return dvds;
     }
 
-    public Optional<Admin> getAdminById(Long id) {
-        return Optional.of(libraryUserRepository.findAdminById(id));
+    public Admin findAdminById(Long id) {
+        return libraryUserRepository.findAdminById(id);
     }
 
-    public Optional<Client> getClientById(Long id) {
-        return libraryUserRepository.findClientById(id);
+    public Client findClientById(Long id) {
+        return libraryUserRepository.findClientById(id).get();
     }
-
 }
 

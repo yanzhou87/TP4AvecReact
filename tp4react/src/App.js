@@ -187,48 +187,30 @@ function App() {
     const selectClient = async (myId) => {
 
         const client = await fetchClient(myId)
-        const emprunts = await fetchEmprunts()
         const amendes = await fetchAmendes()
-        console.log("dons fonction select : " + {client})
+        setEmprunts(await fetchEmprunts())
 
         if (client.id !== undefined) {
-            setEmpruntsForClient([])
             setAmendes([])
-            setAmendeForClient(0)
             setClient(client)
 
             if (emprunts.length !== 0) {
-                emprunts.forEach((emp) => {
-                    if (emp.clientId === myId) {
-                        setEmpruntsForClient([...empruntsForClient, emp])
-                    }
-                })
+                     setEmpruntsForClient( emprunts.filter((emp) => emp.clientId === myId ))
             }
-            console.log("dons fonction select : " + {client})
+
+            let sommeAmende = 0;
+
             if (amendes.length !== 0) {
                 amendes.forEach((myAmende) => {
                     if (myAmende.clientId === myId) {
                         setAmendes([...amendes, myAmende])
-                        setAmendeForClient(amendeForClient + myAmende.sommeAmende)
+                        setAmendeForClient(sommeAmende += myAmende.sommeAmende)
                     }
                 })
             }
-            console.log("dons fonction select : " + {client})
         }
     }
-
-    // const selectBook = async (id) => {
-    //     const book = await fetchBook(id)
-    //     setBook(book)
-    // }
-
-    // const selectCd = async (id) => {
-    //     const cd = await fetchCd(id)
-    //     setCd(cd)
-    // }
-
     const addAdmin = async (admin) => {
-        console.log(admin)
         const res = await fetch('http://localhost:8080/admins',
             {
                 method: 'POST',
@@ -363,7 +345,7 @@ function App() {
                     <Route path='/admins/:id' element={<Admin admin={admin}/>}/>
                     <Route path='/clients/:id'
                            element={<Client empruntsForClient={empruntsForClient} client={client}
-                                            valideReturnEmprunt={(valideReturnEmprunt)} amende={amendeForClient} amendes={amendes}/>}/>
+                                            valideReturnEmprunt={(valideReturnEmprunt)} amende={amendeForClient}/>}/>
                     <Route path='/addAdmin' element={<AddAdmin onAdd={addAdmin}/>}/>
                     <Route path='/addClient' element={<AddClient onAdd={addClient}/>}/>
                     <Route path='/addArticle' element={<AddArticle admin={admin}/>}/>

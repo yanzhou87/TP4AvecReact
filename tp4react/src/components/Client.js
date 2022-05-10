@@ -4,8 +4,7 @@ import Button from "./Button";
 import PropTypes from "prop-types";
 import Header from "./Header";
 
-const Client = ({empruntsForClient,client, valideReturnEmprunt, amende, amendes}) => {
-console.log("dans fonction client " + client)
+const Client = ({empruntsForClient,client, valideReturnEmprunt, amende}) => {
     if(client.firstName === undefined){
         return  <Header/>
     }
@@ -23,7 +22,6 @@ console.log("dans fonction client " + client)
                     <th>Date Return Attendu</th>
                     <th>Date Return</th>
                     <th>Return</th>
-                    <th>Amende Total</th>
                 </tr>
                 {empruntsForClient.map((emprunt) => (
                     <tr key={emprunt.id}>
@@ -32,11 +30,11 @@ console.log("dans fonction client " + client)
                         <td>{emprunt.dateReturnAttendu}</td>
                         <td>{emprunt.dateReturn}</td>
                         <td onClick={()=>valideReturnEmprunt(emprunt)}><Button color={'Plum'} text={'Return'} /></td>
-                        <td>{amende}</td>
                     </tr>
                 ))}
                 </thead>
             </table>
+             <div>Amende Total  :  {amende}</div>
         </div>
     )
 }

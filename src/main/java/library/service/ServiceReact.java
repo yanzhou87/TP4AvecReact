@@ -39,10 +39,10 @@ public class ServiceReact {
 
     public List<SaveClientForm> getAllClients() {
         List<SaveClientForm> clientForms = new ArrayList<>();
-        List<Client> clients = libraryUserRepository.finAllClients();
+        List<Client> clients = serviceAdmin.getAllClients();
         for (int i = 0; i < clients.size(); i++) {
             Client client = clients.get(i);
-            SaveClientForm clientForm = new SaveClientForm(client.getId(),client.getFirstName(),client.getLastName(),client.getAge());
+            SaveClientForm clientForm = new SaveClientForm(client.getId(), client.getFirstName(), client.getLastName(), client.getAge());
             clientForms.add(clientForm);
         }
         return clientForms;
@@ -50,7 +50,7 @@ public class ServiceReact {
 
     public List<SaveAdminForm> getAllAdmins() {
         List<SaveAdminForm> adminDtos = new ArrayList<>();
-        List<Admin> admins = libraryUserRepository.findAllAdmins();
+        List<Admin> admins = serviceAdmin.getAllAdmins();
         for (Admin admin : admins) {
             SaveAdminForm adminDto = new SaveAdminForm(admin.getId(), admin.getFirstName(), admin.getLastName(), admin.getAge());
             adminDtos.add(adminDto);
@@ -60,12 +60,12 @@ public class ServiceReact {
 
     public List<SaveBookForm> getAllBooks() {
         List<SaveBookForm> bookForms = new ArrayList<>();
-        List<Article> articles = articleRepository.findAll();
+        List<Article> articles = serviceClient.findAllArticles();
         for (Article a : articles) {
             if (a instanceof Book) {
-                SaveBookForm bookForm = new SaveBookForm(a.getId(),a.getTitle(),
-                        a.getAuthor(),a.getArticleType(),a.getYearPublication(),
-                        a.getNombreExemplaires(),((Book) a).getEditor(),((Book) a).getNumbrePages());
+                SaveBookForm bookForm = new SaveBookForm(a.getId(), a.getTitle(),
+                        a.getAuthor(), a.getArticleType(), a.getYearPublication(),
+                        a.getNombreExemplaires(), ((Book) a).getEditor(), ((Book) a).getNumbrePages());
                 bookForms.add(bookForm);
             }
         }
@@ -74,12 +74,12 @@ public class ServiceReact {
 
     public List<SaveCdForm> getAllCds() {
         List<SaveCdForm> cdForms = new ArrayList<>();
-        List<Article> articles = articleRepository.findAll();
+        List<Article> articles = serviceClient.findAllArticles();
         for (Article cd : articles) {
             if (cd instanceof CD) {
-              SaveCdForm saveCdForm = new SaveCdForm(cd.getId(),cd.getTitle(),
-                      cd.getAuthor(),cd.getNombreExemplaires(),((CD) cd).getDurationMovie());
-              cdForms.add(saveCdForm);
+                SaveCdForm saveCdForm = new SaveCdForm(cd.getId(), cd.getTitle(),
+                        cd.getAuthor(), cd.getNombreExemplaires(), ((CD) cd).getDurationMovie());
+                cdForms.add(saveCdForm);
             }
         }
         return cdForms;
@@ -87,11 +87,11 @@ public class ServiceReact {
 
     public List<SaveDvdForm> getAllDVDs() {
         List<SaveDvdForm> dvdForms = new ArrayList<>();
-        List<Article> articles = articleRepository.findAll();
+        List<Article> articles = serviceClient.findAllArticles();
         for (Article dvd : articles) {
             if (dvd instanceof DVD) {
-                SaveDvdForm saveDvdForm = new SaveDvdForm(dvd.getId(),dvd.getTitle(),
-                        dvd.getAuthor(),dvd.getNombreExemplaires(),((DVD) dvd).getDurationMovie());
+                SaveDvdForm saveDvdForm = new SaveDvdForm(dvd.getId(), dvd.getTitle(),
+                        dvd.getAuthor(), dvd.getNombreExemplaires(), ((DVD) dvd).getDurationMovie());
                 dvdForms.add(saveDvdForm);
             }
         }
@@ -100,13 +100,14 @@ public class ServiceReact {
 
     public List<SaveEmpruntForm> getAllEmprunts() {
         List<SaveEmpruntForm> listEmpruntsDto = new ArrayList<>();
-        List<Emprunt> listEmprunts = empruntRepository.findAll();
+        List<Emprunt> listEmprunts = serviceClient.findAllEmprunts();
         for (int i = 0; i < listEmprunts.size(); i++) {
             Emprunt emprunt = listEmprunts.get(i);
             SaveEmpruntForm empruntForm = new SaveEmpruntForm(emprunt.getId(),
                     emprunt.getClient().getId(), emprunt.getArticle().getId(),
-                    emprunt.getDateEmprunt().toString(),emprunt.getDateReturnAttendu().toString(),
-                    emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
+                    emprunt.getDateEmprunt().toString(),
+                    emprunt.getDateReturnAttendu() == null ? "" : emprunt.getDateReturnAttendu().toString(),
+                    emprunt.getDateReturn() == null ? "" : emprunt.getDateReturn().toString(),
                     emprunt.isReturnEmprdunt());
             listEmpruntsDto.add(empruntForm);
         }
@@ -116,58 +117,55 @@ public class ServiceReact {
 
 
     public SaveClientForm saveClient(SaveClientForm newClient) {
-       Client client = new Client(newClient.getId(), newClient.getFirstName(), newClient.getLastName(), newClient.getAge());
-        Client myclient = libraryUserRepository.save(client);
+        Client client = new Client(newClient.getId(), newClient.getFirstName(), newClient.getLastName(), newClient.getAge());
+        Client myclient = serviceAdmin.saveClient(client);
         System.out.println(myclient);
-        SaveClientForm saveClientForm = new SaveClientForm(myclient.getId(),myclient.getFirstName(), myclient.getLastName(), myclient.getAge());
+        SaveClientForm saveClientForm = new SaveClientForm(myclient.getId(), myclient.getFirstName(), myclient.getLastName(), myclient.getAge());
         return saveClientForm;
     }
 
     public SaveAdminForm saveAdmin(SaveAdminForm newAdmin) {
         Admin admin = new Admin(newAdmin.getId(), newAdmin.getFirstName(), newAdmin.getLastName(), newAdmin.getAge());
-        Admin myAdmin = libraryUserRepository.save(admin);
+        Admin myAdmin = serviceAdmin.saveAdmin(admin).get();
         SaveAdminForm saveAdminForm = new SaveAdminForm(myAdmin.getId(), myAdmin.getFirstName(), myAdmin.getLastName(), myAdmin.getAge());
         return saveAdminForm;
     }
 
     public SaveEmpruntForm saveEmprunt(SaveEmpruntForm newEmprunt) throws UnsufficientFunds {
-        System.out.println("emprunt saveEmprunt newEmprunt: " + newEmprunt);
-        Emprunt myEmprunt = serviceAdmin.saveEmprunt(articleRepository.findArticleById(newEmprunt.getArticleId()).get() ,
-                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),LocalDate.now());
-        System.out.println(myEmprunt);
+
+        Emprunt myEmprunt = serviceClient.saveEmprunt(newEmprunt);
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
-                myEmprunt.getClient().getId(),myEmprunt.getArticle().getId(),
-                myEmprunt.getDateEmprunt().toString(), myEmprunt.getDateReturnAttendu().toString());
-        System.out.println(saveEmpruntForm);
+                myEmprunt.getClient().getId(), myEmprunt.getArticle().getId(),
+                LocalDate.now().toString(),
+                myEmprunt.getDateReturnAttendu() == null ? "" : myEmprunt.getDateReturnAttendu().toString());
+
         return saveEmpruntForm;
-    }
-    public Optional<Book> getBookById(Long id) {
-        return articleRepository.findBookById(id);
     }
 
     public Optional<SaveClientForm> findClientById(Long id) {
-        Client client = libraryUserRepository.findClientById(id).get();
+        Client client = serviceAdmin.findClientById(id);
 
         SaveClientForm saveClientForm = new SaveClientForm(client.getId(), client.getFirstName(), client.getLastName(), client.getAge());
         return Optional.of(saveClientForm);
     }
+
     public Optional<SaveAdminForm> findAdminsById(Long id) {
-        Admin admin = libraryUserRepository.findAdminById(id);
-        SaveAdminForm saveAdminForm = new SaveAdminForm(admin.getId(),admin.getFirstName(),admin.getLastName(),admin.getAge());
+        Admin admin = serviceAdmin.findAdminById(id);
+        SaveAdminForm saveAdminForm = new SaveAdminForm(admin.getId(), admin.getFirstName(), admin.getLastName(), admin.getAge());
         return Optional.of(saveAdminForm);
     }
 
     public Optional<SaveEmpruntForm> findEmpruntById(Long id) {
-        Emprunt emprunt = empruntRepository.findEmpruntById(id).get();
-        SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(emprunt.getId(),emprunt.getClient().getId(),
-                emprunt.getArticle().getId(),emprunt.getDateEmprunt().toString(),emprunt.getDateReturnAttendu().toString(),
-                emprunt.getDateReturn()==null ? "" : emprunt.getDateReturn().toString(),
+        Emprunt emprunt = serviceClient.findEmpruntById(id);
+        SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(emprunt.getId(), emprunt.getClient().getId(),
+                emprunt.getArticle().getId(), emprunt.getDateEmprunt().toString(), emprunt.getDateReturnAttendu().toString(),
+                emprunt.getDateReturn() == null ? "" : emprunt.getDateReturn().toString(),
                 emprunt.isReturnEmprdunt());
         return Optional.of(saveEmpruntForm);
     }
 
     public Optional<SaveBookForm> findBookById(Long id) {
-        Book book = articleRepository.findBookById(id).get();
+        Book book = serviceClient.findBookById(id);
         SaveBookForm bookForm = new SaveBookForm(book.getId(), book.getTitle(),
                 book.getAuthor(), book.getArticleType(), book.getYearPublication(),
                 book.getNombreExemplaires(), book.getEditor(), book.getNumbrePages());
@@ -179,10 +177,10 @@ public class ServiceReact {
 
         Book book = new Book(newBook.getId(), newBook.getTitle(),
                 newBook.getAuthor(),
-                newBook.getArticleType(),newBook.getYearPublication(), newBook.getNombreExemplaires(),
+                newBook.getArticleType(), newBook.getYearPublication(), newBook.getNombreExemplaires(),
                 newBook.getEditor(), newBook.getNumbrePages());
 
-        Book myBook = articleRepository.save(book);
+        Book myBook = serviceAdmin.saveBook(book);
 
         SaveBookForm saveBookForm = new SaveBookForm(myBook.getId(), myBook.getTitle(),
                 myBook.getAuthor(), myBook.getArticleType(), myBook.getYearPublication(),
@@ -195,7 +193,7 @@ public class ServiceReact {
                 newCd.getAuthor(),
                 newCd.getNombreExemplaires(),
                 newCd.getDurationMovie());
-        CD myCd = articleRepository.save(cd);
+        CD myCd = serviceAdmin.saveCD(cd);
         SaveCdForm saveCdForm = new SaveCdForm(myCd.getId(), myCd.getTitle(),
                 myCd.getAuthor(), myCd.getNombreExemplaires(), myCd.getDurationMovie());
         return saveCdForm;
@@ -206,57 +204,56 @@ public class ServiceReact {
                 newDvd.getAuthor(),
                 newDvd.getNombreExemplaires(),
                 newDvd.getDurationMovie());
-        DVD myDvd = articleRepository.save(dvd);
+        DVD myDvd = serviceAdmin.saveDVD(dvd);
         SaveDvdForm saveDvdForm = new SaveDvdForm(myDvd.getId(), myDvd.getTitle(),
                 myDvd.getAuthor(), myDvd.getNombreExemplaires(), myDvd.getDurationMovie());
         return saveDvdForm;
     }
 
     public List<SaveArticleForm> findAllArticles() {
-        List<Article> articles = articleRepository.findAll();
+        List<Article> articles = serviceClient.findAllArticles();
         List<SaveArticleForm> articleForms = new ArrayList<>();
-        for(Article article :articles){
+        for (Article article : articles) {
             SaveArticleForm articleForm = new SaveArticleForm(article.getId(),
-                    article.getTitle(),article.getAuthor(),article.getNombreExemplaires());
+                    article.getTitle(), article.getAuthor(), article.getNombreExemplaires());
             articleForms.add(articleForm);
         }
         return articleForms;
     }
 
     public Optional<SaveArticleForm> findArticleById(Long id) {
-        Article article = articleRepository.findArticleById(id).get();
-        SaveArticleForm articleForm = new SaveArticleForm(article.getId(),article.getTitle(),
-                article.getAuthor(),article.getNombreExemplaires());
+        Article article = serviceClient.findArticleById(id).get();
+        SaveArticleForm articleForm = new SaveArticleForm(article.getId(), article.getTitle(),
+                article.getAuthor(), article.getNombreExemplaires());
         return Optional.of(articleForm);
     }
 
     public Optional<SaveEmpruntForm> updateEmprunt(SaveEmpruntForm newEmprunt) {
-        Emprunt myEmprunt = serviceClient.returnEmprunt(
-                libraryUserRepository.findClientById(newEmprunt.getClientId()).get(),
-                newEmprunt.getArticleId(), LocalDate.now());
+        Emprunt myEmprunt = serviceClient.updateEmprunt(newEmprunt);
+
         SaveEmpruntForm saveEmpruntForm = new SaveEmpruntForm(myEmprunt.getId(),
                 myEmprunt.getClient().getId(), myEmprunt.getArticle().getId(),
                 myEmprunt.getDateEmprunt().toString(), myEmprunt.getDateReturnAttendu().toString(),
                 myEmprunt.getDateReturn().toString(), myEmprunt.isReturnEmprdunt());
-       return Optional.of(saveEmpruntForm);
+        return Optional.of(saveEmpruntForm);
 
     }
 
     public List<SaveAmendeFrom> findAllAmendes() {
-        List<Amende> amendes = amendeRepository.findAll();
+        List<Amende> amendes = serviceClient.findAllAmende();
         List<SaveAmendeFrom> amendeFroms = new ArrayList<>();
-        for(Amende amende : amendes){
+        for (Amende amende : amendes) {
             SaveAmendeFrom amendeFrom = new SaveAmendeFrom(amende.getId(),
-                    amende.getClient().getId(), amende.getAmendeForDay(),amende.getSommeAmende());
+                    amende.getClient().getId(), amende.getAmendeForDay(), amende.getSommeAmende());
             amendeFroms.add(amendeFrom);
         }
         return amendeFroms;
     }
 
     public Optional<SaveAmendeFrom> findAmendeById(Long id) {
-        Amende amende = amendeRepository.findAmendeById(id).get();
-        SaveAmendeFrom amendeFrom = new SaveAmendeFrom(amende.getId(),amende.getClient().getId(),
-                amende.getAmendeForDay(),amende.getSommeAmende());
+        Amende amende =  serviceClient.findAmendeById(id);
+        SaveAmendeFrom amendeFrom = new SaveAmendeFrom(amende.getId(), amende.getClient().getId(),
+                amende.getAmendeForDay(), amende.getSommeAmende());
         return Optional.of(amendeFrom);
     }
 }
