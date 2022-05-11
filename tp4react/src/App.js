@@ -187,7 +187,8 @@ function App() {
     const selectClient = async (myId) => {
 
         const client = await fetchClient(myId)
-        const amendes = await fetchAmendes()
+        setAmendes( await fetchAmendes())
+        console.log(amendes)
         setEmprunts(await fetchEmprunts())
 
         if (client.id !== undefined) {
@@ -201,6 +202,7 @@ function App() {
             let sommeAmende = 0;
 
             if (amendes.length !== 0) {
+
                 amendes.forEach((myAmende) => {
                     if (myAmende.clientId === myId) {
                         setAmendes([...amendes, myAmende])
